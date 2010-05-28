@@ -1,0 +1,32 @@
+.widget-content {
+  font:75% Verdana,sans-serif;
+  text-align:left;
+  width: 300px;
+  font-size: 12px;
+}
+
+.project_container {
+  margin-top: 7px; 
+  margin-bottom: 15px;
+}
+
+.project_container .info {
+  padding-top: 3px;
+}
+
+.project_container .progress_bar_container {
+  float: left; border: 1px solid black; width: 140px; height: 14px; margin-top: 0px; position: relative;
+}
+
+.progress_bar_container .bar {
+  background-color: lightgreen; height: 14px; width: 60px; position: absolute; top: 0; left: 0;
+}
+
+.progress_bar_container .text {
+  height: 14px; width: 135px; padding-left: 5px; font-size: 10px; font-weight: bold; position: absolute; top: 0; left: 0; text-align: center;
+}
+
+.project_container .countdown {
+  float: right; 
+  text-align: right;
+}

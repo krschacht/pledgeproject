@@ -1,0 +1,12 @@
+/* application-wide */
+
+body {
+  font-family:arial,verdana,helvetica,tahoma,Sans-serif;
+  font-size:100%;
+  margin: 0;
+  padding: 0;
+}
+
+.stretcher {
+  clear: both; height: 1; width: 100%;
+}

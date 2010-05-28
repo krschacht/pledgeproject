@@ -1,31 +1,22 @@
-<h1>Listing projects</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Num pledges</th>
-    <th>Total pledges</th>
-    <th>Pledge deadline at</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="widget-content">
 
-<% @projects.each do |project| %>
-  <tr>
-    <td><%= project.title %></td>
-    <td><%= project.description %></td>
-    <td><%= project.num_pledges %></td>
-    <td><%= project.total_pledges %></td>
-    <td><%= project.pledge_deadline_at %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+  <% @projects.each do |project| %>
 
-<br />
+    <div class="project_container">
+      <b>Podcast on Finding a Romantic Partner</b>
+      <div class="info">
+        <div class="progress_bar_container" style="display: none;">
+          <div class="bar"></div>
+          <div class="text">$230 of $600</div>
+        </div>
+        <div class="countdown">Pledges open for <span class="has_countdown" until="2010/6/20 1:00"></span></div>
+        <div class="stretcher"></div>
+      </div>
+    </div>
 
-<%= link_to 'New Project', new_project_path %>
+  <% end %>
+  
+</div>
+
+<% # link_to 'New Project', new_project_path %>
