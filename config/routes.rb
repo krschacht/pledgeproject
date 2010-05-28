@@ -1,4 +1,8 @@
 Pledgeproject::Application.routes.draw do |map|
+  resources :projects
+
+  resources :pledges
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
