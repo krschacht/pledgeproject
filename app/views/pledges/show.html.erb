@@ -1,0 +1,35 @@
+<p class="notice"><%= notice %></p>
+
+<p>
+  <b>Project:</b>
+  <%= @pledge.project_id %>
+</p>
+
+<p>
+  <b>First name:</b>
+  <%= @pledge.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @pledge.last_name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @pledge.email %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @pledge.amount %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%= @pledge.note %>
+</p>
+
+
+<%= link_to 'Edit', edit_pledge_path(@pledge) %> |
+<%= link_to 'Back', pledges_path %>

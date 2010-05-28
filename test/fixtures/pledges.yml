@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  project_id: 1
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  amount: 9.99
+  note: MyText
+
+two:
+  project_id: 1
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  amount: 9.99
+  note: MyText

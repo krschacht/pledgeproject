@@ -1,0 +1,32 @@
+
+
+<p class="notice"><%= notice %></p>
+
+<p id="tester">
+  <b>Title:</b>
+  <%= @project.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @project.description %>
+</p>
+
+<p>
+  <b>Num pledges:</b>
+  <%= @project.num_pledges %>
+</p>
+
+<p>
+  <b>Total pledges:</b>
+  <%= @project.total_pledges %>
+</p>
+
+<p>
+  <b>Pledge deadline at:</b>
+  <%= @project.pledge_deadline_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
