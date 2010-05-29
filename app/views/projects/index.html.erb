@@ -11,7 +11,8 @@
           <div class="bar"></div>
           <div class="text">$230 of $600</div>
         </div>
-        <div class="countdown">Pledges open for <span class="has_countdown" until="2010/6/20 1:00"></span></div>
+        <div class="countdown">Pledges open for 
+          <span class="has_countdown" until="<%= project.pledge_deadline_at.strftime('%Y/%m/%d %H:%M:%S') %>"></span></div>
         <div class="stretcher"></div>
       </div> <!-- info -->
 

@@ -7,7 +7,7 @@ $(document).ready( function() {
     $(this).countdown( {
       until: new Date( $(this).attr( 'until' ) ),
       compact: true,
-      timezone: -6,
+      timezone: -5,
       format: 'dHMS',
       description: ''
     } );
