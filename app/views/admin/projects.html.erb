@@ -1,0 +1,31 @@
+<h1>Listing projects</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Num pledges</th>
+    <th>Total pledges</th>
+    <th>Pledge deadline at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<%= @projects.each do |project| %>
+  <tr>
+    <td><%= project.title %></td>
+    <td><%= project.description %></td>
+    <td><%= project.num_pledges %></td>
+    <td><%= project.total_pledges %></td>
+    <td><%= project.pledge_deadline_at %></td>
+    <td><%= link_to 'Show', project %></td>
+    <td><%= link_to 'Edit', edit_project_path(project) %></td>
+    <td><%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Project', new_project_path %>

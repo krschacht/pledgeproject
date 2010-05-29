@@ -1,8 +1,17 @@
 Pledgeproject::Application.routes.draw do |map|
   resources :projects
-
-  resources :pledges
-
+  
+  namespace :admin do    
+    # Directs /admin/products/* to Admin::ProductsController
+    # (app/controllers/admin/products_controller.rb)
+    resources :pledges
+  end
+  
+  get "admin/projects"
+  
+  
+#  resources :pledges
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

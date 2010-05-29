@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 
-  before_filter :require_admin, :only => [ :new, :edit, :create ]
+  before_filter :require_admin, :only => [ :admin, :new, :edit, :create ]
 
   # GET /projects
   # GET /projects.xml

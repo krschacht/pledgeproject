@@ -21,13 +21,13 @@
     <td><%= pledge.email %></td>
     <td><%= pledge.amount %></td>
     <td><%= pledge.note %></td>
-    <td><%= link_to 'Show', pledge %></td>
-    <td><%= link_to 'Edit', edit_pledge_path(pledge) %></td>
-    <td><%= link_to 'Destroy', pledge, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show', admin_pledge %></td>
+    <td><%= link_to 'Edit', edit_admin_pledge_path(pledge) %></td>
+    <td><%= link_to 'Destroy', admin_pledge, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Pledge', new_pledge_path %>
+<%= link_to 'New Pledge', new_admin_pledge_path %>

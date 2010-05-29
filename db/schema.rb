@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100528225807) do
+ActiveRecord::Schema.define(:version => 20100529001355) do
 
   create_table "pledges", :force => true do |t|
     t.integer  "project_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20100528225807) do
     t.datetime "pledge_deadline_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
   end
 
 end

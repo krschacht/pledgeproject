@@ -1,4 +1,5 @@
-<%= form_for(@pledge) do |f| %>
+<%= form_for @pledge, :url => admin_pledge_path do |f| %>
+
   <% if @pledge.errors.any? %>
   <div id="errorExplanation">
     <h2><%= pluralize(@pledge.errors.count, "error") %> prohibited this pledge from being saved:</h2>

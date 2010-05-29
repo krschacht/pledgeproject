@@ -10,3 +10,17 @@ body {
 .stretcher {
   clear: both; height: 1; width: 100%;
 }
+
+a {
+  color: #46457B;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #86202A;
+  text-decoration: underline;
+}
+
+.hidden {
+  display: none;
+}

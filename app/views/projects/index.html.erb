@@ -4,7 +4,8 @@
   <% @projects.each do |project| %>
 
     <div class="project_container">
-      <b>Podcast on Finding a Romantic Partner</b>
+      <b><%= link_to project.title, project.url, :target => "_parent" %></b>
+
       <div class="info">
         <div class="progress_bar_container" style="display: none;">
           <div class="bar"></div>
@@ -12,11 +13,10 @@
         </div>
         <div class="countdown">Pledges open for <span class="has_countdown" until="2010/6/20 1:00"></span></div>
         <div class="stretcher"></div>
-      </div>
+      </div> <!-- info -->
+
     </div>
 
   <% end %>
   
 </div>
-
-<% # link_to 'New Project', new_project_path %>

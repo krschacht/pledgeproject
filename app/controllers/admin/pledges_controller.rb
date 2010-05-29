@@ -1,4 +1,4 @@
-class PledgesController < ApplicationController
+class Admin::PledgesController < ApplicationController
 
   before_filter :require_admin, :only => [ :new, :edit, :create ]
 
@@ -27,7 +27,7 @@ class PledgesController < ApplicationController
   # GET /pledges/new
   # GET /pledges/new.xml
   def new
-    @pledge = Pledge.new
+    @admin_pledge = Pledge.new
 
     respond_to do |format|
       format.html # new.html.erb
