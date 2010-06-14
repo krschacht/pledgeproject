@@ -1,0 +1,26 @@
+
+<div class="widget-content">
+
+  <% @projects.each do |project| %>
+
+    <div class="project_container">
+      <b><%= link_to project.title, project.url, :target => "_parent" %></b>
+
+      <div class="info">
+        <div class="progress_bar_container">
+          <div class="bar"></div>
+          <div class="text">$230 of $600</div>
+        </div>
+        <div class="countdown">
+          <span class="has_countdown" until="<%= project.pledge_deadline_at.strftime('%Y/%m/%d %H:%M:%S') %>"></span>
+          to pledge
+        </div>
+        <div class="stretcher"></div>
+      </div> <!-- info -->
+
+    </div>
+
+  <% end %>
+  
+</div>
+

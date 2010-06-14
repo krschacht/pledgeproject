@@ -15,7 +15,7 @@
 }
 
 .project_container .progress_bar_container {
-  float: left; border: 1px solid black; width: 140px; height: 14px; margin-top: 0px; position: relative;
+  float: left; border: 1px solid black; width: 100px; height: 14px; margin-top: 0px; position: relative;
 }
 
 .progress_bar_container .bar {
@@ -23,7 +23,7 @@
 }
 
 .progress_bar_container .text {
-  height: 14px; width: 135px; padding-left: 5px; font-size: 10px; font-weight: bold; position: absolute; top: 0; left: 0; text-align: center;
+  height: 14px; width: 95px; padding-left: 5px; font-size: 10px; font-weight: bold; position: absolute; top: 0; left: 0; text-align: center;
 }
 
 .project_container .countdown {

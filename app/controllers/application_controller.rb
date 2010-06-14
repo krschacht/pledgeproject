@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
 
   def current_user_admin?
-    return true
+    cookies[:loggedin].to_i == 1
   end
   
   def require_admin

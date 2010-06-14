@@ -1,7 +1,11 @@
 class ProjectsController < ApplicationController
 
-  before_filter :require_admin, :only => [ :admin, :new, :edit, :create ]
+  before_filter :require_admin, :except => [ :widget ]
 
+  def widget
+    @projects = Project.all
+  end
+  
   # GET /projects
   # GET /projects.xml
   def index

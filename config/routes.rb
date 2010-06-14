@@ -1,14 +1,18 @@
 Pledgeproject::Application.routes.draw do |map|
+  match 'projects/widget', :to => 'projects#widget', :as => "projects_widget"
   resources :projects
+  
+  match 'admin', :to => 'admin#index', :as => "admin"
+  match 'admin/login', :to => 'admin#login', :as => "admin_login"
+  match 'admin/logout', :to => 'admin#logout', :as => "admin_logout"
   
   namespace :admin do    
     # Directs /admin/products/* to Admin::ProductsController
     # (app/controllers/admin/products_controller.rb)
+    
     resources :pledges
   end
-  
-  get "admin/projects"
-  
+
   
 #  resources :pledges
   
