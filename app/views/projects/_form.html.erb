@@ -36,6 +36,22 @@
     <%= f.label :pledge_deadline_at %><br />
     <%= f.datetime_select :pledge_deadline_at %>
   </div>
+
+  <div class="field">
+    <%= f.label :method %><br />
+    <%= f.text_field :method %>
+  </div>
+
+  <div class="field">
+    <%= f.label :pledge_goal_amount %><br />
+    <%= f.text_field :pledge_goal_amount %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_pledge_total %><br />
+    <%= f.text_field :current_pledge_total %>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
