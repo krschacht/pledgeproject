@@ -27,7 +27,7 @@ class Admin::PledgesController < ApplicationController
   # GET /pledges/new
   # GET /pledges/new.xml
   def new
-    @admin_pledge = Pledge.new
+    @pledge = Pledge.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,7 +47,7 @@ class Admin::PledgesController < ApplicationController
 
     respond_to do |format|
       if @pledge.save
-        format.html { redirect_to(@pledge, :notice => 'Pledge was successfully created.') }
+        format.html { redirect_to(admin_pledge_url(@pledge), :notice => 'Pledge was successfully created.') }
         format.xml  { render :xml => @pledge, :status => :created, :location => @pledge }
       else
         format.html { render :action => "new" }
@@ -79,7 +79,7 @@ class Admin::PledgesController < ApplicationController
     @pledge.destroy
 
     respond_to do |format|
-      format.html { redirect_to(pledges_url) }
+      format.html { redirect_to(admin_pledges_url) }
       format.xml  { head :ok }
     end
   end  

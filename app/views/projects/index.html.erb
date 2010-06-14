@@ -14,7 +14,7 @@
 
     <td><%# link_to 'Show', project %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %> | </td>
-    <td><%= link_to 'Delete', project, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to "Delete", project_path(project.id), :method=>:delete, :class=>:destroy, :confirm=>"Are you sure?" %></td>
   </tr>
 <% end %>
 </table>

@@ -21,9 +21,9 @@
     <td><%= pledge.email %></td>
     <td><%= pledge.amount %></td>
     <td><%= pledge.note %></td>
-    <td><%= link_to 'Show', admin_pledge %></td>
+    <td><%= link_to 'Show', admin_pledge_path(pledge) %></td>
     <td><%= link_to 'Edit', edit_admin_pledge_path(pledge) %></td>
-    <td><%= link_to 'Destroy', admin_pledge, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to "Delete", admin_pledge_path(pledge.id), :method=>:delete, :class=>:destroy, :confirm=>"Are you sure?" %></td>
   </tr>
 <% end %>
 </table>
