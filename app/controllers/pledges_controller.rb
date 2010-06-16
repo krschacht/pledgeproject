@@ -16,7 +16,6 @@ class PledgesController < ApplicationController
   def new
     @pledge = Pledge.new
     @project = Project.find( params[:project_id].to_i )
-    @body_backg = "grey_backg";
     
     respond_to do |format|
       format.html # new.html.erb
@@ -36,7 +35,7 @@ class PledgesController < ApplicationController
         format.html { redirect_to(admin_pledge_url(@pledge), :notice => 'Pledge was successfully created.') }
         format.xml  { render :xml => @pledge, :status => :created, :location => @pledge }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => params[:prev_action] }
         format.xml  { render :xml => @pledge.errors, :status => :unprocessable_entity }
       end
     end

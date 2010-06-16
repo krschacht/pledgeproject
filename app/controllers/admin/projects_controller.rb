@@ -2,6 +2,17 @@ class Admin::ProjectsController < ApplicationController
 
   before_filter :require_admin, :show_admin_nav
   
+  
+  def pledge_embed
+    @project = Project.find( params[:project_id].to_i )
+    
+    @attrib = { :scrolling => 'no',
+                :height => 700,
+                :frameborder => 1,
+                :style => 'width: 100%; border: 1px solid black;',
+                :allowtransparency => 'true' }    
+  end
+  
   # GET /projects
   # GET /projects.xml
   def index

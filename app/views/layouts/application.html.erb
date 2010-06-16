@@ -5,10 +5,12 @@
   <%= stylesheet_link_tag :all %>
   <%= csrf_meta_tag %>
 </head>
-<body class="<%= @body_backg %> <%= controller.controller_name %> <%= controller.controller_name %>_<%= action_name_safe %>">
+<body class="<%= controller.controller_name %> <%= controller.controller_name %>_<%= action_name_safe %> <%= controller.controller_name %>_prev_<%= params[:prev_action] %>">
   
   <div class="body_interior">
-    <%= link_to "Back to admin", "/admin"  if @show_admin_nav %>
+    <% if @show_admin_nav %>
+      <div><%= link_to "Back to admin", "/admin" %></div>
+    <% end %>
       
     <%= yield %>
   </div>

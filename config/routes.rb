@@ -9,6 +9,7 @@ Pledgeproject::Application.routes.draw do |map|
   match 'admin', :to => 'admin#index', :as => "admin"
   match 'admin/login', :to => 'admin#login', :as => "admin_login"
   match 'admin/logout', :to => 'admin#logout', :as => "admin_logout"
+  match 'admin/projects/:project_id/pledge_embed', :to => 'admin/projects#pledge_embed', :as => "admin_project_pledge_embed"
   
   namespace :admin do    
     # Directs /admin/products/* to Admin::ProductsController

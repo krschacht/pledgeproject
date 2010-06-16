@@ -3,7 +3,7 @@
               :frameborder => 0,
               :style => 'width: 100%; border: 0px;',
               :allowtransparency => 'true' } %>
-<% html = "<iframe src='#{ new_project_pledge_url( 1 ) }' " + 
+<% html = "<iframe src='#{ new_project_pledge_url( @project.id ) }' " + 
           attrib.to_a.inject('') { |v,a| v+="#{a[0]}='#{a[1]}' " } +
           "></iframe>" 
 %>

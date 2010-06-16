@@ -1,3 +1,8 @@
+.pledges_new,
+.pledges_prev_new {
+  background-color: #EEEEEE;
+}
+
 .pledge_form {
   font-family: "Lucida Grande", Tahoma, Arial, sans-serif;
 }

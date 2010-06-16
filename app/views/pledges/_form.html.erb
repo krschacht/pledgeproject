@@ -3,7 +3,8 @@
   <%= form_for @pledge do |f| %>
 
     <%= hidden_field_tag :project_id, @project.id %>
-  
+    <%= hidden_field_tag :prev_action, action_name_safe %>
+      
     <% if @pledge.errors.any? %>
       <div id="errorExplanation">
         <h2><%= pluralize(@pledge.errors.count, "error") %> prohibited this pledge from being saved:</h2>
