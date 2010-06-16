@@ -8,8 +8,8 @@ class Admin::ProjectsController < ApplicationController
     
     @attrib = { :scrolling => 'no',
                 :height => 700,
-                :frameborder => 1,
-                :style => 'width: 100%; border: 1px solid black;',
+                :frameborder => 0,
+                :style => 'width: 100%; border: 0px solid black;',
                 :allowtransparency => 'true' }    
   end
   
