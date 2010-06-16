@@ -1,1 +1,170 @@
-<html><body>.</body></html>
+<html><body>.
+  
+  <script type="text/javascript" src='http://127.0.0.1:3000/projects/widget.js'></script>
+
+  <!--
+    <script>
+
+
+
+    function WufooForm() {
+      this.host='wufoo.com',
+      this.userName='dianahsieh',
+      this.formHash='z7x4a9',
+      this.ssl='unset',
+      this.autoResize=true,
+      this.height='500',
+      this.width='100%',
+      this.disabled=false,
+      this.frameUrl='',
+      this.defaultValues='',
+      this.key='',
+      this.polling=false,
+
+      this.init=function(){
+        this.key=this.formHash+''+Math.floor(Math.random()*1000000);
+        this.gFU();
+        this.aE(window,'message',this.bindMethod(this.sWF,this));
+      },
+
+      this.gFU=function(){
+        var url='';
+        url+=this.dS();
+        url+=this.userName+'.'+this.host+'/embed/'+this.formHash+'/';
+        url+='def/embedKey='+this.key;
+        if(this.defaultValues!='')url+='&'+this.defaultValues;
+        if(this.ssl==false)url+='&secure=false';
+        if(this.disabled)url+='&disable=true';
+        if(this.autoResize == false) url += '&scrolling=true';
+        this.frameUrl=url;
+        //this.frameUrl="http://127.0.0.1:3000/projects/1/pledges/new"
+      },
+
+      this.gFPU=function(){
+        var url='';
+        url+=this.dS();
+        url+=this.userName+'.'+this.host+'/forms/'+this.formHash+'/';
+        if(this.ssl==false)url+='http/true/';
+          return url;
+        }
+        this.aRS=function(){
+        if(!this.polling){
+          var self=this;
+          setTimeout(function(){
+          var script=document.createElement("script");
+          script.setAttribute("src",document.location.protocol+"//"+self.host+"/forms/height.js?embedKey="+self.key+"&variable="+self.formHash+"&timestamp="+new Date().getTime().toString());
+          script.setAttribute("type","text/javascript");
+          document.body.appendChild(script);
+          },50);
+          }
+        },
+
+      this.resizeForm=function(ret){
+        if(this.autoResize==true&&ret.height){
+        document.getElementById('wufooForm'+this.formHash).height=ret.height;
+        if(ret.rules=='1'){
+        this.aCPF(ret.protocol);
+        __poll(this.formHash);
+        this.polling=true;
+        }
+        }
+      },
+
+      this.dS=function(){
+        if(this.ssl==true)return'https://';
+        else return'http://';
+      },
+
+      this.gFM=function(){
+        var scroll = 'no';
+        if(this.autoResize == false) scroll = 'auto';
+        var src='<iframe id="wufooForm'+this.formHash+'" height="'+this.height+'" allowTransparency="true" frameborder="1" scrolling="'+scroll+'" style="width:'+this.width+';"'+
+        'src="'+this.frameUrl+'"><a href="'+this.gFPU()+'" title="html form" rel="nofollow">Fill out my Wufoo form!</a></iframe>';
+        return src;
+      },
+
+      this.display=function(){
+        document.write(this.gFM());
+        if(!window.postMessage)this.aE(document.getElementById('wufooForm'+this.formHash),'load',this.bindMethod(this.aRS,this));
+      },
+
+      this.sWF=function(event){
+        if(event.origin!='http://'+this.userName+'.'+this.host&&
+          event.origin!='https://'+this.userName+'.'+this.host){
+          return;
+        }
+        if(this.autoResize==true){
+          var data=event.data.split('|');
+          if(data[1]&&data[1]==this.key){
+            document.getElementById('wufooForm'+this.formHash).height=data[0];
+          }
+        }
+      },
+
+      this.aE=function(obj,type,fn){
+        if(obj.attachEvent){
+        obj["e"+type+fn]=fn;
+        obj[type+fn]=function(){obj["e"+type+fn](window.event)};
+        obj.attachEvent("on"+type,obj[type+fn]);
+        }
+        else{
+        obj.addEventListener(type,fn,false);
+        }
+      },
+
+      this.bindMethod=function(method,scope){
+        return function(){
+        method.apply(scope,arguments);
+        }
+      },
+
+      this.aCPF=function(protocol){
+        var proxyName='wufooProxyFrame'+this.formHash;
+        __proxyFrameUrl=this.gCPU(protocol);
+        this.aIF(proxyName,__proxyFrameUrl);
+      },
+
+      this.gCPU=function(protocol){
+        var url='';
+        url+=protocol+'//';
+        url+=this.userName+'.'+this.host+'/forms/blank.htm';
+        url+='#'+window.location.href;
+        return url;
+      },
+
+      this.aIF=function(name,src){
+        var proxyFrame=document.getElementById(name);
+        if(!proxyFrame){
+        var newiframe=document.createElement('iframe');
+        newiframe.setAttribute('id',name);
+        newiframe.setAttribute('name',name);
+        newiframe.setAttribute('height','0px;');
+        newiframe.setAttribute('style','position: absolute; left: -500px; top: 500px; width: 0px;');
+        newiframe.setAttribute('src',src);
+        document.body.appendChild(newiframe);
+        }
+      }
+    }
+
+    var __currentHeight=0;
+
+    function __poll(formHash){
+      var childFrameHeight=__gCFH();
+      if((childFrameHeight>0)&&(__currentHeight!=childFrameHeight)){
+      __currentHeight=childFrameHeight;
+      document.getElementById('wufooForm'+formHash).height=childFrameHeight;
+      }
+      setTimeout("__poll('"+formHash+"')",500);
+    }
+
+    function __gCFH(){
+      var hArray=window.location.hash.split('=');
+      return hArray[1];
+    }
+
+    var z7x4a9 = new WufooForm();
+    z7x4a9.init();
+    z7x4a9.display();
+    </script>
+  -->  
+  </body></html>

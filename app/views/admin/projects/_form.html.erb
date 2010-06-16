@@ -1,4 +1,4 @@
-<%= form_for(@project) do |f| %>
+<%= form_for [:admin, @project] do |f| %>
   <% if @project.errors.any? %>
   <div id="errorExplanation">
     <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -37,11 +37,12 @@
     <%= f.datetime_select :pledge_deadline_at %>
   </div>
 
+<!--
   <div class="field">
     <%= f.label :method %><br />
     <%= f.text_field :method %>
   </div>
-
+-->
   <div class="field">
     <%= f.label :pledge_goal_amount %><br />
     <%= f.text_field :pledge_goal_amount %>

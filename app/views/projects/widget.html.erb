@@ -12,7 +12,8 @@
         </div>
         <div class="countdown">
           <span class="has_countdown" until="<%= project.pledge_deadline_at.strftime('%Y/%m/%d %H:%M:%S') %>"></span>
-          to pledge
+          remaining.
+          <%= link_to "Pledge!", new_project_pledge_url( project.id ), :target => "_parent" %>
         </div>
         <div class="stretcher"></div>
       </div> <!-- info -->

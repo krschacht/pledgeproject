@@ -2,7 +2,8 @@
 
 body {
   font-family:arial,verdana,helvetica,tahoma,Sans-serif;
-  font-size:100%;
+/*  font-size:100%; */
+  font-size: 13px;
   margin: 0;
   padding: 0;
 }
@@ -23,4 +24,21 @@ a:hover {
 
 .hidden {
   display: none;
+}
+
+.red {
+  color: red !important;
+}
+
+.grey_backg {
+  background-color: #EEEEEE;
+}
+
+.form_pretty_wrapper {
+  width: 670px;
+  background-color: white;
+  border: 1px solid #CCCCCC;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 20px;
 }

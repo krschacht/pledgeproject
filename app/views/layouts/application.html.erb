@@ -5,12 +5,12 @@
   <%= stylesheet_link_tag :all %>
   <%= csrf_meta_tag %>
 </head>
-<body>
+<body class="<%= @body_backg %>">
 
   <%= yield %>
 
 
   <%= javascript_include_tag :defaults %>
-  <%= javascript_include_tag "jquery.countdown" %>
+  <%= javascript_include_tag 'jquery.countdown', 'pledges' %>
 </body>
 </html>

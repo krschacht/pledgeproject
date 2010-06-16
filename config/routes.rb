@@ -1,6 +1,10 @@
 Pledgeproject::Application.routes.draw do |map|
-  match 'projects/widget', :to => 'projects#widget', :as => "projects_widget"
-  resources :projects
+  match 'projects/widget(.:format)', :to => 'projects#widget', :as => "projects_widget"
+
+  resource :pledges
+  match 'projects/:project_id/pledges/new(.:format)', :to => "pledges#new", :as => "new_project_pledge"
+  match 'projects/:project_id/pledges/new_embed(.:format)', :to => "pledges#new_embed", :as => "new_project_pledge_embed"
+
   
   match 'admin', :to => 'admin#index', :as => "admin"
   match 'admin/login', :to => 'admin#login', :as => "admin_login"
@@ -11,6 +15,7 @@ Pledgeproject::Application.routes.draw do |map|
     # (app/controllers/admin/products_controller.rb)
     
     resources :pledges
+    resources :projects
   end
 
   

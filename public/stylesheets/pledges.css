@@ -1,0 +1,79 @@
+.pledge_form {
+  font-family: "Lucida Grande", Tahoma, Arial, sans-serif;
+}
+
+.pledge_form .info {
+  border-bottom: 1px dotted #CCCCCC;
+  clear: both;
+  margin: 0 0 5px;
+  padding: 0 1% 1.1em;
+}
+
+.pledge_form h2 {
+  font-size: 160%;
+  font-weight: normal;
+  margin: 0 0 0.2em;
+}
+
+.pledge_form .description {
+  color: #555555;
+  font-size: 95%;
+  line-height: 135%;
+}
+
+.pledge_form ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pledge_form li {
+  margin: 0;
+  padding: 6px 1% 9px;
+  clear: both;
+}
+
+.pledge_form label.field {
+  border: medium none;
+  color: #222222;
+  display: block;
+  font-size: 95%;
+  font-weight: bold;
+  line-height: 150%;
+  margin: 0;
+  padding: 0 0 3px;
+}
+
+.pledge_form li span {
+  color: #444444;
+  float: left;
+  margin: 0 0.3em 0 0;
+  padding: 0;
+}
+
+.pledge_form input.text,
+.pledge_form textarea {
+  border-color: #7C7C7C #C3C3C3 #DDDDDD;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 100%;
+  width: 240px;
+}
+
+.pledge_form textarea {
+  height: 10em;
+  width: 460px;
+}
+
+.pledge_form label.sub {
+  color: #444444;
+  display: block;
+  font-size: 85%;
+  line-height: 160%;
+  margin: 0;
+  padding-top: 3px;
+}
+
+.pledge_form label span {
+  float: none;
+}

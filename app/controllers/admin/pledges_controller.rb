@@ -1,6 +1,6 @@
 class Admin::PledgesController < ApplicationController
 
-  before_filter :require_admin, :only => [ :new, :edit, :create ]
+  before_filter :require_admin
 
   # GET /pledges
   # GET /pledges.xml

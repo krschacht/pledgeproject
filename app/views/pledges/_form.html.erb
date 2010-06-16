@@ -1,0 +1,63 @@
+<div class="pledge_form">
+
+  <%= form_for @pledge do |f| %>
+
+    <%= hidden_field_tag :project_id, @project.id %>
+  
+    <% if @pledge.errors.any? %>
+      <div id="errorExplanation">
+        <h2><%= pluralize(@pledge.errors.count, "error") %> prohibited this pledge from being saved:</h2>
+        <ul>
+        <% @pledge.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="info">
+      <h2>Pledge for <%= @project.title %></h2>
+      <div class="description"><%= @project.description %></div>
+    </div>
+
+    <div class="field hidden">
+      <%= f.label :project_id %><br />
+      <%= f.text_field :project_id %>
+    </div>
+
+    <ul>
+      <li>
+        <%= label_tag :name, nil, :class => "field" %>
+        <span>
+          <%= f.text_field :first_name, :class => "text", :style => "width: 90px;" %>
+          <%= f.label :first_name, nil, :class => "sub" %>
+        </span>
+        <span>
+          <%= f.text_field :last_name, :class => "text", :style => "width: 120px;" %>
+          <%= f.label :last_name, nil, :class => "sub" %>
+        </span>
+        <div class="stretcher"></div>
+      </li>
+      <li>
+        <%= f.label :email, nil, :class => "field" %>
+        <div><%= f.text_field :email, :class => "text" %></div>
+      </li>
+      <li>
+        <%= f.label :amount, "Pledge $", :class => "field" %>
+        <div><%= f.text_field :amount, :class => "text", :style => "width: 120px;" %></div>
+      </li>
+      <li>
+        <%= f.label :note, "Your Question", :class => "field" %>
+        <div><%= f.text_area :note, :id => "note" %>
+          <label class="sub" for="pledge_note">
+            Maximum Allowed: 200 words. Currently Used: <span id='word_count'>0</span> words
+          </label>
+      </li>
+      <li class="actions">
+        <%= f.submit %>
+      </li>
+    </ul>
+  
+  <% end %>
+  
+</div>
