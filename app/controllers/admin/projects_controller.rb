@@ -1,6 +1,6 @@
 class Admin::ProjectsController < ApplicationController
 
-  before_filter :require_admin
+  before_filter :require_admin, :show_admin_nav
   
   # GET /projects
   # GET /projects.xml

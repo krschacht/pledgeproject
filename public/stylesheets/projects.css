@@ -30,3 +30,7 @@
   float: right; 
   text-align: right;
 }
+
+.projects_widget .body_interior {
+  margin: 0;
+}
