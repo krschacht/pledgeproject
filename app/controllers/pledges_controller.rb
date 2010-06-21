@@ -27,18 +27,21 @@ class PledgesController < ApplicationController
   # POST /pledges
   # POST /pledges.xml
   def create
-    @pledge = Pledge.new(params[:pledge])
-    @project = Project.find( params[:project_id].to_i )
+    @pledge = Pledge.new( params[:pledge] )
+    @project = Project.find( params[:pledge][:project_id] )
     
     respond_to do |format|
       if @pledge.save
-        format.html { redirect_to(admin_pledge_url(@pledge), :notice => 'Pledge was successfully created.') }
+        format.html { redirect_to(pledge_done_url(@pledge), :notice => 'Your pledge has been saved. Thanks!') }
         format.xml  { render :xml => @pledge, :status => :created, :location => @pledge }
       else
         format.html { render :action => params[:prev_action] }
         format.xml  { render :xml => @pledge.errors, :status => :unprocessable_entity }
       end
     end
+  end
+  
+  def done
   end
 
 end

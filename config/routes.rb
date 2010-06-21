@@ -2,14 +2,14 @@ Pledgeproject::Application.routes.draw do |map|
   match 'projects/widget(.:format)', :to => 'projects#widget', :as => "projects_widget"
 
   resource :pledges
-  match 'projects/:project_id/pledges/new(.:format)', :to => "pledges#new", :as => "new_project_pledge"
-  match 'projects/:project_id/pledges/new_embed(.:format)', :to => "pledges#new_embed", :as => "new_project_pledge_embed"
-
+  match 'projects/:project_id/pledges/new(.:format)'        => 'pledges#new',       :as => 'new_project_pledge'
+  match 'projects/:project_id/pledges/new_embed(.:format)'  => 'pledges#new_embed', :as => 'new_project_pledge_embed'
+  match 'pledges/done/(:id)'                                => 'pledges#done',      :as => 'pledge_done'
   
-  match 'admin', :to => 'admin#index', :as => "admin"
-  match 'admin/login', :to => 'admin#login', :as => "admin_login"
-  match 'admin/logout', :to => 'admin#logout', :as => "admin_logout"
-  match 'admin/projects/:project_id/pledge_embed', :to => 'admin/projects#pledge_embed', :as => "admin_project_pledge_embed"
+  match 'admin'                                   => 'admin#index',                 :as => "admin"
+  match 'admin/login'                             => 'admin#login',                 :as => "admin_login"
+  match 'admin/logout'                            => 'admin#logout',                :as => "admin_logout"
+  match 'admin/projects/:project_id/pledge_embed' => 'admin/projects#pledge_embed', :as => "admin_project_pledge_embed"
   
   namespace :admin do    
     # Directs /admin/products/* to Admin::ProductsController

@@ -63,7 +63,7 @@ class Admin::PledgesController < ApplicationController
 
     respond_to do |format|
       if @pledge.update_attributes(params[:pledge])
-        format.html { redirect_to(@pledge, :notice => 'Pledge was successfully updated.') }
+        format.html { redirect_to(admin_pledge_url(@pledge), :notice => 'Pledge was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

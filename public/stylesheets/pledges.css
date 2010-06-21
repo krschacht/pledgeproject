@@ -49,6 +49,11 @@
   padding: 0 0 3px;
 }
 
+.pledge_form label.req:after {
+  content: ' *';
+  color: red;
+}
+
 .pledge_form li span {
   color: #444444;
   float: left;
@@ -81,4 +86,10 @@
 
 .pledge_form label span {
   float: none;
+}
+
+.done_msg {
+  font-size: 25px;
+  text-align: center;
+  margin-top: 40px;
 }
