@@ -1,0 +1,19 @@
+<% 
+  out = ""
+  
+  @fields.each_with_index do |f,i|
+    out += @delimeter   unless i == 0
+    out += f.to_s
+  end
+
+  out += "\n"
+  
+  @pledges.each do |p|
+    @fields.each_with_index do |f,i|
+      out += @delimeter   unless i == 0
+      out += p.attributes[ f.to_s ].to_s
+    end
+    
+    out += "\n"
+  end  
+-%><%= out %>

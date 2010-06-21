@@ -5,8 +5,11 @@
   <% @projects.each do |project| %>
     <div class="project">
       <div class="title"><%= project.title %></div>
-      <div class="info"><span class="num"><%= project.pledges_count %></span> pledges 
-                        totaling <span class="num"><%= number_with_delimiter( project.current_pledged_total ) %></span>
+      <div class="info">
+        <%= link_to raw("<span class='num'>#{ project.pledges_count }</span> pledges"), 
+                                                                    admin_pledges_for_project_path(project) %>
+                        
+        &nbsp;&nbsp;totaling <span class="num">$<%= number_with_delimiter( project.current_pledged_total ) %></span>
       </div>
     </div>
   <% end %>
@@ -14,7 +17,6 @@
 </div>
 
 <ul>
-<li><a href="/admin/pledges">manage pledges</a></li>
 <li><a href="/admin/projects">manage projects</a> | <a href="/projects/widget">view widget</a></li>
   <ul style="margin-top: 10px;"><li>Embed widget code<br>
     <textarea style="width: 450px; height: 60px;">

@@ -16,13 +16,16 @@ class Pledge < ActiveRecord::Base
 
   after_create  :pledge_added
   after_destroy :pledge_removed
+  after_update  :pledge_updated
   
+  scope :for_project, lambda {|id| where(:project_id => id) }
+   
   def pledge_added
     p = Project.find( self.project_id )
     
     if p
       p.pledges_count += 1
-      p.current_pledged_total += self.amount
+      p.current_pledged_total += self.amount      
       p.save!
     end
   end
@@ -33,6 +36,18 @@ class Pledge < ActiveRecord::Base
     if p
       p.pledges_count -= 1
       p.current_pledged_total -= self.amount
+      
+      p.pledges_count = 0             if p.pledges_count < 0
+      p.current_pledged_total = 0     if p.current_pledged_total < 0
+      p.save!
+    end
+  end
+
+  def pledge_updated
+    p = Project.find( self.project_id )
+
+    if p
+      p.current_pledged_total = Pledge.for_project(1).sum( :amount )
       p.save!
     end
   end

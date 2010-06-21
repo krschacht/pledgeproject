@@ -10,4 +10,8 @@ class Project < ActiveRecord::Base
     self[:method].to_sym  unless self[:method].nil? || self[:method].empty?
   end
   
+  def url_friendly_title
+    self.title.gsub(/[^A-Za-z0-9]/, '_')
+  end
+  
 end

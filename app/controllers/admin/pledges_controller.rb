@@ -82,5 +82,28 @@ class Admin::PledgesController < ApplicationController
       format.html { redirect_to(admin_pledges_url) }
       format.xml  { head :ok }
     end
-  end  
+  end
+
+  def for_project
+    id = params[:id].gsub(/.*-/, '').to_i
+    
+    @project = Project.find( id )
+    @pledges = Pledge.for_project( id )
+    @fields = [ :first_name, :last_name, :email, :amount, :note, :actions ]
+
+    delimiter_codes = {
+      :tab    => "\t",
+      :comma  => ","
+    }
+
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @pledges }
+      format.csv  do
+        @delimeter = delimiter_codes[ (params[:delimiter] || :comma ).to_sym ]
+        render :csv => @pledges
+      end
+    end
+  end
+    
 end

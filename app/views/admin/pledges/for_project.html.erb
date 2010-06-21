@@ -1,0 +1,33 @@
+<div class="download_option">
+  <%= link_to "download comma delimited", 
+              admin_pledges_for_project_path( "#{ @project.url_friendly_title}-#{ @project.id }" ) + ".csv" %>
+</div>
+<div class="download_option">
+  <%= link_to "download tab delimited", 
+              admin_pledges_for_project_path( "#{ @project.url_friendly_title}-#{ @project.id }" ) + 
+                                              ".csv?delimiter=tab" %>
+</div>
+
+<table border="1">
+  <tr>
+    <% @fields.each do |f| %>
+      <th><%= f %></th>
+    <% end %>
+  </tr>
+    <% @pledges.each do |p| %>
+      <tr>
+        <% @fields.each do |f| %>
+
+          <% if f == :actions %>
+            <td>
+              <%= link_to 'Edit', edit_admin_pledge_path(p) %> | 
+              <%= link_to "Delete", admin_pledge_path(p.id), :method=>:delete, :confirm=>"Are you sure?" %>
+            </td>
+          <% else %>
+            <td><%= p.attributes[ f.to_s ] %></td>
+          <% end %>
+
+        <% end %>
+      </tr>
+    <% end %>
+</table>
