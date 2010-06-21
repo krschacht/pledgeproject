@@ -34,6 +34,9 @@ class PledgesController < ApplicationController
     
     respond_to do |format|
       if @pledge.save
+        AdminNotifier.pledge_received( @pledge ).deliver
+        UserNotifier.pledge_received( @pledge ).deliver
+        
         format.html { redirect_to(pledge_done_url(@project), :notice => 'Your pledge has been saved. Thanks!') }
         format.xml  { render :xml => @pledge, :status => :created, :location => @pledge }
       else

@@ -9,6 +9,8 @@ end
 
 
 class Pledge < ActiveRecord::Base
+
+  belongs_to :project
   
   validates :project_id, :first_name, :last_name, :email, :amount, :presence => true
   validates :amount, :numericality => { :greater_than_or_equal_to => 0.01 }
@@ -20,6 +22,10 @@ class Pledge < ActiveRecord::Base
   
   scope :for_project, lambda {|id| where(:project_id => id) }
    
+  def full_name
+    self.first_name + ' ' + self.last_name
+  end
+  
   def pledge_added
     p = Project.find( self.project_id )
     
