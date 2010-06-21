@@ -3,7 +3,7 @@
   <%= form_for @pledge do |f| %>
 
     <%= f.hidden_field :project_id, :value => @project.id %>
-    <%= hidden_field_tag :prev_action, action_name_safe %>
+    <%= hidden_field_tag :return_action, return_action_name %>
       
     <% if @pledge.errors.any? %>
       <div id="errorExplanation">

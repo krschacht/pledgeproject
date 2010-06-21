@@ -23,7 +23,7 @@
     <td><%= pledge.note %></td>
     <td><%= link_to 'Show', admin_pledge_path(pledge) %></td>
     <td><%= link_to 'Edit', edit_admin_pledge_path(pledge) %></td>
-    <td><%= button_to "Delete", admin_pledge_path(pledge.id), :method=>:delete, :confirm=>"Are you sure?" %></td>
+    <td><%= link_to "Delete", admin_pledge_path(pledge.id), :method=>:delete, :confirm=>"Are you sure?" %></td>
   </tr>
 <% end %>
 </table>

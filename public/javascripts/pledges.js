@@ -1,5 +1,7 @@
 $('#note').keyup(function() {
-  word_count = $(this).val().split(/[\w-]+/).length
+  word_count = $(this).val().split(/[\w-]+/).length - 1;
+  word_count = word_count < 0 ? 0 : word_count;
+  
   $('#word_count').text( word_count );
   
   if (word_count > 200)

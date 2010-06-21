@@ -35,7 +35,7 @@ class PledgesController < ApplicationController
         format.html { redirect_to(pledge_done_url(@pledge), :notice => 'Your pledge has been saved. Thanks!') }
         format.xml  { render :xml => @pledge, :status => :created, :location => @pledge }
       else
-        format.html { render :action => params[:prev_action] }
+        format.html { render :action => params[:return_action] }
         format.xml  { render :xml => @pledge.errors, :status => :unprocessable_entity }
       end
     end

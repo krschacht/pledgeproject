@@ -10,7 +10,7 @@
   <tr>
     <td><%= link_to project.title, edit_admin_project_path(project) %>
         <%= "<br>a" + project.description  unless project.description.nil? %></td>
-    <td><%= button_to "Delete", admin_project_path(project.id), :method=>:delete, :confirm=>"Are you sure?" %></td>
+    <td><%= link_to "Delete", admin_project_path(project.id), :method=>:delete, :confirm=>"Are you sure?" %></td>
     <td><%= link_to 'Pretty pledge form', new_project_pledge_path(project.id) %></td>
     <td><%= link_to 'Embeddable pledge form', admin_project_pledge_embed_path(project.id) %></td>
   </tr>

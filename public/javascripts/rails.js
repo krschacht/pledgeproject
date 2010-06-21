@@ -60,6 +60,7 @@ jQuery(function ($) {
     /**
      *  confirmation handler
      */
+        
     $('a[data-confirm],input[data-confirm]').live('click', function () {
         var el = $(this);
         if (el.triggerAndReturn('confirm')) {
@@ -68,7 +69,6 @@ jQuery(function ($) {
             }
         }
     });
-
 
     /**
      * remote handlers
