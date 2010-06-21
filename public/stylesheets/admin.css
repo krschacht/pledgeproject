@@ -29,3 +29,10 @@
 .download_option {
   padding: 0 0 7px 15px;
 }
+
+.paid_true {
+  background-color: lightgreen;
+}
+
+.paid_false {
+}

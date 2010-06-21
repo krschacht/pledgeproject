@@ -26,10 +26,15 @@
 </p>
 
 <p>
+  <b>Amount:</b>
+  <%= @pledge.paid %>
+</p>
+
+<p>
   <b>Note:</b>
   <%= @pledge.note %>
 </p>
 
 
-<%= link_to 'Edit', edit_admin_pledge_path(@pledge) %> |
-<%= link_to 'Back', admin_pledges_path %>
+<%= link_to 'Edit', edit_admin_pledge_path( @pledge ) %> |
+<%= link_to 'Back', admin_pledges_for_project_path( @pledge.project_id ) %>

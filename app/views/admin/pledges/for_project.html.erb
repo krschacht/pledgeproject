@@ -15,14 +15,17 @@
     <% end %>
   </tr>
     <% @pledges.each do |p| %>
-      <tr>
+      <tr class="paid_<%= p.paid %>">
         <% @fields.each do |f| %>
 
           <% if f == :actions %>
             <td>
               <%= link_to 'Edit', edit_admin_pledge_path(p) %> | 
-              <%= link_to "Delete", admin_pledge_path(p.id), :method=>:delete, :confirm=>"Are you sure?" %>
+              <%= link_to "Delete", admin_pledge_path(p.id), :method=>:delete, :confirm=>"Are you sure?" %> |
+              <%= link_to 'Toggle Paid', admin_pledge_path(p, 'pledge[paid]' => "#{! p.paid }" ), :method => :put %>
             </td>
+          <% elsif f == :email %>
+            <td><%= link_to p.attributes[ f.to_s ], "mailto:#{p.attributes[ f.to_s ]}" %></td>
           <% else %>
             <td><%= p.attributes[ f.to_s ] %></td>
           <% end %>

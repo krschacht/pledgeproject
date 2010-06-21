@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100621160908) do
+ActiveRecord::Schema.define(:version => 20100621171826) do
 
   create_table "pledges", :force => true do |t|
     t.integer  "project_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20100621160908) do
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "paid",                                      :default => false
   end
 
   add_index "pledges", ["project_id"], :name => "index_pledges_on_project_id"
