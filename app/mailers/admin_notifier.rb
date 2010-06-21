@@ -9,6 +9,6 @@ class AdminNotifier < ActionMailer::Base
   def pledge_received( pledge )
     @pledge = pledge
 
-    mail :to => "krschacht@gmail.com", :subject => "Pledge Received - #{ @pledge.full_name } - #{ @pledge.project }"
+    mail :to => "krschacht@gmail.com", :subject => "Pledge Received - #{ @pledge.full_name } - #{ @pledge.project.title }"
   end
 end
