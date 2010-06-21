@@ -2,3 +2,11 @@
 <textarea style="width: 450px; height: 100px;">    
 <iframe src='<%= new_project_pledge_embed_url( @project.id ) %>' <%= @attrib.to_a.inject('') { |v,a| v+="#{a[0]}='#{a[1]}' " } %>></iframe>
 </textarea>
+
+<hr>
+
+<% if params[:showiframe] %>
+
+  <iframe src='<%= new_project_pledge_embed_url( @project.id ) %>' <%= @attrib.to_a.inject('') { |v,a| v+="#{a[0]}='#{a[1]}' " } %> border=1></iframe>
+
+<% end %>

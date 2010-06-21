@@ -37,7 +37,16 @@ class PledgesController < ApplicationController
         AdminNotifier.pledge_received( @pledge ).deliver
         UserNotifier.pledge_received( @pledge ).deliver
         
-        format.html { redirect_to(pledge_done_url(@project), :notice => 'Your pledge has been saved. Thanks!') }
+        format.html do
+
+          if @project.pledge_done_url.nil?
+            redirect_to(pledge_done_url(@project), :notice => 'Your pledge has been saved. Thanks!')
+          else
+            render :text => "<html><body><script type='text/javascript'>" +
+                            "parent.location.href = '#{@project.pledge_done_url}';" +
+                            "</script></body></html>"
+          end
+        end
         format.xml  { render :xml => @pledge, :status => :created, :location => @pledge }
       else
         format.html { render :action => params[:return_action] }
@@ -48,7 +57,6 @@ class PledgesController < ApplicationController
   
   def done
     @project = Project.find( params[:id].to_i )   if params[:id]
-    redirect_to( @project.pledge_done_url )       unless @project.pledge_done_url.nil? 
   end
 
 end
