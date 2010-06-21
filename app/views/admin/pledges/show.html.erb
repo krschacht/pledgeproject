@@ -35,6 +35,16 @@
   <%= @pledge.note %>
 </p>
 
+<p>
+  <b>Created at:</b>
+  <%= @pledge.created_at %>
+</p>
+
+<p>
+  <b>Last updated at:</b>
+  <%= @pledge.updated_at %>
+</p>
+
 
 <%= link_to 'Edit', edit_admin_pledge_path( @pledge ) %> |
 <%= link_to 'Back', admin_pledges_for_project_path( @pledge.project_id ) %>

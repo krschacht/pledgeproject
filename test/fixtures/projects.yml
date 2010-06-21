@@ -3,13 +3,12 @@
 one:
   title: MyString
   description: MyText
-  num_pledges: 1
-  total_pledges: 9.99
+  pledges_count: 1
   pledge_deadline_at: 2010-05-28 17:58:07
 
 two:
   title: MyString
   description: MyText
-  num_pledges: 1
+  pledges_count: 1
   total_pledges: 9.99
   pledge_deadline_at: 2010-05-28 17:58:07

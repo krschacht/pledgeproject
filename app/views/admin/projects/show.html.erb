@@ -14,7 +14,7 @@
 
 <p>
   <b>Num pledges:</b>
-  <%= @project.num_pledges %>
+  <%= @project.pledges_count %>
 </p>
 
 <p>
@@ -25,6 +25,16 @@
 <p>
   <b>Pledge deadline at:</b>
   <%= @project.pledge_deadline_at %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%= @project.created_at %>
+</p>
+
+<p>
+  <b>Last updated at:</b>
+  <%= @project.updated_at %>
 </p>
 
 

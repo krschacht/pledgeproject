@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= @page_title || 'NoodleFood' %></title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag :all, :cache => false %>
   <%= csrf_meta_tag %>
 </head>
 <body class=" <%= controller.controller_name %> 
