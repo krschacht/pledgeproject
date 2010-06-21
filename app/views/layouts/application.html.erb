@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pledgeproject</title>
+  <title><%= @page_title || 'NoodleFood' %></title>
   <%= stylesheet_link_tag :all %>
   <%= csrf_meta_tag %>
 </head>
-<body class="<%= controller.controller_name %> <%= controller.controller_name %>_<%= action_name_safe %> <%= controller.controller_name %>_return_<%= params[:return_action] %>">
+<body class=" <%= controller.controller_name %> 
+              <%= controller.controller_name %>_<%= action_name_safe %> 
+              <%= controller.controller_name %>_return_<%= params[:return_action] %>">
   
   <div class="body_interior">
     <% if @show_admin_nav %>
@@ -14,7 +16,6 @@
       
     <%= yield %>
   </div>
-
 
   <%= javascript_include_tag :defaults %>
   <%= javascript_include_tag 'jquery.countdown', 'pledges', 'rails' %>

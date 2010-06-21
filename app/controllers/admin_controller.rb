@@ -3,6 +3,7 @@ class AdminController < ApplicationController
   before_filter :require_admin, :only => [ :index ]
 
   def index
+    @projects = Project.all
   end
   
   def projects

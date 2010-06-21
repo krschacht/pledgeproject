@@ -17,6 +17,8 @@ class PledgesController < ApplicationController
     @pledge = Pledge.new
     @project = Project.find( params[:project_id].to_i )
     
+    @page_title = @project.title
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @pledge }
@@ -32,7 +34,7 @@ class PledgesController < ApplicationController
     
     respond_to do |format|
       if @pledge.save
-        format.html { redirect_to(pledge_done_url(@pledge), :notice => 'Your pledge has been saved. Thanks!') }
+        format.html { redirect_to(pledge_done_url(@project), :notice => 'Your pledge has been saved. Thanks!') }
         format.xml  { render :xml => @pledge, :status => :created, :location => @pledge }
       else
         format.html { render :action => params[:return_action] }
@@ -42,6 +44,8 @@ class PledgesController < ApplicationController
   end
   
   def done
+    @project = Project.find( params[:id].to_i )   if params[:id]
+    redirect_to( @project.pledge_done_url )       unless @project.pledge_done_url.nil? 
   end
 
 end

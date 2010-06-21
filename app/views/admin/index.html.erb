@@ -1,4 +1,17 @@
-<h3>admin</h3>
+<h3>PledgeProject Administration</h3>
+
+<div class="summary">
+
+  <% @projects.each do |project| %>
+    <div class="project">
+      <div class="title"><%= project.title %></div>
+      <div class="info"><span class="num"><%= project.pledges_count %></span> pledges 
+                        totaling <span class="num"><%= number_with_delimiter( project.current_pledged_total ) %></span>
+      </div>
+    </div>
+  <% end %>
+
+</div>
 
 <ul>
 <li><a href="/admin/pledges">manage pledges</a></li>

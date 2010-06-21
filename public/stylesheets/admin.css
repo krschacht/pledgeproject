@@ -1,0 +1,25 @@
+.summary {
+  margin-left: 30px;
+}
+
+.summary .project {
+  margin-bottom: 20px;
+}
+
+.summary .project .title {
+  font-size: 20px;
+  padding-bottom: 4px;
+}
+
+.summary .project .info {
+  font-size: 17px;
+  margin-left: 10px;
+}
+
+.summary .project .info .num {
+  font-weight: bold;
+}
+
+.admin ul {
+  padding-left: 15px;
+}

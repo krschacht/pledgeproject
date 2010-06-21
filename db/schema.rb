@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100528225807) do
+ActiveRecord::Schema.define(:version => 20100621145621) do
 
   create_table "pledges", :force => true do |t|
     t.integer  "project_id"
@@ -26,14 +26,14 @@ ActiveRecord::Schema.define(:version => 20100528225807) do
     t.string   "title"
     t.text     "description"
     t.string   "url"
-    t.integer  "num_pledges"
-    t.decimal  "total_pledges",        :precision => 10, :scale => 0
+    t.integer  "pledges_count",                                        :default => 0
     t.datetime "pledge_deadline_at"
     t.string   "method"
-    t.decimal  "pledge_goal_amount",   :precision => 10, :scale => 0
-    t.decimal  "current_pledge_total", :precision => 10, :scale => 0
+    t.decimal  "pledge_goal_amount",    :precision => 10, :scale => 2
+    t.decimal  "current_pledged_total", :precision => 10, :scale => 2, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "pledge_done_url"
   end
 
 end
