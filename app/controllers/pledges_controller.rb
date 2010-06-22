@@ -41,7 +41,7 @@ class PledgesController < ApplicationController
 
           if @project.pledge_done_url.nil? || @project.pledge_done_url.empty?
             logger.info("using redirect_to #{pledge_done_url}")
-            redirect_to(pledge_done_url(@project), :notice => 'Your pledge has been saved. Thanks!')
+            redirect_to(pledge_done_url(@project), :notice => 'Your pledge has been saved. You will receive an e-mail confirmation of your pledge shortly. Thanks!')
           else
             logger.info("using javascript #{@project.pledge_done_url}")
             render :text => "<html><body><script type='text/javascript'>" +

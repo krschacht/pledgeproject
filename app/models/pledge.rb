@@ -53,7 +53,7 @@ class Pledge < ActiveRecord::Base
     p = Project.find( self.project_id )
 
     if p
-      p.current_pledged_total = Pledge.for_project(1).sum( :amount )
+      p.current_pledged_total = Pledge.for_project( self.project_id ).sum( :amount )
       p.save!
     end
   end
