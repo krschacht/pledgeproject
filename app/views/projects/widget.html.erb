@@ -8,7 +8,7 @@
       <div class="info">
         <div class="progress_bar_container <%= 'hidden' unless project.method == :goal %>">
           <div class="bar" style="width: <%= 100 * project.perct_raised %>px"></div>
-          <div class="text">$<%= project.current_pledged_total %> of $<%= project.pledge_goal_amount %></div>
+          <div class="text hidden">$<%# project.current_pledged_total %> of $<%# project.pledge_goal_amount %></div>
         </div>
         <div class="countdown">
           <span class="has_countdown" until="<%= project.pledge_deadline_at.strftime('%Y/%m/%d %H:%M:%S') %>"></span>

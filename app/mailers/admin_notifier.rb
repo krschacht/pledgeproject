@@ -1,5 +1,5 @@
 class AdminNotifier < ActionMailer::Base
-  default :from => "from@example.com"
+  default :from => "diana@dianahsieh.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -9,6 +9,6 @@ class AdminNotifier < ActionMailer::Base
   def pledge_received( pledge )
     @pledge = pledge
 
-    mail :to => "krschacht@gmail.com", :subject => "Pledge Received - #{ @pledge.full_name } - #{ @pledge.project.title }"
+    mail :to => "diana@dianahsieh.com", :subject => "Pledge Received - #{ @pledge.full_name } - #{ @pledge.project.title }"
   end
 end
