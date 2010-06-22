@@ -1,5 +1,5 @@
 class UserNotifier < ActionMailer::Base
-  default :from => "diana@dianahsieh.com"
+  default :from =>  "diana@dianahsieh.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
