@@ -1,5 +1,9 @@
 class Project < ActiveRecord::Base
+
+  has_many :pledges
   
+  validates :title, :presence => true
+
   def perct_raised
     return 0  if method != :goal || self.current_pledged_total.nil? || self.pledge_goal_amount.nil?
     

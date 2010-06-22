@@ -1,17 +1,18 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+# 
+john:
+ project_id: 1
+ first_name: John
+ last_name: Smith
+ email: jsmith@google.com
+ amount: 9.99
+ note: I don't have any questions
 
-one:
-  project_id: 1
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  amount: 9.99
-  note: MyText
-
-two:
-  project_id: 1
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  amount: 9.99
-  note: MyText
+# 
+# two:
+#   project_id: 1
+#   first_name: MyString
+#   last_name: MyString
+#   email: MyString
+#   amount: 9.99
+#   note: MyText

@@ -1,14 +1,12 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  title: MyString
-  description: MyText
-  pledges_count: 1
-  pledge_deadline_at: 2010-05-28 17:58:07
+letter:
+  title: Letter to the Editor
 
-two:
-  title: MyString
-  description: MyText
-  pledges_count: 1
-  total_pledges: 9.99
-  pledge_deadline_at: 2010-05-28 17:58:07
+# 
+# two:
+#   title: MyString
+#   description: MyText
+#   pledges_count: 1
+#   total_pledges: 9.99
+#   pledge_deadline_at: 2010-05-28 17:58:07

@@ -1,7 +1,7 @@
 class WordCountValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     
-    if value.scan(/[\w-]+/).size > options[:less_than_or_equal_to]
+    if value && value.scan(/[\w-]+/).size > options[:less_than_or_equal_to]
       record.errors[attribute] << "must be less than #{options[:less_than_or_equal_to]} words"
     end
   end
