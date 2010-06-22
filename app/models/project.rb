@@ -1,9 +1,9 @@
 class Project < ActiveRecord::Base
   
   def perct_raised
-    return 0  if method != :goal || self.current_pledge_total.nil? || self.pledge_goal_amount.nil?
+    return 0  if method != :goal || self.current_pledged_total.nil? || self.pledge_goal_amount.nil?
     
-    ( self.current_pledge_total / self.pledge_goal_amount.to_f )
+    ( self.current_pledged_total / self.pledge_goal_amount.to_f )
   end
   
   def method

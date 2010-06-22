@@ -89,7 +89,7 @@ class Admin::PledgesController < ApplicationController
     
     @project = Project.find( id )
     @pledges = Pledge.for_project( id )
-    @fields = [ :first_name, :last_name, :email, :amount, :paid, :note, :actions ]
+    @fields = [ :id, :first_name, :last_name, :email, :amount, :paid, :note, :created_at, :actions ]
 
     delimiter_codes = {
       :tab    => "\t",
