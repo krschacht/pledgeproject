@@ -11,7 +11,7 @@
           <div class="text hidden">$<%# project.current_pledged_total %> of $<%# project.pledge_goal_amount %></div>
         </div>
         <div class="countdown">
-          <span class="has_countdown" until="<%= project.pledge_deadline_at.strftime('%Y/%m/%d %H:%M:%S') %>"></span>
+          <span class="has_countdown" until="<%= project.pledge_deadline_at.strftime('%Y/%m/%d %H:%M:%S') unless project.pledge_deadline_at.nil? %>"></span>
           remaining.
           <%= link_to "Pledge!", new_project_pledge_url( project.id ), :target => "_parent" %>
         </div>
