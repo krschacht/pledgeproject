@@ -6,7 +6,7 @@ gem 'rails', '3.0.0.beta3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql'
-#gem 'hoptoad_notifier'
+gem 'hoptoad_notifier'
 #gem 'logworm_client'
 
 # Use unicorn as the web server
