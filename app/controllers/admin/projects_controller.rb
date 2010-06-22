@@ -7,7 +7,7 @@ class Admin::ProjectsController < ApplicationController
     @project = Project.find( params[:project_id].to_i )
     
     @attrib = { :scrolling => 'no',
-                :height => 700,
+                :height => 710,
                 :frameborder => 0,
                 :style => 'width: 100%; border: 0px solid black;',
                 :allowtransparency => 'true' }    

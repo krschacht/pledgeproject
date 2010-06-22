@@ -9,18 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100621171826) do
+ActiveRecord::Schema.define(:version => 20100622022429) do
 
   create_table "pledges", :force => true do |t|
     t.integer  "project_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.decimal  "amount",     :precision => 10, :scale => 0
+    t.decimal  "amount",        :precision => 10, :scale => 0
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "paid",                                      :default => false
+    t.boolean  "paid",                                         :default => false
+    t.boolean  "subscribe_me",                                 :default => true
+    t.string   "internal_note"
   end
 
   add_index "pledges", ["project_id"], :name => "index_pledges_on_project_id"
