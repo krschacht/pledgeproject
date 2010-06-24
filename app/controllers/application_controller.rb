@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_admin?, :action_name_safe
 
+  before_filter :set_p3p
+
+  def set_p3p
+    response.headers["P3P"]='CP="CAO PSA OUR"'
+  end
 
   def current_user_admin?
     cookies[:loggedin].to_i == 1
