@@ -1,5 +1,7 @@
 class PledgesController < ApplicationController
 
+  protect_from_forgery :except => [:create]
+
   # GET /pledges/new
   # GET /pledges/new.xml
   def new_embed
