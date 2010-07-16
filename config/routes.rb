@@ -15,6 +15,7 @@ Pledgeproject::Application.routes.draw do |map|
   namespace :admin do    
     resources :pledges
     resources :projects
+    resources :users
   end
 
   

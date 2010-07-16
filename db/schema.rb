@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100622022429) do
+ActiveRecord::Schema.define(:version => 20100716223306) do
 
   create_table "pledges", :force => true do |t|
     t.integer  "project_id"
@@ -39,6 +39,24 @@ ActiveRecord::Schema.define(:version => 20100622022429) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "pledge_done_url"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email",                             :null => false
+    t.string   "crypted_password",                  :null => false
+    t.string   "password_salt",                     :null => false
+    t.string   "persistent_token",                  :null => false
+    t.string   "perishable_token",                  :null => false
+    t.integer  "login_count",        :default => 0, :null => false
+    t.integer  "failed_login_count", :default => 0, :null => false
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

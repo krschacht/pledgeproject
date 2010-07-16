@@ -7,7 +7,10 @@ gem 'rails', '3.0.0.beta3'
 
 gem 'mysql'
 gem 'hoptoad_notifier'
-#gem 'logworm_client'
+gem 'authlogic'
+
+
+# gem 'logworm_client'
 
 # Use unicorn as the web server
 # gem 'unicorn'
