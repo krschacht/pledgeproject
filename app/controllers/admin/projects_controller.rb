@@ -15,7 +15,7 @@ class Admin::ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.all
+    @projects = current_user.projects
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,7 +26,7 @@ class Admin::ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -47,12 +47,13 @@ class Admin::ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find(params[:id])
   end
 
   # POST /projects
   # POST /projects.xml
   def create
+    params[:project][:user_id] = current_user.id
     @project = Project.new(params[:project])
 
     respond_to do |format|
@@ -69,7 +70,7 @@ class Admin::ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find(params[:id])
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -85,7 +86,7 @@ class Admin::ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.xml
   def destroy
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find(params[:id])
     @project.destroy
 
     respond_to do |format|

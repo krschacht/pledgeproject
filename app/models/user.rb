@@ -4,5 +4,7 @@ class User < ActiveRecord::Base
     login_field :email 
     validate_login_field :false 
   end  
+  
+  has_many :projects
     
 end

@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
-  default_scope :order => 'id asc'
-
+  default_scope :order => 'id asc'  
+  
+  belongs_to :user
   has_many :pledges
   
   validates :title, :presence => true

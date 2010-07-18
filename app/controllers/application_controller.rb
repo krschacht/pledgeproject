@@ -15,10 +15,6 @@ class ApplicationController < ActionController::Base
     cookies[:loggedin].to_i == 1
   end
   
-  def require_admin
-    redirect_to "/"  unless current_user_admin?
-  end
-
   def show_admin_nav
     @show_admin_nav = true
   end
@@ -59,7 +55,7 @@ private
   end
 
   def store_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = request.fullpath
   end
   
   def redirect_back_or_default(default)

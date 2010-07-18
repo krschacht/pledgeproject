@@ -9,8 +9,6 @@ Pledgeproject::Application.routes.draw do |map|
   match 'pledges/done/(:id)'                                => 'pledges#done',      :as => 'pledge_done'
   
   match 'admin'                                   => 'admin#index',                 :as => 'admin'
-  match 'admin/login'                             => 'admin#login',                 :as => 'admin_login'
-  match 'admin/logout'                            => 'admin#logout',                :as => 'admin_logout'
   match 'admin/projects/:project_id/pledge_embed' => 'admin/projects#pledge_embed', :as => 'admin_project_pledge_embed'
   match 'admin/pledges/for_project/:id(.:format)' => 'admin/pledges#for_project',   :as => 'admin_pledges_for_project'
   
