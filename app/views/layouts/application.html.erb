@@ -10,8 +10,12 @@
               <%= controller.controller_name %>_return_<%= params[:return_action] %>">
   
   <div class="body_interior">
+    
     <% if @show_admin_nav %>
-      <div class="back_link"><%= link_to "Back to admin", "/admin" %></div>
+      <div class="back_link">
+        <%= link_to "Admin Home", "/admin" %> |
+        <%= link_to "Logout", user_session_path, :method => :delete %>
+      </div>
     <% end %>
       
     <%= yield %>

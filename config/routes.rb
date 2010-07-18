@@ -2,6 +2,8 @@ Pledgeproject::Application.routes.draw do |map|
   match 'projects/widget(.:format)', :to => 'projects#widget', :as => "projects_widget"
 
   resource :pledges
+  resource :user_session
+
   match 'projects/:project_id/pledges/new(.:format)'        => 'pledges#new',       :as => 'new_project_pledge'
   match 'projects/:project_id/pledges/new_embed(.:format)'  => 'pledges#new_embed', :as => 'new_project_pledge_embed'
   match 'pledges/done/(:id)'                                => 'pledges#done',      :as => 'pledge_done'
@@ -17,7 +19,12 @@ Pledgeproject::Application.routes.draw do |map|
     resources :projects
     resources :users
   end
-
+  
+  resource  :account,  :controller => "users"
+  resources :users
+  
+  # match "/login" => 'user_sessions#new'
+  # match "/logout" => 'user_sessions#destroy'  
   
 #  resources :pledges
   

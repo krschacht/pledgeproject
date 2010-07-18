@@ -9,6 +9,7 @@ gem 'mysql'
 gem 'hoptoad_notifier'
 gem 'authlogic'
 
+# gem 'moxie_forum', :path => "../plugins/moxie_forum"
 
 # gem 'logworm_client'
 

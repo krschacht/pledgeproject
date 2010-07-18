@@ -1,6 +1,6 @@
 class Admin::PledgesController < ApplicationController
 
-  before_filter :require_admin, :show_admin_nav
+  before_filter :require_user, :show_admin_nav
 
   # GET /pledges
   # GET /pledges.xml
