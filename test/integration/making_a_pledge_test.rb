@@ -11,7 +11,7 @@ class MakingAPledgeTest < ActionController::IntegrationTest
     assert_select 'h2', /Letter to the Editor/
     assert_select 'input[type=hidden][name=return_action][value=new]'
 
-    post_via_redirect '/pledges',  :return_action => 'new', 
+    post_via_redirect "/projects/#{project_id}/pledges",  :return_action => 'new', 
                       :pledge => { 
                         :project_id   => project_id,
                         :first_name   => 'Pete',
@@ -31,7 +31,7 @@ class MakingAPledgeTest < ActionController::IntegrationTest
     get "/projects/#{project_id}/pledges/new"
     assert :success
 
-    post '/pledges', :return_action => 'new', :pledge => { :project_id => project_id }
+    post "/projects/#{project_id}/pledges", :return_action => 'new', :pledge => { :project_id => project_id }
     assert_response :success
 
     assert_select 'h2', /5 errors/

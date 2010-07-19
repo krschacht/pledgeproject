@@ -3,7 +3,7 @@ class Admin::ProjectsController < ApplicationController
   before_filter :require_user, :show_admin_nav
   
   def pledge_embed
-    @project = Project.find( params[:project_id].to_i )
+    @project = Project.find( params[:id] )
     
     @attrib = { :scrolling => 'no',
                 :height => 710,

@@ -1,11 +1,11 @@
 <div style="margin-top: 10px;">Copy and paste this code:</div>
 <textarea style="width: 450px; height: 100px;">    
-<iframe src='<%= new_project_pledge_embed_url( @project.id ) %>' <%= @attrib.to_a.inject('') { |v,a| v+="#{a[0]}='#{a[1]}' " } %>></iframe>
+<iframe src='<%= new_embed_project_pledge_url( @project.id ) %>' <%= @attrib.to_a.inject('') { |v,a| v+="#{a[0]}='#{a[1]}' " } %>></iframe>
 </textarea>
 
 
 <% if params[:showiframe] %>
 
-  <iframe src='<%= new_project_pledge_embed_url( @project.id ) %>' <%= @attrib.to_a.inject('') { |v,a| v+="#{a[0]}='#{a[1]}' " } %> border=1></iframe>
+  <iframe src='<%= new_embed_project_pledge_url( @project.id ) %>' <%= @attrib.to_a.inject('') { |v,a| v+="#{a[0]}='#{a[1]}' " } %> border=1></iframe>
 
 <% end %>

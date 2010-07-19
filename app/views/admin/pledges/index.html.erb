@@ -1,33 +1,36 @@
-<h1>Listing ALL pledges</h1>
+<div class="download_option">
+  <%= link_to "download comma delimited", 
+              admin_project_pledges_path( "#{ @project.url_friendly_title}-#{ @project.id }" ) + ".csv" %>
+</div>
+<div class="download_option">
+  <%= link_to "download tab delimited", 
+              admin_project_pledges_path( "#{ @project.url_friendly_title}-#{ @project.id }" ) + 
+                                              ".csv?delimiter=tab" %>
+</div>
 
-<table>
+<table border="1">
   <tr>
-    <th>Project</th>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Email</th>
-    <th>Amount</th>
-    <th>Note</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% @fields.each do |f| %>
+      <th><%= f %></th>
+    <% end %>
   </tr>
+    <% @pledges.each do |p| %>
+      <tr class="paid_<%= p.paid %>">
+        <% @fields.each do |f| %>
 
-<% @pledges.each do |pledge| %>
-  <tr>
-    <td><%= pledge.project_id %></td>
-    <td><%= pledge.first_name %></td>
-    <td><%= pledge.last_name %></td>
-    <td><%= pledge.email %></td>
-    <td><%= pledge.amount %></td>
-    <td><%= pledge.note %></td>
-    <td><%= link_to 'Show', admin_pledge_path(pledge) %></td>
-    <td><%= link_to 'Edit', edit_admin_pledge_path(pledge) %></td>
-    <td><%= link_to "Delete", admin_pledge_path(pledge.id), :method=>:delete, :confirm=>"Are you sure?" %></td>
-  </tr>
-<% end %>
+          <% if f == :actions %>
+            <td class="nowrap">
+              <%= link_to 'Edit', edit_admin_project_pledge_path( :project_id => @project, :id => p) %> | 
+              <%= link_to "Delete", admin_project_pledge_path( :project_id => @project, :id => p.id), :method=>:delete, :confirm=>"Are you sure?" %> |
+              <%= link_to 'Toggle Paid', admin_project_pledge_path( :project_id => @project, :id => p, 'pledge[paid]' => "#{! p.paid }" ), :method => :put %>
+            </td>
+          <% elsif f == :email %>
+            <td><%= link_to p.attributes[ f.to_s ], "mailto:#{p.attributes[ f.to_s ]}" %></td>
+          <% else %>
+            <td><%= p.attributes[ f.to_s ] %></td>
+          <% end %>
+
+        <% end %>
+      </tr>
+    <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Pledge', new_admin_pledge_path %>

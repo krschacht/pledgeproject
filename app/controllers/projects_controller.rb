@@ -1,7 +1,8 @@
 class ProjectsController < ApplicationController
 
   def widget
-    @projects = Project.all
+    @user = User.find( params[:id] )
+    @projects = @user.projects
 
     respond_to do |format|
       format.html # new.html.erb

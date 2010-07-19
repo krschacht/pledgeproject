@@ -1,8 +1,7 @@
 <div class="pledge_form">
 
-  <%= form_for @pledge do |f| %>
+  <%= form_for [ :project, @pledge ] do |f| %>
 
-    <%= f.hidden_field :project_id, :value => @project.id %>
     <%= hidden_field_tag :return_action, return_action_name %>
       
     <% if @pledge.errors.any? %>

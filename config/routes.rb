@@ -1,25 +1,57 @@
 Pledgeproject::Application.routes.draw do |map|
-  match 'projects/widget(.:format)', :to => 'projects#widget', :as => "projects_widget"
 
-  resource :pledges
+  scope 'projects/:project_id' do
+    resources :pledges, :name_prefix => 'project' do
+      member do
+        get :done
+      end
+    end
+  end
+  
+  match 'projects/:project_id/pledges/new_embed(.:format)'  => 'pledges#new_embed', :as => 'new_embed_project_pledge'
+
+  # resource :pledges
+  # match 'projects/:project_id/pledges/new(.:format)'        => 'pledges#new',       :as => 'new_project_pledge'
+  
+  # match 'pledges/done/(:id)'                                => 'pledges#done',      :as => 'pledge_done'
+
+
   resource :user_session
-
-  match 'projects/:project_id/pledges/new(.:format)'        => 'pledges#new',       :as => 'new_project_pledge'
-  match 'projects/:project_id/pledges/new_embed(.:format)'  => 'pledges#new_embed', :as => 'new_project_pledge_embed'
-  match 'pledges/done/(:id)'                                => 'pledges#done',      :as => 'pledge_done'
   
   match 'admin'                                   => 'admin#index',                 :as => 'admin'
-  match 'admin/projects/:project_id/pledge_embed' => 'admin/projects#pledge_embed', :as => 'admin_project_pledge_embed'
-  match 'admin/pledges/for_project/:id(.:format)' => 'admin/pledges#for_project',   :as => 'admin_pledges_for_project'
+#  match 'admin/projects/:project_id/pledge_embed' => 'admin/projects#pledge_embed', :as => 'admin_project_pledge_embed'
+#  match 'admin/pledges/for_project/:id(.:format)' => 'admin/pledges#for_project',   :as => 'admin_pledges_for_project'
   
-  namespace :admin do    
-    resources :pledges
-    resources :projects
+  namespace :admin do
+    resources :projects do
+      resources :pledges
+      
+      member do
+        get :pledge_embed
+      end
+    end
     resources :users
   end
   
   resource  :account,  :controller => "users"
-  resources :users
+  resources :users, :except => [ :index ]
+  
+  match 'users/:id/projects/widget(.:format)', :to => 'projects#widget', :as => "user_projects_widget"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   # match "/login" => 'user_sessions#new'
   # match "/logout" => 'user_sessions#destroy'  

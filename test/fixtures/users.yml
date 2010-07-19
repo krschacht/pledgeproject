@@ -1,5 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+ari:
+  email: ari@armstrong.com
+  first_name: ari
+  last_name: armstrong
+  site_name: FIRM
+  notification_email: ari.person@gmail.com
+  from_email: ari@armstrong.com
+
 # one:
 #   name: MyString
 #   email: MyString

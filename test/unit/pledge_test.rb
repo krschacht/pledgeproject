@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class PledgeTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
 
   test "pledges attributes must not be empty" do
     pledge = Pledge.new
@@ -26,7 +25,7 @@ class PledgeTest < ActiveSupport::TestCase
     assert !pledge.invalid?
 
     assert_equal pledge.project, projects(:letter)
-    assert_equal projects(:letter).pledges.length, 1
+    assert_equal projects(:letter).pledges.length, 2      # there is already one pledge in the fixture
     assert_equal projects(:letter).pledges.first, pledge
   end
 

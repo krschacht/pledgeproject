@@ -31,8 +31,10 @@ class PledgesController < ApplicationController
   # POST /pledges
   # POST /pledges.xml
   def create
+    params[:pledge][:project_id] = params[:project_id]
+    
     @pledge = Pledge.new( params[:pledge] )
-    @project = Project.find( params[:pledge][:project_id] )
+    @project = Project.find( params[:project_id].to_i )
     
     respond_to do |format|
       if @pledge.save
@@ -42,8 +44,10 @@ class PledgesController < ApplicationController
         format.html do
 
           if @project.pledge_done_url.nil? || @project.pledge_done_url.empty?
-            logger.info("using redirect_to #{pledge_done_url}")
-            redirect_to(pledge_done_url(@project), :notice => 'Your pledge has been saved. You will receive an e-mail confirmation of your pledge shortly. Thanks!')
+            logger.info("using redirect_to #{done_pledge_path( :project_id => @project, :id => @pledge )}")
+            redirect_to( done_pledge_path( :project_id => @project, :id => @pledge ), 
+                         :notice => 'Your pledge has been saved. You will receive an ' +
+                                    'e-mail confirmation of your pledge shortly. Thanks!' )
           else
             logger.info("using javascript #{@project.pledge_done_url}")
             render :text => "<html><body><script type='text/javascript'>" +
@@ -60,7 +64,7 @@ class PledgesController < ApplicationController
   end
   
   def done
-    @project = Project.find( params[:id].to_i )   if params[:id]
+    @project = Project.find( params[:project_id].to_i )   if params[:project_id]
   end
 
 end

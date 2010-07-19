@@ -5,11 +5,24 @@ class Admin::PledgesController < ApplicationController
   # GET /pledges
   # GET /pledges.xml
   def index
-    @pledges = Pledge.all
+    # id = params[:id].gsub(/.*-/, '').to_i
+    
+    @project = Project.find( params[:project_id] )
+    @pledges = @project.pledges
+    @fields = [ :id, :first_name, :last_name, :email, :subscribe_me, :amount, :paid, :internal_note, :note, :created_at, :actions ]
+
+    delimiter_codes = {
+      :tab    => "\t",
+      :comma  => ","
+    }
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml  { render :xml => @pledges }
+      format.csv  do
+        @delimeter = delimiter_codes[ (params[:delimiter] || :comma ).to_sym ]
+        render :csv => @pledges
+      end
     end
   end
 

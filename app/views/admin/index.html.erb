@@ -7,7 +7,7 @@
       <div class="title"><%= project.title %></div>
       <div class="info">
         <%= link_to raw("<span class='num'>#{ project.pledges_count }</span> pledges"), 
-                                                                    admin_pledges_for_project_path(project) %>
+                                                                    admin_project_pledges_path(project) %>
                         
         &nbsp;&nbsp;totaling <span class="num">$<%= number_with_delimiter( project.current_pledged_total ) %></span>
       </div>
@@ -17,10 +17,10 @@
 </div>
 
 <ul>
-<li><a href="/admin/projects">manage projects</a> | <a href="/projects/widget">view widget</a></li>
+<li><%= link_to "manage projects", admin_projects_path %> | <%= link_to "view widget", user_projects_widget_path( current_user ) %></li>
   <ul style="margin-top: 10px;"><li>Embed widget code<br>
     <textarea style="width: 450px; height: 60px;">
-<script type="text/javascript" src='<%= projects_widget_url %>.js'></script>
+<script type="text/javascript" src='<%= user_projects_widget_url( current_user ) %>.js'></script>
     </textarea>
   </li>
   </ul>

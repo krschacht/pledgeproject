@@ -4,12 +4,15 @@ class ProjectsWidgetTest < ActionController::IntegrationTest
   fixtures :all
 
   test "make sure widget can be served" do
-    get "/projects/widget"
+    id = users(:ari).id
+    
+    get "/users/#{id}/projects/widget"
     assert :success
     assert_template 'widget'
 
-    get "/projects/widget.js"
+    get "/users/#{id}/projects/widget.js"
     assert :success
     assert_template 'widget'
   end
+  
 end
