@@ -11,14 +11,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %> of the project<br />
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :url %><br />
+    <%= f.label :url %> where users should be taken when they want more info on the project (i.e. a blog post)<br />
     <%= f.text_field :url %>
   </div>
-  <div class="field">
+  <div class="field" style="display: none;">
     <%= f.label :pledge_done_url %><br />
     <%= f.text_field :pledge_done_url %>
   </div>
@@ -35,12 +35,12 @@
   </div>
 
 
-  <div class="field">
+  <div class="field" style="display: none;">
     <%= f.label :method %> (For a progress bar in the widget, type 'goal' here and fill out the goal amount below. Or leave this blank for no public progress bar.)<br />
     <%= f.text_field :method %>
   </div>
 
-  <div class="field">
+  <div class="field" style="display: none;">
     <%= f.label :pledge_goal_amount %><br />
     <%= f.text_field :pledge_goal_amount %>
   </div>
