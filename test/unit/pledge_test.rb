@@ -21,12 +21,14 @@ class PledgeTest < ActiveSupport::TestCase
       :email => "krschacht@gmail.com",
       :amount => 50.00
     }
+    num_pledges = projects(:letter).pledges.length
+    
     pledge = Pledge.create( fields )
     assert !pledge.invalid?
 
     assert_equal pledge.project, projects(:letter)
-    assert_equal projects(:letter).pledges.length, 2      # there is already one pledge in the fixture
-    assert_equal projects(:letter).pledges.first, pledge
+    assert_equal Project.find( projects(:letter).id ).pledges.length, num_pledges+1
+    assert_equal Project.find( projects(:letter).id ).pledges.last, pledge
   end
 
 end

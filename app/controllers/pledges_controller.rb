@@ -38,8 +38,8 @@ class PledgesController < ApplicationController
     
     respond_to do |format|
       if @pledge.save
-        #AdminNotifier.pledge_received( @pledge ).deliver
-        #UserNotifier.pledge_received( @pledge ).deliver
+        ProjectNotifier.pledge_received( @pledge ).deliver
+        PledgerNotifier.pledge_received( @pledge ).deliver
         
         format.html do
 

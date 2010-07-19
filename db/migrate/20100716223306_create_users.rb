@@ -10,8 +10,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
       t.string :site_name
-      t.string :notification_email
       t.string :from_email
+      t.string :pledge_confirmation_subject
+      t.text   :pledge_confirmation_body
 
       # magic columns, automatically maintained by Authlogic
       t.integer   :login_count,         :null => false, :default => 0
@@ -21,6 +22,7 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime  :last_login_at
       t.string    :current_login_ip
       t.string    :last_login_ip
+      
 
       t.timestamps
     end

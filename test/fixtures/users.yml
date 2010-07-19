@@ -5,8 +5,10 @@ ari:
   first_name: ari
   last_name: armstrong
   site_name: FIRM
-  notification_email: ari.person@gmail.com
   from_email: ari@armstrong.com
+  pledge_confirmation_subject: You've made a pledge!
+  pledge_confirmation_body: Hi @PLEDGE_FIRST_NAME@, I've received your pledge of $@PLEDGE_AMOUNT@ for the project '@PLEDGE_PROJECT_TITLE@'. Thank you so much for your support of this work! I'll post updates about this project to @SITE_NAME@, and I'll e-mail you any important news too.  Remember, you don't owe any money until the project is completed.  If and when that happens, I'll e-mail you an invoice. If you have any questions, you can e-mail me by replying to this message. Thanks again for your support! @USER_FULL_NAME@
+
 
 # one:
 #   name: MyString

@@ -53,18 +53,19 @@ ActiveRecord::Schema.define(:version => 20100718010333) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                             :null => false
-    t.string   "crypted_password",                  :null => false
-    t.string   "password_salt",                     :null => false
-    t.string   "persistence_token",                 :null => false
-    t.string   "perishable_token",                  :null => false
+    t.string   "email",                                      :null => false
+    t.string   "crypted_password",                           :null => false
+    t.string   "password_salt",                              :null => false
+    t.string   "persistence_token",                          :null => false
+    t.string   "perishable_token",                           :null => false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "site_name"
-    t.string   "notification_email"
     t.string   "from_email"
-    t.integer  "login_count",        :default => 0, :null => false
-    t.integer  "failed_login_count", :default => 0, :null => false
+    t.string   "pledge_confirmation_subject"
+    t.text     "pledge_confirmation_body"
+    t.integer  "login_count",                 :default => 0, :null => false
+    t.integer  "failed_login_count",          :default => 0, :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"

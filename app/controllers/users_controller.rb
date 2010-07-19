@@ -4,6 +4,21 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    
+    @user.pledge_confirmation_subject = "You've made a pledge!"
+    @user.pledge_confirmation_body = <<-END
+Hi @PLEDGE_FIRST_NAME@,
+
+I've received your pledge of $@PLEDGE_AMOUNT@ for the project '@PLEDGE_PROJECT_TITLE@'. Thank you so much for your support of this work!
+
+I'll post updates about this project to @SITE_NAME@, and I'll e-mail you any important news too.  Remember, you don't owe any money until the project is completed.  If and when that happens, I'll e-mail you an invoice.
+
+If you have any questions, you can e-mail me by replying to this message.
+
+Thanks again for your support!
+
+@USER_FULL_NAME@
+END
   end
   
   def create

@@ -57,5 +57,5 @@ class Pledge < ActiveRecord::Base
       p.save!
     end
   end
-  
+
 end

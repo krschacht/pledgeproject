@@ -9,7 +9,7 @@
 </div>
 <% end %>
 
-<%= form.label :email %><br />
+<%= form.label :email %> (this will be both your login & the place you're notified of new pledges)<br />
 <%= form.text_field :email %><br />
 <br />
 <%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />
@@ -27,9 +27,12 @@
 <%= form.label :site_name %> (what should be displayed in the browser title bar)<br />
 <%= form.text_field :site_name %><br />
 <br />
-<%= form.label :notification_email %> (when people pledge, where do you want to be notified at?)<br />
-<%= form.text_field :notification_email %><br />
-<br />
 <%= form.label :from_email %> (when emails are sent to the pledgers, who should the emails come from?)<br />
 <%= form.text_field :from_email %><br />
+<br />
+<%= form.label :pledge_confirmation_subject %> (subject of the confirmation emails sent to new pledgers)<br />
+<%= form.text_field :pledge_confirmation_subject %><br />
+<br />
+<%= form.label :pledge_confirmation_body %><br />
+<%= form.text_area :pledge_confirmation_body %><br />
 <br />
