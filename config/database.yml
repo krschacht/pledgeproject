@@ -16,5 +16,4 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: gardens_production
   pool: 5
