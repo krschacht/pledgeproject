@@ -11,13 +11,9 @@
   
   <div class="body_interior">
     
-    <% if @show_admin_nav %>
-      <div class="back_link">
-        <%= link_to "Admin Home", "/admin" %> |
-        <%= link_to "Logout", user_session_path, :method => :delete %>
-      </div>
-    <% end %>
-      
+    <%= flash[:notice] %>
+    <%= render :partial => 'layouts/admin_nav'  if @show_admin_nav %>
+          
     <%= yield %>
   </div>
 
