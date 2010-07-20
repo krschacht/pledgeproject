@@ -23,8 +23,8 @@ Pledgeproject::Application.configure do
     :address        => "smtp.gmail.com",
     :port           => 587,
     :authentication => 'plain',
-    :user_name      => 'krschacht',
-    :password       => 'par5rapTg',
+    :user_name      => 'admin@blogcoin.com',
+    :password       => 'outgoing77',
     :enable_starttls_auto => true
   }
 

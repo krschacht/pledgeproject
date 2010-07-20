@@ -1,24 +1,30 @@
-<h1>Listing projects</h1>
+<h3>&nbsp;&nbsp;<%= link_to 'Create New Project', new_admin_project_path %></h3>
 
-<table width=100% border=1>
-  <tr>
-    <th>id</th>
-    <th>title & description</th>
-    <th colspan=3>&nbsp;</th>
-  </tr>
+<div class="summary">
 
-<% @projects.each do |project| %>
-  <tr>
-    <td><%= project.id %></td>
-    <td><%= link_to project.title, edit_admin_project_path(project) %>
-        <%= "<br>a" + project.description  unless project.description.nil? %></td>
-    <td><%= link_to "Delete", admin_project_path(project.id), :method=>:delete, :confirm=>"Are you sure?" %></td>
-    <td><%= link_to 'Pretty pledge form', new_project_pledge_path(project.id) %></td>
-    <td><%= link_to 'Embeddable pledge form', pledge_embed_admin_project_path(project.id) %></td>
-  </tr>
-<% end %>
-</table>
+  <% @projects.each do |project| %>
+    <div class="project">
+      <div class="action_links">
+        <%= link_to "Delete", admin_project_path(project.id), :method=>:delete, :confirm=>"Are you sure?" %>
+        <%= link_to 'Pretty pledge form', new_project_pledge_path(project.id) %>
+        <%= link_to 'Embeddable pledge form', pledge_embed_admin_project_path(project.id) %>
+      </div>
+      
+      <div class="title"><%= link_to project.title, edit_admin_project_path(project) %></div>
+      <div class="info">
+        <%= link_to raw("<span class='num'>#{ project.pledges_count }</span> pledges"), 
+                                                                    admin_project_pledges_path(project) %>
+                        
+        &nbsp;&nbsp;totaling <span class="num">$<%= number_with_delimiter( project.current_pledged_total ) %></span>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if @projects.empty? %>
+    <div class="project">
+      There are currently no projects. Click above to create your first one.
+    </div>
+  <% end %>
 
-<br />
+</div>
 
-<%= link_to 'New Project', new_admin_project_path %>

@@ -9,9 +9,9 @@ class PledgesController < ApplicationController
     @project = Project.find( params[:project_id].to_i )
     
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.xml  { render :xml => @pledge }
-      format.js {render :content_type => 'text/javascript'}
+      format.js { render :content_type => 'text/javascript'}
     end
   end
   
@@ -45,9 +45,7 @@ class PledgesController < ApplicationController
 
           if @project.pledge_done_url.nil? || @project.pledge_done_url.empty?
             logger.info("using redirect_to #{done_pledge_path( :project_id => @project, :id => @pledge )}")
-            redirect_to( done_pledge_path( :project_id => @project, :id => @pledge ), 
-                         :notice => 'Your pledge has been saved. You will receive an ' +
-                                    'e-mail confirmation of your pledge shortly. Thanks!' )
+            redirect_to( done_pledge_path( :project_id => @project, :id => @pledge ) )
           else
             logger.info("using javascript #{@project.pledge_done_url}")
             render :text => "<html><body><script type='text/javascript'>" +

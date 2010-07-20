@@ -32,10 +32,12 @@ END
   end
   
   def show
+    @show_admin_nav = true
     @user = @current_user
   end
 
   def edit
+    @show_admin_nav = true
     @user = @current_user
   end
   

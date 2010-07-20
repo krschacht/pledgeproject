@@ -1,3 +1,37 @@
+.summary {
+  margin-left: 30px;
+  margin-bottom: 20px;
+  background-color:#EEEEEE;
+  padding: 15px 0 1px 15px;
+}
+
+.summary .project {
+  margin-bottom: 20px;
+}
+
+.summary .project .title {
+  font-size: 20px;
+  padding-bottom: 4px;
+}
+
+.summary .project .info {
+  font-size: 17px;
+  margin-left: 10px;
+}
+
+.summary .project .info .num {
+  font-weight: bold;
+}
+
+.summary .project .action_links {
+  float: right;
+  margin-right: 20px;
+}
+
+.action_links a {
+  display: block;
+}
+
 .widget-content {
   font:75% Verdana,sans-serif;
   text-align:left;

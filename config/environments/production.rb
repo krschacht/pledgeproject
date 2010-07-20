@@ -44,10 +44,11 @@ Pledgeproject::Application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    :address        => "smtp.colorado.edu",
+    :address        => "smtp.gmail.com",
+    :port           => 587,
     :authentication => 'plain',
-    :user_name      => 'hsieh',
-    :password       => '90kil34d',
+    :user_name      => 'admin@blogcoin.com',
+    :password       => 'outgoing77',
     :enable_starttls_auto => true
   }
 

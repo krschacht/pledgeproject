@@ -1,5 +1,8 @@
 Pledgeproject::Application.routes.draw do |map|
 
+  match 'projects/:project_id/pledges/new_embed(.:format)' => 'pledges#new_embed', 
+        :as => 'new_embed_project_pledge'
+
   scope 'projects/:project_id' do
     resources :pledges, :name_prefix => 'project' do
       member do
@@ -8,8 +11,6 @@ Pledgeproject::Application.routes.draw do |map|
     end
   end
   
-  match 'projects/:project_id/pledges/new_embed(.:format)'  => 'pledges#new_embed', :as => 'new_embed_project_pledge'
-
   # resource :pledges
   # match 'projects/:project_id/pledges/new(.:format)'        => 'pledges#new',       :as => 'new_project_pledge'
   
@@ -18,9 +19,8 @@ Pledgeproject::Application.routes.draw do |map|
 
   resource :user_session
   
-  match 'admin'                                   => 'admin#index',                 :as => 'admin'
-#  match 'admin/projects/:project_id/pledge_embed' => 'admin/projects#pledge_embed', :as => 'admin_project_pledge_embed'
-#  match 'admin/pledges/for_project/:id(.:format)' => 'admin/pledges#for_project',   :as => 'admin_pledges_for_project'
+  match 'admin'       => 'admin/projects#index', :as => 'admin'
+  match 'admin/setup' => 'admin#setup', :as => 'admin_setup'
   
   namespace :admin do
     resources :projects do
