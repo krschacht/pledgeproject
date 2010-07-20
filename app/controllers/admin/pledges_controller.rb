@@ -85,14 +85,13 @@ class Admin::PledgesController < ApplicationController
     end
   end
 
-  # DELETE /pledges/1
-  # DELETE /pledges/1.xml
   def destroy
-    @pledge = Pledge.find(params[:id])
+    @project = Project.find( params[:project_id] )
+    @pledge = Pledge.find( params[:id] )
     @pledge.destroy
 
     respond_to do |format|
-      format.html { redirect_to(admin_pledges_url) }
+      format.html { redirect_to( admin_project_pledges_path(project) ) }
       format.xml  { head :ok }
     end
   end
