@@ -1,9 +1,13 @@
 
 desc "deploy staging"
-task :deploy_staging => ['deploy:set_staging_app', 'deploy:push', 'deploy:restart', 'deploy:tag']
+task :deploy_staging => [ 'deploy:set_staging_app', 'deploy:push', 
+                          'deploy:off', 'deploy:migrate', 'deploy:restart', 
+                          'deploy:tag']
 
 desc "deploy production"
-task :deploy_production => ['deploy:set_production_app', 'deploy:push', 'deploy:restart', 'deploy:tag']
+task :deploy_production => ['deploy:set_production_app', 'deploy:push', 
+                            'deploy:off', 'deploy:migrate', 'deploy:restart', 
+                            'deploy:tag']
 
 namespace :deploy do
   PRODUCTION_APP = 'pledgeproject'
@@ -22,7 +26,7 @@ namespace :deploy do
   task :set_production_app do
   	APP = PRODUCTION_APP
   end
-
+  
   task :push do
     puts 'Deploying site to Heroku ...'
     puts `git push -f git@heroku.com:#{APP}.git`

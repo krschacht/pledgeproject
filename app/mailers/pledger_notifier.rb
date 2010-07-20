@@ -7,7 +7,7 @@ class PledgerNotifier < ActionMailer::Base
     @body_text = @project_user.pledge_confirmation_body
     @body_text.gsub!( /@PLEDGE_FIRST_NAME@/, @pledge.first_name )
     @body_text.gsub!( /@PLEDGE_AMOUNT@/, @pledge.amount.to_s )
-    @body_text.gsub!( /@PLEDGE_PROJECT_TITLE/, @pledge.project.title )
+    @body_text.gsub!( /@PLEDGE_PROJECT_TITLE@/, @pledge.project.title )
     @body_text.gsub!( /@SITE_NAME@/, @project_user.site_name )
     @body_text.gsub!( /@USER_FULL_NAME@/, @project_user.full_name )
 
