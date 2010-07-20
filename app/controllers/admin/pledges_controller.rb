@@ -86,7 +86,7 @@ class Admin::PledgesController < ApplicationController
   end
 
   def destroy
-    @project = Project.find( params[:project_id] )
+    project = Project.find( params[:project_id] )
     @pledge = Pledge.find( params[:id] )
     @pledge.destroy
 
