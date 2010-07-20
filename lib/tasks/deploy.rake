@@ -2,12 +2,12 @@
 desc "deploy staging"
 task :deploy_staging => [ 'deploy:set_staging_app', 'deploy:push', 
                           'deploy:off', 'deploy:migrate', 'deploy:restart', 
-                          'deploy:tag']
+                          'deploy:on', 'deploy:tag']
 
 desc "deploy production"
 task :deploy_production => ['deploy:set_production_app', 'deploy:push', 
                             'deploy:off', 'deploy:migrate', 'deploy:restart', 
-                            'deploy:tag']
+                            'deploy:on', 'deploy:tag']
 
 namespace :deploy do
   PRODUCTION_APP = 'pledgeproject'
