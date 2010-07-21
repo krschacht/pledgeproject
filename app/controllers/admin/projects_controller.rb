@@ -58,7 +58,7 @@ class Admin::ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to(admin_project_url(@project), :notice => 'Project was successfully created.') }
+        format.html { redirect_to(admin_projects_url, :notice => 'Project was successfully created.') }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
         format.html { render :action => "new" }
@@ -90,7 +90,7 @@ class Admin::ProjectsController < ApplicationController
     @project.destroy
 
     respond_to do |format|
-      format.html { redirect_to(admin_projects_url) }
+      format.html { redirect_to( admin_projects_url, :notice => 'Project was deleted.' ) }
       format.xml  { head :ok }
     end
   end

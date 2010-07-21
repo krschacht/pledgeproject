@@ -1,5 +1,6 @@
 <!-- http://apidock.com/rails/ActionView/Helpers/FormHelper/form_for -->
-<%= form_for [:admin, @pledge] do |f| %>
+
+<%= form_for @pledge, :url => admin_project_pledge_path( :project_id => @project, :id => @pledge ) do |f| %>
 
   <% if @pledge.errors.any? %>
   <div id="errorExplanation">

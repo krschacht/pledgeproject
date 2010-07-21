@@ -44,7 +44,7 @@ END
   def update
     @user = @current_user # makes our views "cleaner" and more consistent
     if @user.update_attributes(params[:user])
-      flash[:notice] = "Account updated!"
+      flash[:notice] = "Account updated."
       redirect_to admin_url
     else
       render :action => :edit

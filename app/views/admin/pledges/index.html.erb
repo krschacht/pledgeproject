@@ -1,11 +1,10 @@
 <div class="download_option">
   <%= link_to "download comma delimited", 
-              admin_project_pledges_path( "#{ @project.url_friendly_title}-#{ @project.id }" ) + ".csv" %>
+              admin_project_pledges_path( @project.id ) + ".csv" %>
 </div>
 <div class="download_option">
   <%= link_to "download tab delimited", 
-              admin_project_pledges_path( "#{ @project.url_friendly_title}-#{ @project.id }" ) + 
-                                              ".csv?delimiter=tab" %>
+              admin_project_pledges_path( @project.id ) + ".csv?delimiter=tab" %>
 </div>
 
 <table border="1">

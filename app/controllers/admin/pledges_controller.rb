@@ -50,6 +50,7 @@ class Admin::PledgesController < ApplicationController
 
   # GET /pledges/1/edit
   def edit
+    @project = Project.find( params[:project_id] )
     @pledge = Pledge.find(params[:id])
   end
 
@@ -72,11 +73,12 @@ class Admin::PledgesController < ApplicationController
   # PUT /pledges/1
   # PUT /pledges/1.xml
   def update
+    project = Project.find( params[:project_id] )
     @pledge = Pledge.find(params[:id])
 
     respond_to do |format|
       if @pledge.update_attributes(params[:pledge])
-        format.html { redirect_to(admin_pledge_url(@pledge), :notice => 'Pledge was successfully updated.') }
+        format.html { redirect_to(admin_project_pledges_path( project ), :notice => 'Pledge was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -91,7 +93,7 @@ class Admin::PledgesController < ApplicationController
     @pledge.destroy
 
     respond_to do |format|
-      format.html { redirect_to( admin_project_pledges_path(project) ) }
+      format.html { redirect_to( admin_project_pledges_path(project), :notice => 'Pledge was deleted.' ) }
       format.xml  { head :ok }
     end
   end

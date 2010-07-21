@@ -21,12 +21,13 @@ class CreateNewUserTest < ActionController::IntegrationTest
     get '/account/new'
     post_via_redirect '/account', :user => { :password_confirmation => ' ' }
     assert_response :success
-    assert_select 'h2', /7 errors/    
-    user = {
+    assert_select 'h2', /13 errors/    
+    user_attrib = {
       :email                  => 'diana@gmail.com',
       :password               => 'test',
       :first_name             => 'Diana',
       :last_name              => 'Hsieh',
+      :site_name              => 'NoodleFood',
       :from_email             => 'diana@dianahsieh.com',
       :pledge_confirmation_subject => "You've made a pledge!",
       :pledge_confirmation_body => <<-END
@@ -43,13 +44,23 @@ Thanks again for your support!
 @USER_FULL_NAME@
 END
     }
-    post_via_redirect '/account', :user => user.merge( { :password_confirmation => 'abcd' })
+    post_via_redirect '/account', :user => user_attrib.merge( { :password_confirmation => 'abcd' })
     assert_response :success
     assert_select 'ul', /password doesn't match/i    
-    post_via_redirect '/account', :user => user.merge( { :password_confirmation => 'test' })
+    post_via_redirect '/account', :user => user_attrib.merge( { :password_confirmation => 'test' })
     assert_response :success
     assert_select 'body', /account registered/i
     assert_select 'body', /create new project/i
+    
+    # Now that you're logged in, first test editing your account
+    get '/account/edit'
+    assert_response :success
+    assert_select 'h1', /edit my account/i
+    user_attrib.delete(:password)
+    user_attrib.delete(:site_name)
+    put_via_redirect '/account', :user => user_attrib.merge( :site_name => 'Super-NoodleFood' )
+    assert_response :success
+    assert_equal 'Account updated.', flash[:notice]
 
     # Create a new project (actually 2 of them, we're going to delete one)
     project_title = 'Super Test project'
@@ -57,8 +68,9 @@ END
     post_via_redirect '/admin/projects', :project => { :title => project_title }
     post_via_redirect '/admin/projects', :project => { :title => project_title + '2' }
     assert_response :success
-    assert_select 'body', /project was successfully created/i
+    assert_equal 'Project was successfully created.', flash[:notice]
     project = Project.find_by_title( project_title )
+    project2 = Project.find_by_title( project_title + '2' )
 
     # Make sure project shows up
     get '/admin/projects'
@@ -72,47 +84,111 @@ END
     assert_select 'body', /download comma delimited/i
     get "/admin/projects/#{project.id}/pledge_embed"
     assert_select 'body', /copy and paste/i
+    get "/projects/#{project.id}/pledges/new_embed"
+    assert_select 'h2', /Pledge for #{project_title}/
+    assert_select 'div.form_pretty_wrapper', false
     get "/projects/#{project.id}/pledges/new"
     assert_select 'h2', /Pledge for #{project_title}/
+    assert_select 'div.form_pretty_wrapper'
+    
+    # Make sure a project can be deleted
+    delete_via_redirect "admin/projects/#{project2.id}"
+    assert_response :success
+    assert_equal 'Project was deleted.', flash[:notice]
+    get '/admin/projects'
+    assert_select 'div.title a', {:count => 1, :text => project_title }
+    assert_select 'div.title a', {:count => 0, :text => project_title + '2' }
+    
+    # Submit some pledges
+    post_via_redirect "/projects/#{project.id}/pledges", 
+      :pledge => {  :first_name     => 'Keith',
+                    :last_name      => 'Schacht',
+                    :email          => 'krschacht@gmail.com',
+                    :subscribe_me   => 1,
+                    :amount         => 50,
+                    :note           => 'This is a question' }
+    assert_response :success
+    assert_select 'div.done_msg', /Your pledge has been saved./
+
+    post_via_redirect "/projects/#{project.id}/pledges", 
+      :pledge => {  :first_name     => 'Pari',
+                    :last_name      => 'Schacht',
+                    :email          => 'pari@nurturingwisdom.com',
+                    :subscribe_me   => 0,
+                    :amount         => 60,
+                    :note           => 'A second question' }
+    assert_response :success
+
+    post_via_redirect "/projects/#{project.id}/pledges", 
+      :pledge => {  :first_name     => 'Ari',
+                    :last_name      => 'Armstrong',
+                    :email          => 'ari@armstrong.com',
+                    :subscribe_me   => 1,
+                    :amount         => 25,
+                    :note           => 'This is a third question' }
+    assert_response :success
+    
+    # Check that pledges were properly recorded
+    get '/admin/projects'
+    assert_select 'div.project div.title a', 1
+    assert_select 'div.project', /3 pledges/
+    assert_select 'div.project', /\$135\./    
+    
+    get "/admin/projects/#{project.id}/pledges"
+    assert_select 'table tr', 4 # 2 projects, 1 row is header row
+    assert_select 'table tr.paid_false', 3
+    assert_select 'table tr.paid_true', 0
+    pledge = project.pledges.first
+
+    # Mark a pledge as paid then unpaid
+    put_via_redirect "/admin/projects/#{project.id}/pledges/#{pledge.id}", 
+      :pledge => {  :paid => true }
+    assert_response :success
+    get "/admin/projects/#{project.id}/pledges"
+    assert_select 'table tr.paid_false', 2
+    assert_select 'table tr.paid_true', 1   
+
+    put_via_redirect "/admin/projects/#{project.id}/pledges/#{pledge.id}", 
+      :pledge => {  :paid => false }
+    assert_response :success
+    get "/admin/projects/#{project.id}/pledges"
+    assert_select 'table tr.paid_false', 3
+    assert_select 'table tr.paid_true', 0
+
+    # Edit a pledge
+    get "/admin/projects/#{project.id}/pledges/#{pledge.id}/edit"
+    assert_response :success
+    assert_select 'h1', /Editing/
+    attributes = pledge.attributes
+    attributes.delete("created_on")
+    attributes.delete("updated_on")
+    attributes.delete("id")
+    attributes.delete("amount")
+    
+    put_via_redirect "/admin/projects/#{project.id}/pledges/#{pledge.id}", 
+      :pledge => attributes.merge( { :amount => 999 } )      
+    assert_response :success
+    get "/admin/projects/#{project.id}/pledges"
+    assert_select 'td', /999/
+    
+    # Delete a pledge (should be 2 remaining after this)
+    delete_via_redirect "/admin/projects/#{project.id}/pledges/#{pledge.id}"
+    assert_response :success
+    assert_equal 'Pledge was deleted.', flash[:notice]
+    get "/admin/projects/#{project.id}/pledges"
+    assert_select 'table tr', 3  # 2 projects, 1 row is header row
+    
+    # Test download CSV links
+    get "/admin/projects/#{project.id}/pledges.csv"
+    assert_response :success
+    get "/admin/projects/#{project.id}/pledges.csv?delimiter=tab"
+    assert_response :success
+    
+    # Logout
+    delete_via_redirect '/user_session'
+    assert_response :success
+    assert_equal 'Logout successful!', flash[:notice]
     
   end
 
-
-  # test "making a pledge" do
-  #    project_id = projects(:letter).id
-  #    get "/projects/#{project_id}/pledges/new"
-  #    assert :success
-  # 
-  #    assert_select 'h2', /Letter to the Editor/
-  #    assert_select 'input[type=hidden][name=return_action][value=new]'
-  # 
-  #    post_via_redirect "/projects/#{project_id}/pledges",  :return_action => 'new', 
-  #                      :pledge => { 
-  #                        :project_id   => project_id,
-  #                        :first_name   => 'Pete',
-  #                        :last_name    => 'Smith',
-  #                        :email        => 'pete@smith.com',
-  #                        :subscribe_me => 1,
-  #                        :amount       => 20,
-  #                        :note         => "I like this project!" }
-  #    assert_response :success
-  #    assert_template :done
-  # 
-  #    assert_select 'div', /has been saved/
-  #  end
-  # 
-  #  test "error making a pledge, then successful" do
-  #    project_id = projects(:letter).id
-  #    get "/projects/#{project_id}/pledges/new"
-  #    assert :success
-  # 
-  #    post "/projects/#{project_id}/pledges", :return_action => 'new', :pledge => { :project_id => project_id }
-  #    assert_response :success
-  # 
-  #    assert_select 'h2', /5 errors/
-  #  end
-  # 
-  # make sure people can't alter the URL to view projects which are not theirs
-  # make sure when creating projects they get attached to the correct person
-  
 end
