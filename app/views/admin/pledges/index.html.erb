@@ -7,7 +7,7 @@
               admin_project_pledges_path( @project.id ) + ".csv?delimiter=tab" %>
 </div>
 
-<table border="1">
+<table class="pledges">
   <tr>
     <% @fields.each do |f| %>
       <th><%= f %></th>
@@ -25,6 +25,8 @@
             </td>
           <% elsif f == :email %>
             <td><%= link_to p.attributes[ f.to_s ], "mailto:#{p.attributes[ f.to_s ]}" %></td>
+          <% elsif f == :created_at %>
+            <td><%= p.attributes[ f.to_s ].to_s(:long) %></td>
           <% else %>
             <td><%= p.attributes[ f.to_s ] %></td>
           <% end %>

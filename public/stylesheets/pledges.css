@@ -1,3 +1,14 @@
+table.pledges {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+table.pledges td,
+table.pledges th {
+  border: 1px solid black;
+  padding: 4px;
+}
+
 .pledges_new,
 .pledges_return_new {
   background-color: #EEEEEE;

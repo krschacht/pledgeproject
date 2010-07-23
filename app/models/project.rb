@@ -22,5 +22,9 @@ class Project < ActiveRecord::Base
   def url_friendly_title
     self.title.gsub(/[^A-Za-z0-9]/, '_')
   end
+
+  def to_s
+    "project_#{self.id}"
+  end
   
 end

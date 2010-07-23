@@ -1,5 +1,56 @@
+<div class="link">&nbsp;&nbsp;<%= link_to 'Create New Project', new_admin_project_path %></div>
 
-Code to embed a widget in your blog sidebar (<%= link_to "preview", user_projects_widget_path( current_user ) %>)<br><br>
-    <textarea style="width: 450px; height: 60px;">
-<script type="text/javascript" src='<%= user_projects_widget_url( current_user ) %>.js'></script>
-    </textarea>
+<div class="summary">
+
+  <% @projects.each do |project| %>
+    <div class="project">
+      <div class="action_links">
+        <%= link_to "Delete", admin_project_path(project.id), :method=>:delete, :confirm=>"Are you sure?" %>
+        <%= link_to 'Pretty pledge form', new_project_pledge_path(project) %>
+        <%= link_to 'Embeddable pledge form', pledge_embed_admin_project_path(project) %>
+      </div>
+      
+      <div class="title"><%= link_to project.title, edit_admin_project_path(project) %></div>
+      <div class="info">
+        <%= link_to raw("<span class='num'>#{ project.pledges_count }</span> pledges"), 
+                                                                    admin_project_pledges_path(project) %>
+                        
+        &nbsp;&nbsp;totaling <span class="num">$<%= number_with_delimiter( project.current_pledged_total ) %></span>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if @projects.empty? %>
+    <div class="project">
+      There are currently no projects. 
+      <%= link_to 'Create your first project.', new_admin_project_path %>
+    </div>
+  <% end %>
+
+</div>
+
+
+<div class="link">&nbsp;&nbsp;<%= link_to 'Create New Pledge Form', new_admin_group_path %></div>
+
+<div class="summary">
+
+  <% @groups.each do |group| %>
+    <div class="project">
+      <div class="action_links">
+        <%= link_to "Delete", admin_group_path(group.id), :method=>:delete, :confirm=>"Are you sure?" %>
+        <%= link_to 'Pretty pledge form', new_group_vote_path(group) %>
+        <%= link_to 'Embeddable pledge form', vote_embed_admin_group_path(group) %>
+      </div>
+      
+      <div class="title"><%= link_to group.title, edit_admin_group_path(group) %></div>
+    </div>
+  <% end %>
+  
+  <% if @groups.empty? %>
+    <div class="project">
+      There are currently no pledge groups. 
+      <%= link_to 'Create your first pledge group.', new_admin_group_path %>
+    </div>
+  <% end %>
+
+</div>

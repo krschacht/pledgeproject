@@ -1,12 +1,10 @@
 class PledgesController < ApplicationController
 
   protect_from_forgery :except => [:create]
+  before_filter :set_project
 
-  # GET /pledges/new
-  # GET /pledges/new.xml
   def new_embed
     @pledge = Pledge.new
-    @project = Project.find( params[:project_id].to_i )
     
     respond_to do |format|
       format.html
@@ -17,7 +15,6 @@ class PledgesController < ApplicationController
   
   def new
     @pledge = Pledge.new
-    @project = Project.find( params[:project_id].to_i )
     
     @page_title = @project.title
     
@@ -28,13 +25,8 @@ class PledgesController < ApplicationController
     end
   end
 
-  # POST /pledges
-  # POST /pledges.xml
   def create
-    params[:pledge][:project_id] = params[:project_id]
-    
     @pledge = Pledge.new( params[:pledge] )
-    @project = Project.find( params[:project_id].to_i )
     
     respond_to do |format|
       if @pledge.save
@@ -43,7 +35,7 @@ class PledgesController < ApplicationController
         
         format.html do
 
-          if @project.pledge_done_url.nil? || @project.pledge_done_url.empty?
+          if @project.pledge_done_url.to_s.empty?
             logger.info("using redirect_to #{done_pledge_path( :project_id => @project, :id => @pledge )}")
             redirect_to( done_pledge_path( :project_id => @project, :id => @pledge ) )
           else
@@ -62,7 +54,13 @@ class PledgesController < ApplicationController
   end
   
   def done
-    @project = Project.find( params[:project_id].to_i )   if params[:project_id]
   end
+  
+private
+
+  def set_project
+    @project = Project.find( params[:project_id] )  if params[:project_id]
+  end
+
 
 end

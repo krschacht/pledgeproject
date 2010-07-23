@@ -3,7 +3,7 @@ class Admin::ProjectsController < ApplicationController
   before_filter :require_user, :show_admin_nav
   
   def pledge_embed
-    @project = Project.find( params[:id] )
+    @project = current_user.projects.find( params[:id] )
     
     @attrib = { :scrolling => 'no',
                 :height => 710,
@@ -12,46 +12,22 @@ class Admin::ProjectsController < ApplicationController
                 :allowtransparency => 'true' }    
   end
   
-  # GET /projects
-  # GET /projects.xml
   def index
     @projects = current_user.projects
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @projects }
-    end
   end
 
-  # GET /projects/1
-  # GET /projects/1.xml
   def show
-    @project = current_user.projects.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @project }
-    end
+    @project = current_user.projects.find( params[:id] )
   end
 
-  # GET /projects/new
-  # GET /projects/new.xml
   def new
     @project = Project.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @project }
-    end
   end
 
-  # GET /projects/1/edit
   def edit
-    @project = current_user.projects.find(params[:id])
+    @project = current_user.projects.find( params[:id] )
   end
 
-  # POST /projects
-  # POST /projects.xml
   def create
     params[:project][:user_id] = current_user.id
     @project = Project.new(params[:project])
@@ -67,10 +43,8 @@ class Admin::ProjectsController < ApplicationController
     end
   end
 
-  # PUT /projects/1
-  # PUT /projects/1.xml
   def update
-    @project = current_user.projects.find(params[:id])
+    @project = current_user.projects.find( params[:id] )
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -83,15 +57,10 @@ class Admin::ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.xml
   def destroy
-    @project = current_user.projects.find(params[:id])
+    @project = current_user.projects.find( params[:id] )
     @project.destroy
 
-    respond_to do |format|
-      format.html { redirect_to( admin_projects_url, :notice => 'Project was deleted.' ) }
-      format.xml  { head :ok }
-    end
+    redirect_to( admin_projects_url, :notice => 'Project was deleted.' )
   end
 end

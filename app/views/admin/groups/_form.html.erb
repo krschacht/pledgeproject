@@ -1,0 +1,32 @@
+<%= form_for [:admin, @group] do |f| %>
+
+  <% if @group.errors.any? %>
+    <div id="errorExplanation">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+      <ul>
+      <% @group.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+    
+  <div class="field">
+    <%= f.label :project_ids %><br>
+
+    <% @projects.each do |project| %>
+      <input name="projects[]" type="checkbox" id="project_<%= project.id %>" value="<%= project.id %>" onchange="project_checkbox_clicked();"> <%= project.title %><br>
+    <% end %>
+
+    <%= f.hidden_field :project_ids %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

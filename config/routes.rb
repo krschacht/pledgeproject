@@ -1,25 +1,8 @@
 Pledgeproject::Application.routes.draw do |map|
 
-  match 'projects/:project_id/pledges/new_embed(.:format)' => 'pledges#new_embed', 
-        :as => 'new_embed_project_pledge'
-
-  scope 'projects/:project_id' do
-    resources :pledges, :name_prefix => 'project' do
-      member do
-        get :done
-      end
-    end
-  end
+  ## Admin routes
   
-  # resource :pledges
-  # match 'projects/:project_id/pledges/new(.:format)'        => 'pledges#new',       :as => 'new_project_pledge'
-  
-  # match 'pledges/done/(:id)'                                => 'pledges#done',      :as => 'pledge_done'
-
-
-  resource :user_session
-  
-  match 'admin'       => 'admin/projects#index', :as => 'admin'
+  match 'admin'       => 'admin#index', :as => 'admin'
   match 'admin/setup' => 'admin#setup', :as => 'admin_setup'
   
   namespace :admin do
@@ -30,24 +13,47 @@ Pledgeproject::Application.routes.draw do |map|
         get :pledge_embed
       end
     end
+    
     resources :users
+    resources :groups do
+      member do
+        get :vote_embed
+      end
+    end
+    resources :votes
   end
   
-  resource  :account,  :controller => "users"
-  resources :users, :except => [ :index ]
-  
+  ## Public routes
+
+  resource :user_session  
+  resource :account,  :controller => "users"
+  resources :users, :except => [ :index ]  
+
+  # I don't know how to do this inside the scope :(
+  match 'group/:group_id/vote/new_embed(.:format)' => 'votes#new_embed', 
+        :as => 'new_embed_group_vote'
+
+  scope 'group/:group_id' do
+    resources :vote, :only => [ :new, :create ], :name_prefix => 'group' do
+      member do
+        get :done
+      end
+    end
+  end
+
+  # I don't know how to do this inside the scope :(  
+  match 'projects/:project_id/pledges/new_embed(.:format)' => 'pledges#new_embed', 
+        :as => 'new_embed_project_pledge'
+
+  scope 'projects/:project_id' do
+    resources :pledges, :only => [ :new, :create ], :name_prefix => 'project' do
+      member do
+        get :done
+      end
+    end
+  end
+    
   match 'users/:id/projects/widget(.:format)', :to => 'projects#widget', :as => "user_projects_widget"
-
-
-
-
-
-
-
-
-
-
-
 
 
 

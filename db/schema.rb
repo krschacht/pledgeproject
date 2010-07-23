@@ -9,7 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100718010333) do
+ActiveRecord::Schema.define(:version => 20100722163111) do
+
+  create_table "groups", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "project_ids"
+    t.string   "vote_done_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pledges", :force => true do |t|
     t.integer  "project_id"
@@ -23,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20100718010333) do
     t.boolean  "paid",                                         :default => false
     t.boolean  "subscribe_me",                                 :default => true
     t.string   "internal_note"
+    t.integer  "vote_id"
   end
 
   add_index "pledges", ["project_id"], :name => "index_pledges_on_project_id"
@@ -71,6 +81,12 @@ ActiveRecord::Schema.define(:version => 20100718010333) do
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

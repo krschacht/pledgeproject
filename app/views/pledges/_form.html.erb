@@ -18,6 +18,8 @@
       <div class="description"><%= @project.description %></div>
     </div>
 
+    <%= hidden_field_tag "pledge[project_id]", @project.id %>
+
     <ul>
       <li>
         <%= label_tag :name, nil, :class => "field req" %>

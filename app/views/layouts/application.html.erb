@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= @page_title || 'NoodleFood' %></title>
+  <title><%= @page_title || 'Pledge Project' %></title>
   <%= stylesheet_link_tag :all, :cache => false %>
   <%= csrf_meta_tag %>
 </head>
@@ -18,6 +18,6 @@
   </div>
 
   <%= javascript_include_tag :defaults %>
-  <%= javascript_include_tag 'jquery.countdown', 'pledges', 'rails' %>
+  <%= javascript_include_tag 'jquery.countdown', 'pledges', 'rails', 'groups' %>
 </body>
 </html>

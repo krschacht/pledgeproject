@@ -1,0 +1,20 @@
+<%= form_for [:admin, @vote] do |f| %>
+  <% if @vote.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
+    <ul>
+    <% @vote.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

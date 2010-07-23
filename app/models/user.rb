@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
               :presence => true
   
   has_many :projects
+  has_many :groups
 
   def full_name
     self.first_name + " " + self.last_name

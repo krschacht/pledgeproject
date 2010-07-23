@@ -106,7 +106,8 @@ END
                     :email          => 'krschacht@gmail.com',
                     :subscribe_me   => 1,
                     :amount         => 50,
-                    :note           => 'This is a question' }
+                    :note           => 'This is a question',
+                    :project_id     => project.id }
     assert_response :success
     assert_select 'div.done_msg', /Your pledge has been saved./
 
@@ -116,7 +117,8 @@ END
                     :email          => 'pari@nurturingwisdom.com',
                     :subscribe_me   => 0,
                     :amount         => 60,
-                    :note           => 'A second question' }
+                    :note           => 'A second question',
+                    :project_id     => project.id }
     assert_response :success
 
     post_via_redirect "/projects/#{project.id}/pledges", 
@@ -125,8 +127,11 @@ END
                     :email          => 'ari@armstrong.com',
                     :subscribe_me   => 1,
                     :amount         => 25,
-                    :note           => 'This is a third question' }
+                    :note           => 'This is a third question',
+                    :project_id     => project.id }
     assert_response :success
+    
+    ## TODO: Test failed pledges
     
     # Check that pledges were properly recorded
     get '/admin/projects'
