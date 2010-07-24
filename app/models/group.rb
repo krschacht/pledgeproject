@@ -9,4 +9,8 @@ class Group < ActiveRecord::Base
     ids.map { |i| Project.find( i.to_i ) }
   end
 
+  def project
+    projects.first
+  end
+  
 end

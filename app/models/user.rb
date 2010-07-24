@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+# http://blog.steveklabnik.com/writing-a-su-feature-with-authlogic
+
   acts_as_authentic do |c| 
     login_field :email 
     validate_login_field :false 

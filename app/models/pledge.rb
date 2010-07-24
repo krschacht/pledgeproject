@@ -13,7 +13,7 @@ class Pledge < ActiveRecord::Base
   belongs_to :project
   
   validates :project_id, :first_name, :last_name, :email, :amount, :presence => true
-  validates :amount, :numericality => { :greater_than_or_equal_to => 0.01 }
+  validates :amount, :numericality => { :greater_than_or_equal_to => 0.0 }
   validates :note, :word_count => { :less_than_or_equal_to => 200 }
 
   after_create  :pledge_added

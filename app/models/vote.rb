@@ -4,5 +4,9 @@ class Vote < ActiveRecord::Base
   has_many :pledges
 
   accepts_nested_attributes_for :pledges
-    
+  
+  def pledge
+    self.pledges.first
+  end
+
 end
