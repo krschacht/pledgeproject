@@ -51,6 +51,21 @@ END
     assert_response :success
     assert_select 'body', /account registered/i
     assert_select 'body', /create new project/i
+
+  # end
+  # 
+  # test "login user" do
+  #   
+  #   # try to access admin, make sure it prompts for login
+  #   get "/admin"
+  #   assert_redirected_to '/user_session/new'
+  #   get '/user_session/new'
+  #   assert_select 'h1', /Login/
+  #   
+  #   # login
+  #   post_via_redirect '/user_session', :user_session => { :email => 'diana@gmail.com', :password => 'test', :remember_me => 0 }
+  #   assert_response :success
+  #   assert_select 'body', /login successful/i
     
     # Now that you're logged in, first test editing your account
     get '/account/edit'
@@ -63,19 +78,19 @@ END
     assert_equal 'Account updated.', flash[:notice]
 
     # Create a new project (actually 2 of them, we're going to delete one)
-    project_title = 'Super Test project'
+    project_titleA = 'Super Test project'
     get '/admin/projects/new'
-    post_via_redirect '/admin/projects', :project => { :title => project_title }
-    post_via_redirect '/admin/projects', :project => { :title => project_title + '2' }
+    post_via_redirect '/admin/projects', :project => { :title => project_titleA }
+    post_via_redirect '/admin/projects', :project => { :title => project_titleA + '2' }
     assert_response :success
     assert_equal 'Project was successfully created.', flash[:notice]
-    project = Project.find_by_title( project_title )
-    project2 = Project.find_by_title( project_title + '2' )
+    project = Project.find_by_title( project_titleA )
+    project2 = Project.find_by_title( project_titleA + '2' )
 
     # Make sure project shows up
     get '/admin/projects'
-    assert_select 'body', /#{project_title}/
-    assert_select 'body', /#{project_title + '2'}/
+    assert_select 'body', /#{project_titleA}/
+    assert_select 'body', /#{project_titleA + '2'}/
     
     # Make sure all the links on this page work
     get "/admin/projects/#{project.id}/edit"
@@ -85,10 +100,10 @@ END
     get "/admin/projects/#{project.id}/pledge_embed"
     assert_select 'body', /copy and paste/i
     get "/projects/#{project.id}/pledges/new_embed"
-    assert_select 'h2', /Pledge for #{project_title}/
+    assert_select 'h2', /Pledge for #{project_titleA}/
     assert_select 'div.form_pretty_wrapper', false
     get "/projects/#{project.id}/pledges/new"
-    assert_select 'h2', /Pledge for #{project_title}/
+    assert_select 'h2', /Pledge for #{project_titleA}/
     assert_select 'div.form_pretty_wrapper'
     
     # Make sure a project can be deleted
@@ -96,8 +111,8 @@ END
     assert_response :success
     assert_equal 'Project was deleted.', flash[:notice]
     get '/admin/projects'
-    assert_select 'div.title a', {:count => 1, :text => project_title }
-    assert_select 'div.title a', {:count => 0, :text => project_title + '2' }
+    assert_select 'div.title a', {:count => 1, :text => project_titleA }
+    assert_select 'div.title a', {:count => 0, :text => project_titleA + '2' }
     
     # Submit some pledges
     post_via_redirect "/projects/#{project.id}/pledges", 
@@ -189,6 +204,19 @@ END
     get "/admin/projects/#{project.id}/pledges.csv?delimiter=tab"
     assert_response :success
     
+    ####### Pledge forms ############
+    
+    # Test creating a new pledge form
+    project_titleB = 'New Podcast'
+    post_via_redirect '/admin/projects', :project => { :title => project_titleB }
+    
+    get '/admin'
+    assert_select 'body', /create new pledge form/i
+    get 'admin/groups/new'
+    assert_select 'h1', /new pledge form/i
+    
+    ###### end pledge forms #########
+    
     # Logout
     delete_via_redirect '/user_session'
     assert_response :success
@@ -196,4 +224,11 @@ END
     
   end
 
+  private
+  
+    module CustomDsl
+      def login
+      end
+    end
+    
 end
