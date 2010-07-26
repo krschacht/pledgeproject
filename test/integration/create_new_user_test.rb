@@ -110,7 +110,7 @@ END
     delete_via_redirect "admin/projects/#{project2.id}"
     assert_response :success
     assert_equal 'Project was deleted.', flash[:notice]
-    get '/admin/projects'
+    get '/admin'
     assert_select 'div.title a', {:count => 1, :text => project_titleA }
     assert_select 'div.title a', {:count => 0, :text => project_titleA + '2' }
     
@@ -204,17 +204,77 @@ END
     get "/admin/projects/#{project.id}/pledges.csv?delimiter=tab"
     assert_response :success
     
-    ####### Test the Multi-Pledge Forms ############
+    ####### Test the Multi-Pledge Forms (aka groups) ############
     
-    # Create a second project so we can use it on the form
+    # Create a second project so we can use it on the form/group
     project_titleB = 'New Podcast'
     post_via_redirect '/admin/projects', :project => { :title => project_titleB }
     projectB = Project.find_by_title( project_titleB )
-        
+
+    # Check the form for creating a new form/group
     get '/admin'
     assert_select 'body', /create new pledge form/i
     get 'admin/groups/new'
     assert_select 'h1', /new pledge form/i
+    assert_select 'body', /#{project_titleA}/  # both projects appear on this form
+    assert_select 'body', /#{project_titleB}/
+
+    # Create a new form/group
+    group_title = 'Pick a Podcast'
+    post_via_redirect '/admin/groups', :group => { :title => group_title, :project_ids => "#{project.id},#{projectB.id}" }
+    assert_response :success
+    assert_equal 'Form was successfully created.', flash[:notice]
+    group = Group.find_by_title( group_title )
+
+    get '/admin'
+    assert_select 'body', /#{group_title}/
+    
+    # Make sure all the form/group links can be linked
+    get "/admin/groups/#{group.id}/edit"
+    assert_select 'h1', /edit pledge form/i
+    get "/admin/groups/#{group.id}/vote_embed"
+    assert_select 'body', /copy and paste/i
+    get "/groups/#{group.id}/votes/new_embed"
+    assert_select 'h2', /Pledge for #{group_title}/
+    assert_select 'div.form_pretty_wrapper', false
+    get "/groups/#{group.id}/votes/new"
+    assert_select 'h2', /Pledge for #{group_title}/
+    assert_select 'div.form_pretty_wrapper'
+    assert_select 'body', /#{project_titleA}/  # both projects appear on this form
+    assert_select 'body', /#{project_titleB}/
+    
+    # Submit some vote/pledges
+    post_via_redirect "/groups/#{group.id}/votes", 
+      :vote =>  { :group_id           => group.id,
+                  :pledges_attributes => { 
+                    0 => { 
+                      :first_name     => 'Keith',
+                      :last_name      => 'Schacht',
+                      :email          => 'krschacht@gmail.com',
+                      :subscribe_me   => 1,
+                      :note           => 'This is a question',
+                    
+                      :amount         => 50,
+                      :project_id     => project.id
+                    },
+                    1 => {
+                      :amount         => 75,
+                      :project_id     => projectB.id                      
+                    }
+                  }
+                }
+    assert_response :success
+    assert_select 'div.done_msg', /Your pledge has been saved./
+
+    # Make sure a group/form can be deleted
+    delete_via_redirect "/admin/groups/#{group.id}"
+    assert_response :success
+    assert_equal 'Form was deleted.', flash[:notice]
+    get '/admin'
+    assert_select 'div.title a', {:count => 0, :text => group_title }
+    
+    # TODO: Try submitting invalid pledge multi-form
+    # TODO: Test that emails are properly generated for pledges
     
     ###### end pledge forms #########
     

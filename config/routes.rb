@@ -30,11 +30,11 @@ Pledgeproject::Application.routes.draw do |map|
   resources :users, :except => [ :index ]  
 
   # I don't know how to do this inside the scope :(
-  match 'group/:group_id/vote/new_embed(.:format)' => 'votes#new_embed', 
+  match 'groups/:group_id/votes/new_embed(.:format)' => 'votes#new_embed', 
         :as => 'new_embed_group_vote'
 
-  scope 'group/:group_id' do
-    resources :vote, :only => [ :new, :create ], :name_prefix => 'group' do
+  scope 'groups/:group_id' do
+    resources :votes, :only => [ :new, :create ], :name_prefix => 'group' do
       member do
         get :done
       end

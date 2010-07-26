@@ -37,7 +37,7 @@ class Admin::GroupsController < ApplicationController
 
     respond_to do |groupat|
       if @group.save
-        groupat.html { redirect_to(admin_path, :notice => 'Group was successfully created.') }
+        groupat.html { redirect_to(admin_path, :notice => 'Form was successfully created.') }
         groupat.xml  { render :xml => @group, :status => :created, :location => @group }
       else
         groupat.html { render :action => "new" }
@@ -49,7 +49,7 @@ class Admin::GroupsController < ApplicationController
   def update
     respond_to do |groupat|
       if @group.update_attributes(params[:group])
-        groupat.html { redirect_to(admin_path, :notice => 'Group was successfully updated.') }
+        groupat.html { redirect_to(admin_path, :notice => 'Form was successfully updated.') }
         groupat.xml  { head :ok }
       else
         groupat.html { render :action => "edit" }
@@ -61,7 +61,7 @@ class Admin::GroupsController < ApplicationController
   def destroy
     @group.destroy
 
-    redirect_to( admin_url, :notice => 'Group was deleted.' )
+    redirect_to( admin_url, :notice => 'Form was deleted.' )
   end
   
 private
