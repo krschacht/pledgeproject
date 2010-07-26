@@ -33,9 +33,9 @@ class CreateNewUserTest < ActionController::IntegrationTest
       :pledge_confirmation_body => <<-END
 Hi @PLEDGE_FIRST_NAME@,
 
-I've received your pledge of $@PLEDGE_AMOUNT@ for the project '@PLEDGE_PROJECT_TITLE@'. Thank you so much for your support of this work!
+I've received your pledge(s) of @PLEDGE_AMOUNTS@ for the project(s) @PLEDGE_PROJECT_TITLES@. Thank you so much for your support!
 
-I'll post updates about this project to @SITE_NAME@, and I'll e-mail you any important news too.  Remember, you don't owe any money until the project is completed.  If and when that happens, I'll e-mail you an invoice.
+I'll post updates about the project(s) to @SITE_NAME@, and I'll e-mail you any important news too. Remember, you don't owe any money until a project receives enough money to get started. If and when that happens, I'll e-mail you an invoice.
 
 If you have any questions, you can e-mail me by replying to this message.
 
@@ -204,12 +204,13 @@ END
     get "/admin/projects/#{project.id}/pledges.csv?delimiter=tab"
     assert_response :success
     
-    ####### Pledge forms ############
+    ####### Test the Multi-Pledge Forms ############
     
-    # Test creating a new pledge form
+    # Create a second project so we can use it on the form
     project_titleB = 'New Podcast'
     post_via_redirect '/admin/projects', :project => { :title => project_titleB }
-    
+    projectB = Project.find_by_title( project_titleB )
+        
     get '/admin'
     assert_select 'body', /create new pledge form/i
     get 'admin/groups/new'

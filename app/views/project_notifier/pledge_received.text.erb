@@ -1,8 +1,10 @@
-Project: <%= @pledge.project.title %>
-
+Title: <%= @title %>
 Name: <%= @pledge.full_name %>
 Email: <%= @pledge.email %>
-Pledged $<%= @pledge.amount %>
+
+<% @pledges.each do |p| %>
+Pledged $<%= p.amount %> for <%= p.project.title %>
+<% end %>
 
 Note:
 

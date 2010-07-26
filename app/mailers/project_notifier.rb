@@ -5,15 +5,30 @@ class ProjectNotifier < ActionMailer::Base
   #
   #   en.actionmailer.admin_notifier.pledge_received.subject
   #
-  def pledge_received( pledge )
-    @pledge = pledge
-    u = pledge.project.user
+  def pledge_received( obj )
+    
+    if obj.is_a? Pledge
+      
+      u = obj.project.user
+      @title = obj.project.title
+      @pledges = [ obj ]
+      @pledge = obj
+      
+    elsif obj.is_a? Vote
+      
+      u = obj.group.project.user
+      @title = obj.group.title
+      @pledges = obj.pledges
+      @pledge = obj.pledge      
+    else
+      raise "Invalid object passed into notifier"
+    end
 
-    mail  :from       => "#{pledge.full_name} <#{pledge.email}>",
-          :sender     => pledge.email,
-          :reply_to   => pledge.email,
+    mail  :from       => "#{@pledge.full_name} <#{@pledge.email}>",
+          :sender     => @pledge.email,
+          :reply_to   => @pledge.email,
           :reply_path => App.system_email,
           :to         => u.email, 
-          :subject => "Pledge Received - #{ pledge.full_name } - #{ pledge.project.title }"
+          :subject => "Pledge Received - #{ @pledge.full_name } - #{ @title }"
   end
 end

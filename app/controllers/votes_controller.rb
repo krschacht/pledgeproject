@@ -42,8 +42,8 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        GroupNotifier.vote_received( @vote ).deliver
-        VoterNotifier.vote_received( @vote ).deliver
+        ProjectNotifier.pledge_received( @vote ).deliver
+        PledgerNotifier.pledge_received( @vote ).deliver
         
         format.html do
 

@@ -9,9 +9,9 @@ class UsersController < ApplicationController
     @user.pledge_confirmation_body = <<-END
 Hi @PLEDGE_FIRST_NAME@,
 
-I've received your pledge of $@PLEDGE_AMOUNT@ for the project '@PLEDGE_PROJECT_TITLE@'. Thank you so much for your support of this work!
+I've received your pledge(s) of @PLEDGE_AMOUNTS@ for the project(s) @PLEDGE_PROJECT_TITLES@. Thank you so much for your support!
 
-I'll post updates about this project to @SITE_NAME@, and I'll e-mail you any important news too.  Remember, you don't owe any money until the project is completed.  If and when that happens, I'll e-mail you an invoice.
+I'll post updates about the project(s) to @SITE_NAME@, and I'll e-mail you any important news too. Remember, you don't owe any money until a project receives enough money to get started. If and when that happens, I'll e-mail you an invoice.
 
 If you have any questions, you can e-mail me by replying to this message.
 
