@@ -1,3 +1,13 @@
+# FB
+# http://stackoverflow.com/questions/1072160/using-facebook-connect-with-authlogic
+# http://groups.google.com/group/authlogic/browse_thread/thread/ed0ec364ae90ac23
+# http://stackoverflow.com/questions/2946324/how-to-integrate-facebook-the-new-graph-api-with-authlogic-in-ruby-on-rails
+# http://stackoverflow.com/questions/3066031/facebook-graph-api-with-rails-and-authlogic-preferred-methodology
+# http://developers.facebook.com/docs/guides/web
+# http://developers.facebook.com/docs/reference/plugins/comments
+# http://web1.tunnlr.com:10107/test.html
+# http://developers.facebook.com/setup/done?id=138563892831947&locale=en_US
+
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]

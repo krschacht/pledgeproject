@@ -3,16 +3,12 @@ class ApplicationController < ActionController::Base
   layout 'application'
   
   helper_method :current_user_session, :current_user,
-                :current_user_admin?, :action_name_safe
+                :action_name_safe, :require_super_admin
 
   before_filter :set_p3p
 
   def set_p3p
     response.headers["P3P"]='CP="CAO PSA OUR"'
-  end
-
-  def current_user_admin?
-    cookies[:loggedin].to_i == 1
   end
   
   def show_admin_nav
@@ -42,6 +38,13 @@ private
       flash[:notice] = "You must be logged in to access this page"
       redirect_to new_user_session_url
       return false
+    end
+  end
+  
+  def require_super_admin
+    unless current_user && current_user.role == :super_admin
+      flash[:notice] = "You must be a super-admin to access that page"
+      redirect_to admin_path
     end
   end
 

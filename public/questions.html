@@ -1,0 +1,27 @@
+<html>
+<head>
+     <title>Embedding Moderator Sample</title>
+     <script src="http://www.google.com/moderator/static/moderator-embed-api.js" type="text/javascript"></script>
+</head>
+<body>
+  <h1>Romantic Podcast Pledge Project</h1>
+  <h3>A description of the podcast and the types of topics it will cover goes here</h3>
+   
+   <div style="position: relative; width: 950px; height: 640px;">
+
+     <div id="moderator-embed-target" style="margin: 30px 0 0 20px; border: 1px solid #CCCCCC; width: 800px;"></div>
+     
+     <div style="position: absolute; right: 0; top: 170px; border: 0px solid black; height: 100px; width: 120px;">
+       <img src="/images/left_arrow.gif" style="position: absolute; left: 0;">
+       <div style="position: absolute; left: 25px; top: 10px; width: 100px;">Vote on the questions that have been submitted.</div>
+     </div>
+
+     <div style="position: absolute; right: 0; top: 530px; border: 0px solid black; height: 100px; width: 120px;">
+       <img src="/images/left_arrow.gif" style="position: absolute; left: 0;">
+       <div style="position: absolute; left: 25px; top: 30px; width: 100px;">Submit new questions here</div>
+     </div>
+    
+     <script type="text/javascript">MODERATOR_embed("https://www.google.com/moderator/#15/e=1ee77&t=1ee77.40&f=1ee77.6d1e6", "moderator-embed-target");
+     </script>
+</body>
+</html>

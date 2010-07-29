@@ -2,8 +2,10 @@ Pledgeproject::Application.routes.draw do |map|
 
   ## Admin routes
   
-  match 'admin'       => 'admin#index', :as => 'admin'
-  match 'admin/setup' => 'admin#setup', :as => 'admin_setup'
+  match 'admin'         => 'admin#index', :as => 'admin'
+  match 'admin/setup'   => 'admin#setup', :as => 'admin_setup'
+  match 'admin/su/:id'  => 'admin#su',    :as => 'admin_su'
+  match 'admin/unsu'    => 'admin#unsu',  :as => 'admin_unsu'
   
   namespace :admin do
     resources :projects do

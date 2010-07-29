@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
 
-  before_filter :require_user, :show_admin_nav
+  before_filter :require_super_admin, :show_admin_nav
 
   # GET /users
   # GET /users.xml
