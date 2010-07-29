@@ -17,7 +17,7 @@
   <div class="admin_link">
     <%= link_to "Edit Settings", edit_account_path %>
   </div>
-  <div class="admin_link">
+  <div class="admin_link <%= 'hidden' unless current_user.super_admin? %>">
     <%= link_to "Super-Admin Controls", admin_users_path %>
   </div>
   

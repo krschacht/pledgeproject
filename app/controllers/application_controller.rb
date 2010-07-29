@@ -42,7 +42,7 @@ private
   end
   
   def require_super_admin
-    unless current_user && current_user.role == :super_admin
+    unless current_user && current_user.super_admin?
       flash[:notice] = "You must be a super-admin to access that page"
       redirect_to admin_path
     end

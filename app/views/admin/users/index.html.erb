@@ -14,9 +14,9 @@
   <tr>
     <td><%= user.full_name %></td>
     <td><%= user.email %></td>
-    <td><%= link_to 'Show', admin_user_path( user ) %></td>
-    <td><%= link_to 'Edit', edit_admin_user_path( user ) %></td>
-    <td><%= link_to 'Destroy', admin_user_path( user ), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%# link_to 'Show', admin_user_path( user ) %></td>
+    <td><%# link_to 'Edit', edit_admin_user_path( user ) %></td>
+    <td><%# link_to 'Destroy', admin_user_path( user ), :confirm => 'Are you sure?', :method => :delete %></td>
     <td><%= link_to 'Login As', admin_su_path( user ) %></td>
   </tr>
 <% end %>

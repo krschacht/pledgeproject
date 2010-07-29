@@ -22,4 +22,12 @@ class User < ActiveRecord::Base
     ( self[:role] || 'admin' ).to_sym
   end
   
+  def super_admin?
+    role == :super_admin
+  end
+  
+  def admin?
+    role == :admin || role == :super_admin
+  end
+  
 end
