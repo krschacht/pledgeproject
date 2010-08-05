@@ -28,7 +28,7 @@ class PledgeTest < ActiveSupport::TestCase
 
     assert_equal pledge.project, projects(:letter)
     assert_equal Project.find( projects(:letter).id ).pledges.length, num_pledges+1
-    assert_equal Project.find( projects(:letter).id ).pledges.last, pledge
+    assert Project.find( projects(:letter).id ).pledges.include? pledge
   end
 
 end

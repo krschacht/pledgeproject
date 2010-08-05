@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
   default_scope :order => 'id asc'  
   
   belongs_to :user
-  has_many :pledges
+  has_many :pledges, :order => 'created_at ASC'
   
   validates :title, :presence => true
 
