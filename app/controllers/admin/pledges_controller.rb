@@ -9,7 +9,7 @@ class Admin::PledgesController < ApplicationController
     
     @project = Project.find( params[:project_id] )
     @pledges = @project.pledges
-    @fields = [ :id, :first_name, :last_name, :email, :subscribe_me, :amount_pledged, :payment_requested?, :amount_paid, :internal_note, :note, :created_at ]
+    @fields = [ :id, :first_name, :last_name, :email, :subscribe_me, :amount_pledged, :amount_paid, :internal_note, :note, :created_at ]
 
     delimiter_codes = {
       :tab    => "\t",
@@ -96,6 +96,17 @@ class Admin::PledgesController < ApplicationController
       format.html { redirect_to( admin_project_pledges_path(project), :notice => 'Pledge was deleted.' ) }
       format.xml  { head :ok }
     end
+  end
+  
+  def invoice
+    @project = current_user.projects.find( params[:project_id] )
+    @pledge = @project.pledges.find( params[:id] )
+    
+    @invoice = PaypalPaymentRequest.new(
+                  :business => current_user.paypal_email,
+                  :item_name => @project.title,
+                  :amount => @pledge.amount_pledged.to_f,
+                  :item_number => @pledge.id )    
   end
     
 end

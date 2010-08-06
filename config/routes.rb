@@ -2,14 +2,18 @@ Pledgeproject::Application.routes.draw do |map|
 
   ## Admin routes
   
-  match 'admin'         => 'admin#index', :as => 'admin'
+  match 'admin'         => 'admin/projects#index', :as => 'admin'
   match 'admin/setup'   => 'admin#setup', :as => 'admin_setup'
   match 'admin/su/:id'  => 'admin#su',    :as => 'admin_su'
   match 'admin/unsu'    => 'admin#unsu',  :as => 'admin_unsu'
   
   namespace :admin do
     resources :projects do
-      resources :pledges
+      resources :pledges do
+        member do
+          post  :invoice
+        end
+      end
       
       member do
         get :pledge_embed
@@ -52,7 +56,7 @@ Pledgeproject::Application.routes.draw do |map|
       member do
         get :done
       end
-    end
+    end    
   end
     
   match 'users/:id/projects/widget(.:format)', :to => 'projects#widget', :as => "user_projects_widget"

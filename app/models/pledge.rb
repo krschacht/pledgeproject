@@ -31,7 +31,6 @@ class Pledge < ActiveRecord::Base
     ! payment_requested_at.nil?
   end
   
-  
   def pledge_added
     p = Project.find( self.project_id )
     
@@ -85,6 +84,12 @@ class Pledge < ActiveRecord::Base
 
   def payment_requested?
     ! payment_requested_at.nil?
+  end
+  
+  def stage
+    return :pledged           if ! payment_requested?
+    return :payment_requested if   payment_requested? and ! paid_in_full?
+    return :paid_in_full      if   paid_in_full?
   end
   
 end

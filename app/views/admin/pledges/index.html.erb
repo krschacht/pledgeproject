@@ -6,7 +6,7 @@
   <%= link_to "tab delimited", 
               admin_project_pledges_path( @project.id ) + ".csv?delimiter=tab",
               :class => "" %></li>
-  <li><%= link_to "Send payment request to all pledges", "#", :confirm => "" %></li>
+  <li><%= link_to "Invoice all pledgers below", "#", :confirm => "" %></li>
 </ul>
 
 <table class="pledges">
@@ -17,13 +17,15 @@
       <th>&nbsp;</th>
   </tr>
     <% @pledges.each do |p| %>
-      <tr class="paid_">
+      <tr class="stage_<%= p.stage %>">
         <% @fields.each do |f| %>
 
           <% if f == :email %>
-            <td><%= link_to pledge_field(p, f), "mailto:#{p.attributes[ f.to_s ]}" %></td>
+            <td><%= link_to pledge_field(p, f), "mailto:#{ pledge_field(p, f) }" %></td>
           <% elsif f == :created_at %>
             <td><%= pledge_field(p, f).to_s(:long) %></td>
+          <% elsif f == :amount_paid %>
+            <td class="<%= 'green_backg' if p.paid_in_full? %>"><%= pledge_field(p, f) %></td>
           <% else %>
             <td><%= pledge_field(p, f) %></td>
           <% end %>
@@ -32,9 +34,14 @@
         
         <td class="nowrap">
           <%= link_to 'Edit', edit_admin_project_pledge_path( :project_id => @project, :id => p) %> | 
-          <%= link_to "Delete", admin_project_pledge_path( :project_id => @project, :id => p.id), :method=>:delete, :confirm=>"Are you sure?" %> |
-          <% r = PaypalPaymentRequest.new( :pledge_id => p.id ) %>
-          <%= link_to 'pay', r.url %>
+          <%= link_to "Delete", admin_project_pledge_path( :project_id => @project, :id => p.id), :method=>:delete, :confirm=>"You are about to delete a pledge for #{number_to_currency( p.amount_pledged)} from #{p.full_name}. Continue?" %> |
+          <%= link_to(  "Invoice", 
+                            invoice_admin_project_pledge_path( 
+                              :project_id => @project, 
+                              :id => p ),
+                            :method => :post,
+                            :confirm => "You're about to email an invoice to #{p.full_name}. Continue?"
+                         )  unless p.payment_requested? %>          
         </td>
         
       </tr>

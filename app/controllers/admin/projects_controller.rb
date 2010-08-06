@@ -2,18 +2,9 @@ class Admin::ProjectsController < ApplicationController
 
   before_filter :require_user, :show_admin_nav
   
-  def pledge_embed
-    @project = current_user.projects.find( params[:id] )
-    
-    @attrib = { :scrolling => 'no',
-                :height => 710,
-                :frameborder => 0,
-                :style => 'width: 100%; border: 0px solid black;',
-                :allowtransparency => 'true' }    
-  end
-  
   def index
-    @projects = current_user.projects
+    @projects   = current_user.projects
+    @groups     = current_user.groups
   end
 
   def show
@@ -63,4 +54,15 @@ class Admin::ProjectsController < ApplicationController
 
     redirect_to( admin_projects_url, :notice => 'Project was deleted.' )
   end
+  
+  def pledge_embed
+    @project = current_user.projects.find( params[:id] )
+    
+    @attrib = { :scrolling => 'no',
+                :height => 710,
+                :frameborder => 0,
+                :style => 'width: 100%; border: 0px solid black;',
+                :allowtransparency => 'true' }    
+  end
+    
 end

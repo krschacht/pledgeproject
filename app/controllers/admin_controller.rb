@@ -4,8 +4,6 @@ class AdminController < ApplicationController
   before_filter :require_super_admin, :only => [ :su ]
 
   def index
-    @projects   = current_user.projects
-    @groups     = current_user.groups
   end
   
   def setup

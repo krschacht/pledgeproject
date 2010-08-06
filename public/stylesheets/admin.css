@@ -20,11 +20,21 @@
 ul.small_menu {
 }
 
-.paid_true {
+.stage_pledged {
+}
+
+.stage_payment_requested {
+  background-color: yellow;
+}
+
+.stage_paid_in_full {
   background-color: lightgreen;
 }
 
-.paid_false {
+.green_backg {
+  background-color: green;
+  font-weight: bold;
+  color: white;
 }
 
 .link {
