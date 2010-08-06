@@ -50,3 +50,10 @@ a:hover {
 .nowrap {
   white-space: nowrap;
 }
+
+a.always_underlined,
+a.always_underlined:hover,
+a.always_underlined:visited,
+a.always_underlined:active {
+  text-decoration: underline;
+}

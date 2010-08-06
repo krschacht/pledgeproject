@@ -11,7 +11,7 @@
   @pledges.each do |p|
     @fields.each_with_index do |f,i|
       out += @delimeter   unless i == 0
-      out += p.attributes[ f.to_s ].to_s
+      out += pledge_field(p, f).to_s
     end
     
     out += "\n"

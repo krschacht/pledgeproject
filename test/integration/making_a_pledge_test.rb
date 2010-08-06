@@ -13,13 +13,13 @@ class MakingAPledgeTest < ActionController::IntegrationTest
 
     post_via_redirect "/projects/#{project_id}/pledges",  :return_action => 'new', 
                       :pledge => { 
-                        :project_id   => project_id,
-                        :first_name   => 'Pete',
-                        :last_name    => 'Smith',
-                        :email        => 'pete@smith.com',
-                        :subscribe_me => 1,
-                        :amount       => 20,
-                        :note         => "I like this project!" }
+                        :project_id     => project_id,
+                        :first_name     => 'Pete',
+                        :last_name      => 'Smith',
+                        :email          => 'pete@smith.com',
+                        :subscribe_me   => 1,
+                        :amount_pledged => 20,
+                        :note           => "I like this project!" }
     assert_response :success
     assert_template :done
     

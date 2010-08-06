@@ -57,6 +57,7 @@ Pledgeproject::Application.routes.draw do |map|
     
   match 'users/:id/projects/widget(.:format)', :to => 'projects#widget', :as => "user_projects_widget"
 
+  post "paypal/postback"
 
 
 

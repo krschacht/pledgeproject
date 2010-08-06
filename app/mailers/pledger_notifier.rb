@@ -20,7 +20,7 @@ class PledgerNotifier < ActionMailer::Base
 
     @body_text = @project_user.pledge_confirmation_body
     @body_text.gsub!( /@PLEDGE_FIRST_NAME@/, @pledge.first_name )
-    @body_text.gsub!( /@PLEDGE_AMOUNTS@/, @pledges.collect { |p| p.amount }.map { |i| "$#{i}" }.to_sentence )
+    @body_text.gsub!( /@PLEDGE_AMOUNTS@/, @pledges.collect { |p| p.amount_pledged }.map { |i| "$#{i}" }.to_sentence )
     @body_text.gsub!( /@PLEDGE_PROJECT_TITLES@/, @pledges.collect { |p| p.project.title }.map { |s| "'#{s}'" }.to_sentence )
     @body_text.gsub!( /@SITE_NAME@/, @project_user.site_name )
     @body_text.gsub!( /@USER_FULL_NAME@/, @project_user.full_name )

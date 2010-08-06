@@ -23,7 +23,7 @@ class ProjectTest < ActiveSupport::TestCase
       :first_name => "Keith",
       :last_name => "Schacht",
       :email => "krschacht@gmail.com",
-      :amount => 25.00
+      :amount_pledged => 25.00
     )
 
     pari = Pledge.create(
@@ -31,7 +31,7 @@ class ProjectTest < ActiveSupport::TestCase
       :first_name => "Pari",
       :last_name => "Schacht",
       :email => "pari@nurturingwisdom.com",
-      :amount => 35.00
+      :amount_pledged => 35.00
     )
 
     podcast = Project.find( podcast.id )
@@ -42,7 +42,7 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal podcast.perct_raised, 0.6
     
     # Make sure totals are correct even if a pledge is updated  
-    keith.amount = 40
+    keith.amount_pledged = 40
     keith.save!
     
     podcast = Project.find( podcast.id )
@@ -50,7 +50,7 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal podcast.perct_raised, 0.75
 
     # Make sure perct_raised is never more than 100%
-    keith.amount = 100
+    keith.amount_pledged = 100
     keith.save!
     
     podcast = Project.find( podcast.id )

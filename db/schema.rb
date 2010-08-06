@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100729003246) do
+ActiveRecord::Schema.define(:version => 20100806013616) do
 
   create_table "groups", :force => true do |t|
     t.integer  "user_id"
@@ -20,22 +20,48 @@ ActiveRecord::Schema.define(:version => 20100729003246) do
     t.datetime "updated_at"
   end
 
+  create_table "paypal_postbacks", :force => true do |t|
+    t.integer  "premium_transaction_id"
+    t.string   "payer_business_name"
+    t.string   "payer_email"
+    t.string   "payment_status"
+    t.string   "receiver_email"
+    t.string   "business"
+    t.decimal  "payment_gross",          :precision => 10, :scale => 2
+    t.string   "txn_id"
+    t.text     "raw"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pledges", :force => true do |t|
     t.integer  "project_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.decimal  "amount",        :precision => 10, :scale => 0
+    t.decimal  "amount_pledged",       :precision => 10, :scale => 2
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "paid",                                         :default => false
-    t.boolean  "subscribe_me",                                 :default => true
+    t.boolean  "subscribe_me",                                        :default => true
     t.string   "internal_note"
     t.integer  "vote_id"
+    t.integer  "user_id"
+    t.datetime "payment_requested_at"
+    t.datetime "paid_in_full_at"
+    t.decimal  "amount_paid",          :precision => 10, :scale => 2, :default => 0.0
   end
 
   add_index "pledges", ["project_id"], :name => "index_pledges_on_project_id"
+
+  create_table "premium_transactions", :force => true do |t|
+    t.integer  "pledge_id"
+    t.integer  "user_id"
+    t.string   "type"
+    t.decimal  "amount",     :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "projects", :force => true do |t|
     t.string   "title"
@@ -84,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20100729003246) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
+    t.string   "paypal_email"
   end
 
   create_table "votes", :force => true do |t|

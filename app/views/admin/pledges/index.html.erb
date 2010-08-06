@@ -1,37 +1,42 @@
-<div class="download_option">
-  <%= link_to "download comma delimited", 
-              admin_project_pledges_path( @project.id ) + ".csv" %>
-</div>
-<div class="download_option">
-  <%= link_to "download tab delimited", 
-              admin_project_pledges_path( @project.id ) + ".csv?delimiter=tab" %>
-</div>
+<ul class="small_menu">
+  <li>
+  Download <%= link_to "comma delimited", 
+              admin_project_pledges_path( @project.id ) + ".csv",
+              :class => "" %> /
+  <%= link_to "tab delimited", 
+              admin_project_pledges_path( @project.id ) + ".csv?delimiter=tab",
+              :class => "" %></li>
+  <li><%= link_to "Send payment request to all pledges", "#", :confirm => "" %></li>
+</ul>
 
 <table class="pledges">
   <tr>
     <% @fields.each do |f| %>
       <th><%= f %></th>
     <% end %>
+      <th>&nbsp;</th>
   </tr>
     <% @pledges.each do |p| %>
-      <tr class="paid_<%= p.paid %>">
+      <tr class="paid_">
         <% @fields.each do |f| %>
 
-          <% if f == :actions %>
-            <td class="nowrap">
-              <%= link_to 'Edit', edit_admin_project_pledge_path( :project_id => @project, :id => p) %> | 
-              <%= link_to "Delete", admin_project_pledge_path( :project_id => @project, :id => p.id), :method=>:delete, :confirm=>"Are you sure?" %> |
-              <%= link_to 'Toggle Paid', admin_project_pledge_path( :project_id => @project, :id => p, 'pledge[paid]' => "#{! p.paid }" ), :method => :put %>
-            </td>
-          <% elsif f == :email %>
-            <td><%= link_to p.attributes[ f.to_s ], "mailto:#{p.attributes[ f.to_s ]}" %></td>
+          <% if f == :email %>
+            <td><%= link_to pledge_field(p, f), "mailto:#{p.attributes[ f.to_s ]}" %></td>
           <% elsif f == :created_at %>
-            <td><%= p.attributes[ f.to_s ].to_s(:long) %></td>
+            <td><%= pledge_field(p, f).to_s(:long) %></td>
           <% else %>
-            <td><%= p.attributes[ f.to_s ] %></td>
+            <td><%= pledge_field(p, f) %></td>
           <% end %>
 
         <% end %>
+        
+        <td class="nowrap">
+          <%= link_to 'Edit', edit_admin_project_pledge_path( :project_id => @project, :id => p) %> | 
+          <%= link_to "Delete", admin_project_pledge_path( :project_id => @project, :id => p.id), :method=>:delete, :confirm=>"Are you sure?" %> |
+          <% r = PaypalPaymentRequest.new( :pledge_id => p.id ) %>
+          <%= link_to 'pay', r.url %>
+        </td>
+        
       </tr>
     <% end %>
 </table>

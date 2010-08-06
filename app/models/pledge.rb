@@ -10,9 +10,11 @@ end
 
 class Pledge < ActiveRecord::Base
   belongs_to :project
+  belongs_to :user
+  has_many :premium_transactions
   
-  validates :project_id, :first_name, :last_name, :email, :amount, :presence => true
-  validates :amount, :numericality => { :greater_than_or_equal_to => 0.0 }
+  validates :project_id, :first_name, :last_name, :email, :amount_pledged, :presence => true
+  validates :amount_pledged, :numericality => { :greater_than_or_equal_to => 0.0 }
   validates :note, :word_count => { :less_than_or_equal_to => 200 }
 
   after_create  :pledge_added
@@ -22,15 +24,20 @@ class Pledge < ActiveRecord::Base
   scope :for_project, lambda {|id| where(:project_id => id) }
    
   def full_name
-    self.first_name + ' ' + self.last_name
+    first_name + ' ' + last_name
   end
+  
+  def payment_requested?
+    ! payment_requested_at.nil?
+  end
+  
   
   def pledge_added
     p = Project.find( self.project_id )
     
     if p
       p.pledges_count += 1
-      p.current_pledged_total += self.amount      
+      p.current_pledged_total += self.amount_pledged      
       p.save!
     end
   end
@@ -40,7 +47,7 @@ class Pledge < ActiveRecord::Base
     
     if p
       p.pledges_count -= 1
-      p.current_pledged_total -= self.amount
+      p.current_pledged_total -= self.amount_pledged
       
       p.pledges_count = 0             if p.pledges_count < 0
       p.current_pledged_total = 0     if p.current_pledged_total < 0
@@ -52,9 +59,15 @@ class Pledge < ActiveRecord::Base
     p = Project.find( self.project_id )
 
     if p
-      p.current_pledged_total = Pledge.for_project( self.project_id ).sum( :amount )
+      p.current_pledged_total = Pledge.for_project( self.project_id ).sum( :amount_pledged )
       p.save!
     end
   end
-
+  
+  def new_payment_transaction( p )
+    amount_paid += p.amount
+    paid_in_full_at = Time.now  if amount_paid >= amount_pledged
+    save!
+  end
+  
 end

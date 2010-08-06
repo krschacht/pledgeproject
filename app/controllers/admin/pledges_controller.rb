@@ -9,7 +9,7 @@ class Admin::PledgesController < ApplicationController
     
     @project = Project.find( params[:project_id] )
     @pledges = @project.pledges
-    @fields = [ :id, :first_name, :last_name, :email, :subscribe_me, :amount, :paid, :internal_note, :note, :created_at, :actions ]
+    @fields = [ :id, :first_name, :last_name, :email, :subscribe_me, :amount_pledged, :payment_requested?, :amount_paid, :internal_note, :note, :created_at ]
 
     delimiter_codes = {
       :tab    => "\t",
@@ -95,28 +95,6 @@ class Admin::PledgesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to( admin_project_pledges_path(project), :notice => 'Pledge was deleted.' ) }
       format.xml  { head :ok }
-    end
-  end
-
-  def for_project
-    id = params[:id].gsub(/.*-/, '').to_i
-    
-    @project = Project.find( id )
-    @pledges = Pledge.for_project( id )
-    @fields = [ :id, :first_name, :last_name, :email, :subscribe_me, :amount, :paid, :internal_note, :note, :created_at, :actions ]
-
-    delimiter_codes = {
-      :tab    => "\t",
-      :comma  => ","
-    }
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @pledges }
-      format.csv  do
-        @delimeter = delimiter_codes[ (params[:delimiter] || :comma ).to_sym ]
-        render :csv => @pledges
-      end
     end
   end
     

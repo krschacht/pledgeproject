@@ -10,16 +10,16 @@ class PledgeTest < ActiveSupport::TestCase
     assert pledge.errors[:first_name].any?
     assert pledge.errors[:last_name].any?
     assert pledge.errors[:email].any?
-    assert pledge.errors[:amount].any?
+    assert pledge.errors[:amount_pledged].any?
   end
   
   test "successful creation and linking of pledges and projects" do
     fields = {
-      :project_id => projects(:letter).id,
-      :first_name => "Keith",
-      :last_name => "Schacht",
-      :email => "krschacht@gmail.com",
-      :amount => 50.00
+      :project_id       => projects(:letter).id,
+      :first_name       => "Keith",
+      :last_name        => "Schacht",
+      :email            => "krschacht@gmail.com",
+      :amount_pledged   => 50.00
     }
     num_pledges = projects(:letter).pledges.length
     

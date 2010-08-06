@@ -3,7 +3,7 @@ Name: <%= @pledge.full_name %>
 Email: <%= @pledge.email %>
 
 <% @pledges.each do |p| %>
-Pledged $<%= p.amount %> for <%= p.project.title %>
+Pledged $<%= p.amount_pledged %> for <%= p.project.title %>
 <% end %>
 
 Note:

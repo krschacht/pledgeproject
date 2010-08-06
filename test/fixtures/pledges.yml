@@ -5,7 +5,7 @@ john:
  first_name: John
  last_name: Smith
  email: jsmith@google.com
- amount: 9.99
+ amount_pledged: 9.99
  note: I don't have any questions
 
 # 
