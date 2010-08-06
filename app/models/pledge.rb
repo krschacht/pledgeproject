@@ -65,9 +65,26 @@ class Pledge < ActiveRecord::Base
   end
   
   def new_payment_transaction( p )
-    amount_paid += p.amount
-    paid_in_full_at = Time.now  if amount_paid >= amount_pledged
+    self.amount_paid = amount_paid.to_f + p.amount
+    self.paid_in_full_at = Time.now  if amount_paid >= amount_pledged
     save!
+  end
+  
+  def paid_in_full?
+    ! paid_in_full_at.nil?
+  end
+  
+  def amount_remaining
+    amount_pledged - amount_paid
+  end
+  
+  def payment_requested!
+    self.payment_requested_at = Time.now
+    save!
+  end
+
+  def payment_requested?
+    ! payment_requested_at.nil?
   end
   
 end

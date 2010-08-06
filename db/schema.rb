@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20100806013616) do
     t.integer  "pledge_id"
     t.integer  "user_id"
     t.string   "type"
-    t.decimal  "amount",     :precision => 10, :scale => 0
+    t.decimal  "amount",     :precision => 10, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

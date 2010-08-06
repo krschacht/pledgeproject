@@ -1,25 +1,25 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  premium_transaction_id: 1
-  payer_business_name: MyString
-  payer_email: MyString
-  payment_status: MyString
-  receiver_email: MyString
-  business: MyString
-  payment_gross: 9.99
-  payment_status: MyString
-  txn_id: MyString
-  raw: MyText
-
-two:
-  premium_transaction_id: 1
-  payer_business_name: MyString
-  payer_email: MyString
-  payment_status: MyString
-  receiver_email: MyString
-  business: MyString
-  payment_gross: 9.99
-  payment_status: MyString
-  txn_id: MyString
-  raw: MyText
+# one:
+#   premium_transaction_id: 1
+#   payer_business_name: MyString
+#   payer_email: MyString
+#   payment_status: MyString
+#   receiver_email: MyString
+#   business: MyString
+#   payment_gross: 9.99
+#   payment_status: MyString
+#   txn_id: MyString
+#   raw: MyText
+# 
+# two:
+#   premium_transaction_id: 1
+#   payer_business_name: MyString
+#   payer_email: MyString
+#   payment_status: MyString
+#   receiver_email: MyString
+#   business: MyString
+#   payment_gross: 9.99
+#   payment_status: MyString
+#   txn_id: MyString
+#   raw: MyText

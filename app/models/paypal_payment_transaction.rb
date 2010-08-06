@@ -4,7 +4,7 @@ class PaypalPaymentTransaction < PremiumTransaction
   def self.record( postback_params )
     
     transaction do
-      pledge = Pledge.find( postback_params[ "item_number" ].to_i )
+      pledge = Pledge.find( postback_params[ "item_number" ] )
             
       p = create!(  :user_id    => 0,
                     :pledge     => pledge,
