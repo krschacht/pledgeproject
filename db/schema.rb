@@ -111,6 +111,8 @@ ActiveRecord::Schema.define(:version => 20100806013616) do
     t.datetime "updated_at"
     t.string   "role"
     t.string   "paypal_email"
+    t.string   "pledge_invoice_subject"
+    t.text     "pledge_invoice_body"
   end
 
   create_table "votes", :force => true do |t|
