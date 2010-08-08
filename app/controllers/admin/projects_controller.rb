@@ -39,7 +39,7 @@ class Admin::ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to(admin_project_url(@project), :notice => 'Project was successfully updated.') }
+        format.html { redirect_to(admin_projects_url, :notice => 'Project was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

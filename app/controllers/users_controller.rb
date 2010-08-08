@@ -29,6 +29,26 @@ Thanks again for your support!
 
 @USER_FULL_NAME@
 END
+
+    @user.pledge_invoice_subject = "Invoice for your pledge"
+    @user.pledge_invoice_body = <<-END
+Dear @PLEDGE_FIRST_NAME@,
+
+Thank you so much for pledging for the @PLEDGE_PROJECT_TITLE@. The project has been completed, here is your invoice.
+
+You pledged @PLEDGE_AMOUNT@.
+
+Click here to pay me via PayPal:
+
+@INVOICE_URL@
+
+(If you're not satisfied with the project, I will give you a refund, provided that you explain your reasons.)
+
+Thank you again for supporting my work.  I appreciate that more than I can say!
+
+@USER_FULL_NAME@
+END
+
   end
   
   def create

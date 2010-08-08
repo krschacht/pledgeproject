@@ -18,6 +18,7 @@
 .summary .project .info {
   font-size: 17px;
   margin-left: 10px;
+  color: #777777;
 }
 
 .summary .project .info .num {
@@ -28,6 +29,29 @@
   float: right;
   margin-right: 20px;
 }
+
+.summary .project .close_msg_dialog {
+  position: relative; 
+  color: black; 
+  background-color: white; 
+  padding: 5px 15px;
+  border: 1px solid #CCCCCC;
+  width: 550px;
+}
+
+.close_msg_dialog a {
+  font-size: 12px;
+}
+
+.close_msg_dialog form {
+  display: inline;
+}
+
+.close_msg_dialog input.text {
+  width: 230px;
+}
+
+
 
 .action_links a {
   display: block;

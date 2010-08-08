@@ -5,7 +5,19 @@ class Project < ActiveRecord::Base
   has_many :pledges, :order => 'created_at ASC'
   
   validates :title, :presence => true
+  
+  def self.create( hash )
+    status = hash.delete(:status) || hash.delete('status') || 'open'    
+    hash.merge!( :status => status )
+    super hash
+  end
 
+  def self.create!( hash )
+    status = hash.delete(:status) || hash.delete('status') || 'open'    
+    hash.merge!( :status => status )
+    super hash
+  end  
+  
   def perct_raised
     return 0  if method != :goal || self.current_pledged_total.nil? || self.pledge_goal_amount.nil?
     
@@ -21,6 +33,10 @@ class Project < ActiveRecord::Base
   
   def url_friendly_title
     self.title.gsub(/[^A-Za-z0-9]/, '_')
+  end
+  
+  def status
+    self[:status].to_sym
   end
 
   def to_s

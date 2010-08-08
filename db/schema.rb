@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100806013616) do
+ActiveRecord::Schema.define(:version => 20100808204957) do
 
   create_table "groups", :force => true do |t|
     t.integer  "user_id"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(:version => 20100806013616) do
     t.string   "vote_done_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "status"
+    t.text     "closed_msg"
   end
 
   create_table "paypal_postbacks", :force => true do |t|
@@ -76,6 +78,8 @@ ActiveRecord::Schema.define(:version => 20100806013616) do
     t.datetime "updated_at"
     t.string   "pledge_done_url"
     t.integer  "user_id"
+    t.text     "status"
+    t.text     "closed_msg"
   end
 
   create_table "sessions", :force => true do |t|

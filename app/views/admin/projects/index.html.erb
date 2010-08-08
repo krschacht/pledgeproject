@@ -5,7 +5,7 @@
   <% @projects.each do |project| %>
     <div class="project">
       <div class="action_links">
-        <%= link_to "Delete", admin_project_path(project.id), :method=>:delete, :confirm=>"Are you sure?" %>
+        <%= link_to "Delete", admin_project_path(project), :method=>:delete, :confirm=>"Are you sure?" %>
         <%= link_to 'Pretty pledge form', new_project_pledge_path(project) %>
         <%= link_to 'Embeddable pledge form', pledge_embed_admin_project_path(project) %>
       </div>
@@ -17,6 +17,9 @@
                         
         totaling <span class="num"><%= number_to_currency( project.current_pledged_total ) %></span>,
         collected <span class="num"><%= number_to_currency( project.current_pledged_total ) %></span>.
+        
+        <%= render  :partial => 'close_dialog', :object => project %>        
+        
       </div>
     </div>
   <% end %>
@@ -44,6 +47,9 @@
       </div>
       
       <div class="title"><%= link_to group.title, edit_admin_group_path(group) %></div>
+      <div class="info">
+        <%= render  :partial => 'close_dialog', :object => group %>
+      </div>
     </div>
   <% end %>
   

@@ -4,6 +4,18 @@ class Group < ActiveRecord::Base
   
   validates :title, :project_ids, :presence => true
 
+  def self.create( hash )
+    status = hash.delete(:status) || hash.delete('status') || 'open'    
+    hash.merge!( :status => status )
+    super hash
+  end
+
+  def self.create!( hash )
+    status = hash.delete(:status) || hash.delete('status') || 'open'    
+    hash.merge!( :status => status )
+    super hash
+  end  
+
   def projects
     ids = self.project_ids.split(',')
     ids.map { |i| Project.find( i.to_i ) }
@@ -11,6 +23,10 @@ class Group < ActiveRecord::Base
 
   def project
     projects.first
+  end
+  
+  def status
+    self[:status].to_sym
   end
   
 end

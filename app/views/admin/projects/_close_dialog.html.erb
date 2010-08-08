@@ -1,0 +1,37 @@
+<% if close_dialog.status == :open %>
+  Form is <b>open</b>.
+<% else %>
+  Form is now closed.
+<% end %>
+
+<% if close_dialog.class.to_s == "Project" %>
+<%  if close_dialog.status == :open %>
+    <%= link_to 'Close', "#", :onclick => "show_close_msg_dialog( 'p_#{close_dialog.id}' ); return false;", :id => "p_#{close_dialog.id}_link" %>
+<%  else %>
+    <%= link_to 'Open',   admin_project_path( :id => close_dialog.id, 'project[status]' => "open" ), 
+                              :method => :put %>
+<%  end %>
+<% end %>
+
+<% if close_dialog.class.to_s == "Group" %>
+<%  if close_dialog.status == :open %>
+    <%= link_to 'Close', "#", :onclick => "show_close_msg_dialog( 'g_#{close_dialog.id}' ); return false;", :id => "g_#{close_dialog.id}_link" %>
+<%  else %>
+    <%= link_to 'Open',   admin_group_path( :id => close_dialog.id, 'group[status]' => "open" ), 
+                              :method => :put %>
+<%  end %>
+<% end %>
+
+<% if close_dialog.status == :open %>
+<div class="close_msg_dialog hidden" id="<%= close_dialog.class.to_s.downcase[0..0] %>_<%= close_dialog.id %>_dialog">
+  Closed message: 
+
+  <%= form_for [:admin, close_dialog] do |f| %>
+
+    <%= f.text_field :closed_msg, :class => "text" %>
+    <%= f.hidden_field :status, :value => "closed" %>
+    <%= f.submit 'Save' %>
+    <%= link_to "cancel", "#", :onclick => "hide_close_msg_dialog( '#{close_dialog.class.to_s.downcase[0..0]}_#{close_dialog.id}' ); return false;" %>
+  <% end %>
+</div>
+<% end %>
