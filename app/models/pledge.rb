@@ -25,11 +25,13 @@ class Pledge < ActiveRecord::Base
   scope :not_invoiced, where( :payment_requested_at => nil)
   
   def first_name
-    self[:first_name][0..0].upcase + self[:first_name][1..999]
+    fn = self[:first_name] || ""
+    fn[0..0].upcase + fn[1..999].to_s
   end
 
   def last_name
-    self[:last_name][0..0].upcase + self[:last_name][1..999]
+    ln = self[:last_name] || ""
+    ln[0..0].upcase + ln[1..999].to_s
   end
   
   def full_name

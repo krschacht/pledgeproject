@@ -10,4 +10,8 @@ production:
   system_email: krschacht@gmail.com
   url_base: http://pledeproject.heroku.com/
 
-  
+test:
+  from_name: Pledge Project
+  from_email: admin@pledgeproject.com
+  system_email: krschacht@gmail.com
+  url_base: http://web1.tunnlr.com:10107/

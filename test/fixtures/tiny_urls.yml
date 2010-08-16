@@ -1,9 +1,5 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  key: MyString
-  url: MyText
-
-two:
-  key: MyString
-  url: MyText
+amazon:
+  key: abcdz
+  url: http://www.amazon.com/long-url

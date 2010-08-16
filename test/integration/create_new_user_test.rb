@@ -275,6 +275,11 @@ END
     
     # TODO: Try submitting invalid pledge multi-form
     # TODO: Test that emails are properly generated for pledges
+
+
+
+    # Test the invoice functionality
+    # Test the tiny_url model
     
     ###### end pledge forms #########
     
