@@ -100,10 +100,10 @@ END
     get "/admin/projects/#{project.id}/pledge_embed"
     assert_select 'body', /copy and paste/i
     get "/projects/#{project.id}/pledges/new_embed"
-    assert_select 'h2', /Pledge for #{project_titleA}/
+    assert_select 'h2', /Pledge for the #{project_titleA}/
     assert_select 'div.form_pretty_wrapper', false
     get "/projects/#{project.id}/pledges/new"
-    assert_select 'h2', /Pledge for #{project_titleA}/
+    assert_select 'h2', /Pledge for the #{project_titleA}/
     assert_select 'div.form_pretty_wrapper'
     
     # Make sure a project can be deleted
@@ -235,10 +235,10 @@ END
     get "/admin/groups/#{group.id}/vote_embed"
     assert_select 'body', /copy and paste/i
     get "/groups/#{group.id}/votes/new_embed"
-    assert_select 'h2', /Pledge for #{group_title}/
+    assert_select 'h2', /Pledge for the #{group_title}/
     assert_select 'div.form_pretty_wrapper', false
     get "/groups/#{group.id}/votes/new"
-    assert_select 'h2', /Pledge for #{group_title}/
+    assert_select 'h2', /Pledge for the #{group_title}/
     assert_select 'div.form_pretty_wrapper'
     assert_select 'body', /#{project_titleA}/  # both projects appear on this form
     assert_select 'body', /#{project_titleB}/

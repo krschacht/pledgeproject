@@ -6,7 +6,7 @@
   <%= link_to "tab delimited", 
               admin_project_pledges_path( @project.id ) + ".csv?delimiter=tab",
               :class => "" %></li>
-  <li><%= link_to "Invoice all pledgers below", "#", :confirm => "" %></li>
+  <li><%= link_to "Invoice all pledgers below", invoice_admin_project_path( @project ), :confirm => "You are about to invoice ALL pledgers below that have not yet received an invoice. Continue?", :method => :post %></li>
 </ul>
 
 <table class="pledges">
@@ -36,12 +36,10 @@
           <%= link_to 'Edit', edit_admin_project_pledge_path( :project_id => @project, :id => p) %> | 
           <%= link_to "Delete", admin_project_pledge_path( :project_id => @project, :id => p.id), :method=>:delete, :confirm=>"You are about to delete a pledge for #{number_to_currency( p.amount_pledged)} from #{p.full_name}. Continue?" %> |
           <%= link_to(  "Invoice", 
-                            invoice_admin_project_pledge_path( 
+                            confirm_invoice_admin_project_pledge_path( 
                               :project_id => @project, 
-                              :id => p ),
-                            :method => :post,
-                            :confirm => "You're about to email an invoice to #{p.full_name}. Continue?"
-                         )  unless p.payment_requested? %>          
+                              :id => p )
+                         ) %>          
         </td>
         
       </tr>

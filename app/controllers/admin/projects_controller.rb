@@ -64,5 +64,16 @@ class Admin::ProjectsController < ApplicationController
                 :style => 'width: 100%; border: 0px solid black;',
                 :allowtransparency => 'true' }    
   end
+
+  def invoice
+    project = Project.find( params[:id] )
+
+    project.pledges.not_invoiced.each do |pledge|
+      PledgerNotifier.invoice( pledge ).deliver
+      pledge.payment_requested!
+    end
     
+    redirect_to admin_project_pledges_path( project ), :notice => 'Invoices were sent.'
+  end
+   
 end

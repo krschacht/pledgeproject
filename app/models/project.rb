@@ -36,7 +36,7 @@ class Project < ActiveRecord::Base
   end
   
   def status
-    self[:status].to_sym
+    (self[:status] || 'open').to_sym
   end
   
   def closed?

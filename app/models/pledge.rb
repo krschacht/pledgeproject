@@ -22,7 +22,16 @@ class Pledge < ActiveRecord::Base
   after_update  :pledge_updated
   
   scope :for_project, lambda {|id| where(:project_id => id) }
-   
+  scope :not_invoiced, where( :payment_requested_at => nil)
+  
+  def first_name
+    self[:first_name][0..0].upcase + self[:first_name][1..999]
+  end
+
+  def last_name
+    self[:last_name][0..0].upcase + self[:last_name][1..999]
+  end
+  
   def full_name
     first_name + ' ' + last_name
   end

@@ -99,14 +99,33 @@ class Admin::PledgesController < ApplicationController
   end
   
   def invoice
-    @project = current_user.projects.find( params[:project_id] )
-    @pledge = @project.pledges.find( params[:id] )
+    project = Project.find( params[:project_id] )
+    pledge = project.pledges.find( params[:id] )
     
-    @invoice = PaypalPaymentRequest.new(
-                  :business => current_user.paypal_email,
-                  :item_name => @project.title,
-                  :amount => @pledge.amount_pledged.to_f,
-                  :item_number => @pledge.id )    
+    PledgerNotifier.invoice( pledge ).deliver
+    pledge.payment_requested!
+    
+    redirect_to admin_project_pledges_path( pledge.project ), :notice => 'Invoice was sent'    
   end
+  
+  def invoice_custom
+    project = Project.find( params[:project_id] )
+    pledge = project.pledges.find( params[:id] )
+
+    body    = params[:body]
+    subject = params[:subject]
+
+    PledgerNotifier.invoice_custom( :pledge => pledge, :body => body, :subject => subject ).deliver
+    pledge.payment_requested!
     
+    redirect_to admin_project_pledges_path( pledge.project ), :notice => 'Invoice was sent'    
+  end
+  
+  def confirm_invoice
+    @project = Project.find( params[:project_id] )
+    @pledge = @project.pledges.find( params[:id] )
+
+    @project_user = @project.user
+  end
+  
 end

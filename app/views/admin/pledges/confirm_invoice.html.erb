@@ -1,0 +1,13 @@
+<h2>You're about to send this email to <%= @pledge.first_name %> at <%= @pledge.email %></h2>
+
+<%= form_for @project_user, :url => invoice_custom_admin_project_pledge_path( :project_id => @project, :id => @pledge ), :method => :post do |f| %>
+  
+  <b>Subject:</b> 
+  <input type="text" name="subject" value="<%= @project_user.pledge_invoice_subject %>"><br><br>
+    
+  <textarea name="body" style="width: 400px; height: 400px;"><%= @project_user.pledge_invoice_body %></textarea>
+  
+  <br><input type="submit" value="Send Invoice">
+
+
+<% end %>
