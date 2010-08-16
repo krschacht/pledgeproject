@@ -1,0 +1,2 @@
+module TinyUrlHelper
+end

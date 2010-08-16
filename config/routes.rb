@@ -1,5 +1,7 @@
 Pledgeproject::Application.routes.draw do |map|
 
+  match 'url/:id'  => 'tiny_url#index'
+  
   ## Admin routes
   
   match 'admin'         => 'admin/projects#index', :as => 'admin'

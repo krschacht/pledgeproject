@@ -46,7 +46,7 @@ class PledgerNotifier < ActionMailer::Base
                   :amount => @pledge.amount_pledged.to_f,
                   :item_number => @pledge.id )
 
-    @body_text.gsub!( /@INVOICE_URL@/, @invoice.url )
+    @body_text.gsub!( /@INVOICE_URL@/, TinyUrl.for( @invoice.url ) )
 
     mail  :from       => "#{ @project_user.full_name } <#{ @project_user.from_email }>",
           :sender     => @project_user.from_email,
@@ -71,7 +71,7 @@ class PledgerNotifier < ActionMailer::Base
     @body_text.gsub!( /@PLEDGE_AMOUNT@/, '$' + @pledge.amount_pledged.to_f.to_s )
     @body_text.gsub!( /@PLEDGE_PROJECT_TITLE@/, @pledge.project.title )
     @body_text.gsub!( /@USER_FULL_NAME@/, @project_user.full_name )
-    @body_text.gsub!( /@INVOICE_URL@/, @invoice.url )
+    @body_text.gsub!( /@INVOICE_URL@/, TinyUrl.for( @invoice.url ) )
 
     mail  :from       => "#{ @project_user.full_name } <#{ @project_user.from_email }>",
           :sender     => @project_user.from_email,

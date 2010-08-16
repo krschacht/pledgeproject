@@ -12,13 +12,13 @@ class PaypalPaymentRequest
     @vars[:rm]              = 1
     @vars[:bn]              = 'PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted'
     @vars[:cn]              = 'Comments about this payment (optional)'  
-    @vars[:return]          = 'http://localhost:3000/completed'
-    @vars[:cancel]          = 'http://localhost:3000/cancel'
+    @vars[:return]          = App.url_base + 'completed'
+    @vars[:cancel]          = App.url_base + 'cancel'
     
     if RAILS_ENV == "development"
-      @vars[:notify_url]      = "http://web1.tunnlr.com:10107/paypal/postback"
+      @vars[:notify_url]      = App.url_base + "paypal/postback"
     else
-      @vars[:notify_url]      = "http://pledgeproject.heroku.com/paypal/postback"
+      @vars[:notify_url]      = App.url_base + "paypal/postback"
     end
 
     # @vars = @vars.merge(

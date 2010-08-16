@@ -126,6 +126,12 @@ class Admin::PledgesController < ApplicationController
     @pledge = @project.pledges.find( params[:id] )
 
     @project_user = @project.user
+    @body = @project_user.pledge_invoice_body
+    
+    @body.gsub!( /@PLEDGE_FIRST_NAME@/, @pledge.first_name )
+    @body.gsub!( /@PLEDGE_AMOUNT@/, '$' + @pledge.amount_pledged.to_f.to_s )
+    @body.gsub!( /@PLEDGE_PROJECT_TITLE@/, @pledge.project.title )
+    @body.gsub!( /@USER_FULL_NAME@/, @project_user.full_name )
   end
   
 end

@@ -6,7 +6,8 @@ class App
     
       app_config_file = "#{Rails.root}/config/application.yml"
       return nil  unless File.exist?( app_config_file )
-      @@app = YAML.load(ERB.new(File.read( app_config_file )).result)
+      all = YAML.load(ERB.new(File.read( app_config_file )).result)
+      @@app = all[ RAILS_ENV ]
       @@app.symbolize_keys!
     end
     
