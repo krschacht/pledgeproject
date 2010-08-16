@@ -38,6 +38,10 @@ class Project < ActiveRecord::Base
   def status
     self[:status].to_sym
   end
+  
+  def closed?
+    status == :closed
+  end
 
   def to_s
     "project_#{self.id}"

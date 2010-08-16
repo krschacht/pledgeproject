@@ -17,73 +17,83 @@
       <h2>Pledge for <%= @group.title %></h2>
     </div>
 
-    <ul>
+    <% if @group.closed? %>
+    
+      <div class="done_msg">
+        <%= raw @group.closed_msg %>
+      </div>
 
-      <%= hidden_field_tag "vote[group_id]", @group.id %>
+    <% else %>
+
+      <ul>
+
+        <%= hidden_field_tag "vote[group_id]", @group.id %>
       
-      <% @vote.pledges.each_with_index do |pledge, i| %>
-        <%= f.fields_for :pledges, pledge do |pledge_fields| %>
+        <% @vote.pledges.each_with_index do |pledge, i| %>
+          <%= f.fields_for :pledges, pledge do |pledge_fields| %>
       
-          <%= hidden_field_tag "vote[pledges_attributes][#{i}][project_id]", @group.projects[i].id %>
+            <%= hidden_field_tag "vote[pledges_attributes][#{i}][project_id]", @group.projects[i].id %>
 
-          <% if i == 0  ## Only display these shared fields for the first pledge form %>
+            <% if i == 0  ## Only display these shared fields for the first pledge form %>
 
-            <li>
-              <%= label_tag :name, nil, :class => "field req" %>
-              <span>
-                <%= pledge_fields.text_field :first_name, :class => "text", :style => "width: 90px;" %>
-                <%= pledge_fields.label :first_name, nil, :class => "sub" %>
-              </span>
-              <span>
-                <%= pledge_fields.text_field :last_name, :class => "text", :style => "width: 120px;" %>
-                <%= pledge_fields.label :last_name, nil, :class => "sub" %>
-              </span>
-              <div class="stretcher"></div>
-            </li>
-            <li>
-              <%= pledge_fields.label :email, nil, :class => "field req" %>
-              <div><%= pledge_fields.text_field :email, :class => "text" %></div>
-            </li>
+              <li>
+                <%= label_tag :name, nil, :class => "field req" %>
+                <span>
+                  <%= pledge_fields.text_field :first_name, :class => "text", :style => "width: 90px;" %>
+                  <%= pledge_fields.label :first_name, nil, :class => "sub" %>
+                </span>
+                <span>
+                  <%= pledge_fields.text_field :last_name, :class => "text", :style => "width: 120px;" %>
+                  <%= pledge_fields.label :last_name, nil, :class => "sub" %>
+                </span>
+                <div class="stretcher"></div>
+              </li>
+              <li>
+                <%= pledge_fields.label :email, nil, :class => "field req" %>
+                <div><%= pledge_fields.text_field :email, :class => "text" %></div>
+              </li>
 
-            <li>
-              <label>You can pledge for any or all of the following projects below.  If you don't wish to pledge anything for one or more projects, just enter $0.</label>
-            </li>
+              <li>
+                <label>You can pledge for any or all of the following projects below.  If you don't wish to pledge anything for one or more projects, just enter $0.</label>
+              </li>
 
-            <% # We want these fields to appear at the end, save it so we can display below %>
+              <% # We want these fields to appear at the end, save it so we can display below %>
             
-            <% @note_label = pledge_fields.label :note, "Your Question or Comment", :class => "field" %>
-            <% @note_text_area = pledge_fields.text_area :note, :id => "note" %>
+              <% @note_label = pledge_fields.label :note, "Your Question or Comment", :class => "field" %>
+              <% @note_text_area = pledge_fields.text_area :note, :id => "note" %>
       
-            <% @subscribe_label = pledge_fields.label :subscribe_me, nil, :class => "field" %>
-            <% @subscribe_check_box = pledge_fields.check_box :subscribe_me %>
+              <% @subscribe_label = pledge_fields.label :subscribe_me, nil, :class => "field" %>
+              <% @subscribe_check_box = pledge_fields.check_box :subscribe_me %>
             
-          <% end %>
+            <% end %>
                 
-          <li style="margin-left: 15px;">
-            <%= pledge_fields.label :amount_pledged, "$ Pledge for the #{@group.projects[i].title}", :class => "field req" %>
-            <div><%= pledge_fields.text_field :amount_pledged, :class => "text", :style => "width: 120px;" %></div>
-          </li>          
+            <li style="margin-left: 15px;">
+              <%= pledge_fields.label :amount_pledged, "$ Pledge for the #{@group.projects[i].title}", :class => "field req" %>
+              <div><%= pledge_fields.text_field :amount_pledged, :class => "text", :style => "width: 120px;" %></div>
+            </li>          
       
-        <% end %>          
-      <% end %>
+          <% end %>          
+        <% end %>
       
-      <li>
-        <%= @note_label %>
-        <%= @note_text_area %>
-          <label class="sub" for="pledge_note">
-            Maximum Allowed: 200 words. Currently Used: <span id='word_count'>0</span> words
-          </label>
-      </li>
+        <li>
+          <%= @note_label %>
+          <%= @note_text_area %>
+            <label class="sub" for="pledge_note">
+              Maximum Allowed: 200 words. Currently Used: <span id='word_count'>0</span> words
+            </label>
+        </li>
 
-      <li>
-        <%= @subscribe_label %>
-        <div><%= @subscribe_check_box %> to occasional announcements about special projects</div>
-      </li>
+        <li>
+          <%= @subscribe_label %>
+          <div><%= @subscribe_check_box %> to occasional announcements about special projects</div>
+        </li>
 
-      <li class="actions">
-        <%= f.submit "Create Pledge" %>
-      </li>
-    </ul>
+        <li class="actions">
+          <%= f.submit "Create Pledge" %>
+        </li>
+      </ul>
+    
+    <% end %>
 
   <% end %>
 

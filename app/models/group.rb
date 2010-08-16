@@ -29,4 +29,8 @@ class Group < ActiveRecord::Base
     self[:status].to_sym
   end
   
+  def closed?
+    status == :closed
+  end
+  
 end

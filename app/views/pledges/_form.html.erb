@@ -20,43 +20,53 @@
 
     <%= hidden_field_tag "pledge[project_id]", @project.id %>
 
-    <ul>
-      <li>
-        <%= label_tag :name, nil, :class => "field req" %>
-        <span>
-          <%= f.text_field :first_name, :class => "text", :style => "width: 90px;" %>
-          <%= f.label :first_name, nil, :class => "sub" %>
-        </span>
-        <span>
-          <%= f.text_field :last_name, :class => "text", :style => "width: 120px;" %>
-          <%= f.label :last_name, nil, :class => "sub" %>
-        </span>
-        <div class="stretcher"></div>
-      </li>
-      <li>
-        <%= f.label :email, nil, :class => "field req" %>
-        <div><%= f.text_field :email, :class => "text" %></div>
-      </li>
-      <li>
-        <%= f.label :subscribe_me, nil, :class => "field" %>
-        <div><%= f.check_box :subscribe_me %> to occasional announcements about special projects</div>
-      </li>
-      <li>
-        <%= f.label :amount_pledged, "Pledge $", :class => "field req" %>
-        <div><%= f.text_field :amount_pledged, :class => "text", :style => "width: 120px;" %></div>
-      </li>
-      <li>
-        <%= f.label :note, "Your Question or Comment", :class => "field" %>
-        <%= f.text_area :note, :id => "note" %>
-          <label class="sub" for="pledge_note">
-            Maximum Allowed: 200 words. Currently Used: <span id='word_count'>0</span> words
-          </label>
-      </li>
-      <li class="actions">
-        <%= f.submit %>
-      </li>
-    </ul>
+    <% if @project.closed? %>
+    
+      <div class="done_msg">
+        <%= raw @project.closed_msg %>
+      </div>
+
+    <% else %>
+
+      <ul>
+        <li>
+          <%= label_tag :name, nil, :class => "field req" %>
+          <span>
+            <%= f.text_field :first_name, :class => "text", :style => "width: 90px;" %>
+            <%= f.label :first_name, nil, :class => "sub" %>
+          </span>
+          <span>
+            <%= f.text_field :last_name, :class => "text", :style => "width: 120px;" %>
+            <%= f.label :last_name, nil, :class => "sub" %>
+          </span>
+          <div class="stretcher"></div>
+        </li>
+        <li>
+          <%= f.label :email, nil, :class => "field req" %>
+          <div><%= f.text_field :email, :class => "text" %></div>
+        </li>
+        <li>
+          <%= f.label :subscribe_me, nil, :class => "field" %>
+          <div><%= f.check_box :subscribe_me %> to occasional announcements about special projects</div>
+        </li>
+        <li>
+          <%= f.label :amount_pledged, "Pledge $", :class => "field req" %>
+          <div><%= f.text_field :amount_pledged, :class => "text", :style => "width: 120px;" %></div>
+        </li>
+        <li>
+          <%= f.label :note, "Your Question or Comment", :class => "field" %>
+          <%= f.text_area :note, :id => "note" %>
+            <label class="sub" for="pledge_note">
+              Maximum Allowed: 200 words. Currently Used: <span id='word_count'>0</span> words
+            </label>
+        </li>
+        <li class="actions">
+          <%= f.submit %>
+        </li>
+      </ul>
   
+    <% end %>
+    
   <% end %>
   
 </div>
