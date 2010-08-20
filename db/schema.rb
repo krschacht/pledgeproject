@@ -99,8 +99,6 @@ ActiveRecord::Schema.define(:version => 20100816203359) do
     t.datetime "updated_at"
   end
 
-  add_index "tiny_urls", ["key"], :name => "index_tiny_urls_on_key"
-
   create_table "users", :force => true do |t|
     t.string   "email",                                      :null => false
     t.string   "crypted_password",                           :null => false

@@ -26,7 +26,16 @@ namespace :deploy do
   task :set_production_app do
   	APP = PRODUCTION_APP
   end
-  
+
+  task :mirror_production_db do
+    puts 'Pulling DB from production... Are you sure you want to overwrite the local database (y/n)?'
+    puts `heroku db:pull --app #{PRODUCTION_APP}`
+
+    puts 'Pushing DB to staging... Are you sure you want to overwrite the staging database (y/n)?'
+    puts `heroku db:push --app #{STAGING_APP}`
+    puts 'Production DB is now mirrored on local dev & staging.'
+  end
+
   task :push do
     puts 'Deploying site to Heroku ...'
     puts `git push -f git@heroku.com:#{APP}.git`
