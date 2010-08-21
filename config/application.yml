@@ -8,7 +8,7 @@ production:
   from_name: Pledge Project
   from_email: admin@pledgeproject.com
   system_email: krschacht@gmail.com
-  url_base: http://pledeproject.heroku.com/
+  url_base: http://pledgeproject.heroku.com/
 
 test:
   from_name: Pledge Project
