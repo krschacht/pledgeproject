@@ -115,8 +115,10 @@ class Admin::PledgesController < ApplicationController
     body    = params[:body]
     subject = params[:subject]
 
-    PledgerNotifier.invoice_custom( :pledge => pledge, :body => body, :subject => subject ).deliver
-    pledge.payment_requested!
+    # PledgerNotifier.invoice_custom( :pledge => pledge, :body => body, :subject => subject ).deliver
+    # pledge.payment_requested!
+    
+    Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice_custom, { :pledge => pledge, :body => body, :subject => subject } )
     
     redirect_to admin_project_pledges_path( pledge.project ), :notice => 'Invoice was sent'    
   end

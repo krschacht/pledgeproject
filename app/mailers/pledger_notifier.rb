@@ -1,3 +1,5 @@
+require 'action_mailer'
+
 class PledgerNotifier < ActionMailer::Base
 
   def pledge_received( obj )
@@ -54,6 +56,9 @@ class PledgerNotifier < ActionMailer::Base
           :reply_path => App.system_email,
           :to         => "#{ @pledge.full_name } <#{ @pledge.email }>", 
           :subject    => @subject
+    
+    @pledge.payment_requested!
+    
   end
     
   def invoice( pledge )
@@ -79,6 +84,9 @@ class PledgerNotifier < ActionMailer::Base
           :reply_path => App.system_email,
           :to         => "#{ @pledge.full_name } <#{ @pledge.email }>", 
           :subject    => @project_user.pledge_invoice_subject
+    
+    @pledge.payment_requested!
+    
   end
 
 end
