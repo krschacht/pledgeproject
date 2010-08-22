@@ -13,6 +13,7 @@ class AddPaymentFieldsToPledge < ActiveRecord::Migration
 
   def self.down
     remove_column :pledges, :user_id
+    remove_column :pledges, :invoice_queued_at
     remove_column :pledges, :payment_requested_at
     remove_column :pledges, :paid_in_full_at
     remove_column :pledges, :amount_paid
