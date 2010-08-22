@@ -69,8 +69,7 @@ class Admin::ProjectsController < ApplicationController
     project = Project.find( params[:id] )
 
     project.pledges.not_invoiced.each do |pledge|
-      PledgerNotifier.invoice( pledge ).deliver
-      pledge.payment_requested!
+      Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice, pledge )
     end
     
     redirect_to admin_project_pledges_path( project ), :notice => 'Invoices were sent.'

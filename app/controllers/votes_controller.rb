@@ -42,8 +42,8 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        ProjectNotifier.pledge_received( @vote ).deliver
-        PledgerNotifier.pledge_received( @vote ).deliver
+        Delayed::Job.enqueue EmailJob.new(:project_notifier, :pledge_received, @vote )        
+        Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :pledge_received, @vote )
         
         format.html do
 

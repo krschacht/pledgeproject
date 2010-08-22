@@ -102,8 +102,10 @@ class Admin::PledgesController < ApplicationController
     project = Project.find( params[:project_id] )
     pledge = project.pledges.find( params[:id] )
     
-    PledgerNotifier.invoice( pledge ).deliver
-    pledge.payment_requested!
+    # PledgerNotifier.invoice( pledge ).deliver
+    # pledge.payment_requested!
+    
+    Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice, pledge )
     
     redirect_to admin_project_pledges_path( pledge.project ), :notice => 'Invoice was sent'    
   end
@@ -118,7 +120,8 @@ class Admin::PledgesController < ApplicationController
     # PledgerNotifier.invoice_custom( :pledge => pledge, :body => body, :subject => subject ).deliver
     # pledge.payment_requested!
     
-    Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice_custom, { :pledge => pledge, :body => body, :subject => subject } )
+    Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice_custom, 
+          { :pledge => pledge, :body => body, :subject => subject } )
     
     redirect_to admin_project_pledges_path( pledge.project ), :notice => 'Invoice was sent'    
   end
