@@ -39,7 +39,7 @@
                             confirm_invoice_admin_project_pledge_path( 
                               :project_id => @project, 
                               :id => p )
-                         ) %>          
+                         ) unless p.invoice_queued? %>          
         </td>
         
       </tr>
