@@ -2,6 +2,7 @@ class AddPaymentFieldsToPledge < ActiveRecord::Migration
   
   def self.up
     add_column :pledges, :user_id, :integer
+    add_column :pledges, :invoice_queued_at, :datetime
     add_column :pledges, :payment_requested_at, :datetime
     add_column :pledges, :paid_in_full_at, :datetime
     add_column :pledges, :amount_paid, :decimal, :precision => 10, :scale => 2, :default => 0.00

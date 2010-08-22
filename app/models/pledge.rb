@@ -23,6 +23,7 @@ class Pledge < ActiveRecord::Base
   
   scope :for_project, lambda {|id| where(:project_id => id) }
   scope :not_invoiced, where( :payment_requested_at => nil)
+  scope :not_queued, where( :invoice_queued_at => nil)
   
   def first_name
     fn = self[:first_name] || ""
@@ -36,6 +37,10 @@ class Pledge < ActiveRecord::Base
   
   def full_name
     first_name + ' ' + last_name
+  end
+  
+  def invoice_queued?
+    ! invoice_queued_at.nil?
   end
   
   def payment_requested?
@@ -88,13 +93,18 @@ class Pledge < ActiveRecord::Base
     amount_pledged - amount_paid
   end
   
-  def payment_requested!
-    self.payment_requested_at = Time.now
-    save!
+  def invoice_queued!
+    if invoice_queued_at == nil
+      self.invoice_queued_at = Time.now
+      save!
+    end
   end
-
-  def payment_requested?
-    ! payment_requested_at.nil?
+  
+  def payment_requested!
+    if payment_requested_at == nil
+      self.payment_requested_at = Time.now
+      save!
+    end
   end
   
   def stage

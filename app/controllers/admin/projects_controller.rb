@@ -68,7 +68,7 @@ class Admin::ProjectsController < ApplicationController
   def invoice
     project = Project.find( params[:id] )
 
-    project.pledges.not_invoiced.each do |pledge|
+    project.pledges.not_queued.each do |pledge|
       Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice, pledge )
     end
     
