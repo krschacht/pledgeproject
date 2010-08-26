@@ -8,9 +8,11 @@ class DelayedJobMigration < ActiveRecord::Migration
       table.datetime :run_at                       # schedule for later
       table.datetime :locked_at                    # set when client working this job
       table.datetime :failed_at                    # set when all retries have failed
-      table.text     :locked_by                    # who is working on this object
+      table.string   :locked_by                    # who is working on this object
       table.timestamps
     end
+    
+    add_index :delayed_jobs, [:priority, :run_at], :name => 'delayed_jobs_priority'
   end
   def self.down
     drop_table :delayed_jobs
