@@ -32,10 +32,7 @@ class PledgerNotifier < ActionMailer::Base
           :reply_to   => @project_user.from_email,
           :reply_path => App.system_email,
           :to         => "#{ @pledge.full_name } <#{ @pledge.email }>", 
-          :subject    => @project_user.pledge_confirmation_subject
-    
-    @pledge.payment_requested!
-    
+          :subject    => @project_user.pledge_confirmation_subject    
   end
 
   def invoice_custom( params )
