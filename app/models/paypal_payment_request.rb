@@ -1,8 +1,13 @@
 
 class PaypalPaymentRequest
  
-  def initialize( opts={} )
-    @vars = opts
+  def initialize( pledge )    
+    @vars = {}
+    @vars[:business]        = pledge.project.user.paypal_email
+    @vars[:item_name]       = pledge.project.title
+    @vars[:amount]          = pledge.amount_pledged.to_f
+    @vars[:item_number]     = pledge.id
+    
     @vars[:cmd]             = '_xclick'
     @vars[:currency_code]   = 'USD'
     @vars[:button_subtype]  = 'services'
@@ -12,8 +17,8 @@ class PaypalPaymentRequest
     @vars[:rm]              = 1
     @vars[:bn]              = 'PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted'
     @vars[:cn]              = 'Comments about this payment (optional)'  
-    @vars[:return]          = App.url_base + 'completed'
-    @vars[:cancel]          = App.url_base + 'cancel'
+    @vars[:return]          = App.url_base + "projects/#{pledge.project.id}/pledges/new"
+    @vars[:cancel]          = App.url_base + "projects/#{pledge.project.id}/pledges/new"
     
     if RAILS_ENV == "development"
       @vars[:notify_url]      = App.url_base + "paypal/postback"

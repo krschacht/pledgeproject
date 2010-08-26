@@ -45,11 +45,7 @@ class PledgerNotifier < ActionMailer::Base
     @pledge     = Pledge.find( @pledge )  unless @pledge.is_a? Pledge
     
     @project_user = @pledge.project.user    
-    @invoice = PaypalPaymentRequest.new(
-                  :business => @project_user.paypal_email,
-                  :item_name => @pledge.project.title,
-                  :amount => @pledge.amount_pledged.to_f,
-                  :item_number => @pledge.id )
+    @invoice = PaypalPaymentRequest.new( @pledge )
 
     @body_text.gsub!( /@INVOICE_URL@/, TinyUrl.for( @invoice.url ) )
 
@@ -68,11 +64,7 @@ class PledgerNotifier < ActionMailer::Base
     
     @pledge = pledge
     @project_user = pledge.project.user
-    @invoice = PaypalPaymentRequest.new(
-                  :business => @project_user.paypal_email,
-                  :item_name => @pledge.project.title,
-                  :amount => @pledge.amount_pledged.to_f,
-                  :item_number => @pledge.id )
+    @invoice = PaypalPaymentRequest.new( @pledge )
     
     @body_text = @project_user.pledge_invoice_body
     @body_text.gsub!( /@PLEDGE_FIRST_NAME@/, @pledge.first_name )

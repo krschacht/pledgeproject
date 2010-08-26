@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20100821195108) do
     t.string   "internal_note"
     t.integer  "vote_id"
     t.integer  "user_id"
+    t.datetime "invoice_queued_at"
     t.datetime "payment_requested_at"
     t.datetime "paid_in_full_at"
     t.decimal  "amount_paid",          :precision => 10, :scale => 2, :default => 0.0
