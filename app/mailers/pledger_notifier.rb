@@ -47,9 +47,9 @@ class PledgerNotifier < ActionMailer::Base
     @body_text.gsub!( /@PLEDGE_FIRST_NAME@/, @pledge.first_name )
     @body_text.gsub!( /@PLEDGE_AMOUNT@/, '$' + @pledge.amount_pledged.to_f.to_s )
     
-    match = @body_text.match( /@PLEDGE_AMOUNT([\*\+-\/])([\d.]+)@/)
+    match = @body_text.match( /@PLEDGE_AMOUNT\s*([\*\+-\/])\s*([\d.]+)@/)
     unless match.nil?
-      @body_text.gsub!( /@PLEDGE_AMOUNT[\*\+-\/][\d.]+@/, '$' + 
+      @body_text.gsub!( /@PLEDGE_AMOUNT\s*[\*\+-\/]\s*[\d.]+@/, '$' + 
             eval( "#{@pledge.amount_pledged.to_f}#{match[1]}#{match[2]}" ).to_s )
     end
         
