@@ -44,8 +44,19 @@ class PledgerNotifier < ActionMailer::Base
     @project_user = @pledge.project.user    
     @invoice = PaypalPaymentRequest.new( @pledge )
 
+    @body_text.gsub!( /@PLEDGE_FIRST_NAME@/, @pledge.first_name )
+    @body_text.gsub!( /@PLEDGE_AMOUNT@/, '$' + @pledge.amount_pledged.to_f.to_s )
+    
+    match = @body_text.match( /@PLEDGE_AMOUNT([\*\+-\/])([\d.]+)@/)
+    unless match.nil?
+      @body_text.gsub!( /@PLEDGE_AMOUNT[\*\+-\/][\d.]+@/, '$' + 
+            eval( "#{@pledge.amount_pledged.to_f}#{match[1]}#{match[2]}" ).to_s )
+    end
+        
+    @body_text.gsub!( /@PLEDGE_PROJECT_TITLE@/, @pledge.project.title )
+    @body_text.gsub!( /@USER_FULL_NAME@/, @project_user.full_name )
     @body_text.gsub!( /@INVOICE_URL@/, TinyUrl.for( @invoice.url ) )
-
+    
     mail  :from       => "#{ @project_user.full_name } <#{ @project_user.from_email }>",
           :sender     => @project_user.from_email,
           :reply_to   => @project_user.from_email,

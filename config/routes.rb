@@ -13,15 +13,15 @@ Pledgeproject::Application.routes.draw do |map|
     resources :projects do
       resources :pledges do
         member do
-          post  :invoice
-          put   :invoice_custom
-          get   :confirm_invoice
+          put :invoice_custom
+          get :confirm_invoice
         end
       end
       
       member do
         get :pledge_embed
-        post :invoice
+        put :invoice_custom
+        get :confirm_invoice
       end
     end
     

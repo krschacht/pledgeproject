@@ -98,16 +98,29 @@ class Admin::PledgesController < ApplicationController
     end
   end
   
-  def invoice
-    project = Project.find( params[:project_id] )
-    pledge = project.pledges.find( params[:id] )
+  # def invoice
+  #   project = Project.find( params[:project_id] )
+  #   pledge = project.pledges.find( params[:id] )
+  #   
+  #   unless pledge.invoice_queued?
+  #     Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice, pledge )
+  #     pledge.invoice_queued!
+  #   end
+  #   
+  #   redirect_to admin_project_pledges_path( pledge.project ), :notice => 'Invoice was sent'    
+  # end
+  
+  def confirm_invoice
+    @project = Project.find( params[:project_id] )
+    @pledge = @project.pledges.find( params[:id] )
+
+    @project_user = @project.user
+    @body = @project_user.pledge_invoice_body
     
-    unless pledge.invoice_queued?
-      Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice, pledge )
-      pledge.invoice_queued!
-    end
-    
-    redirect_to admin_project_pledges_path( pledge.project ), :notice => 'Invoice was sent'    
+    @body.gsub!( /@PLEDGE_FIRST_NAME@/, @pledge.first_name )
+    @body.gsub!( /@PLEDGE_AMOUNT@/, '$' + @pledge.amount_pledged.to_f.to_s )
+    @body.gsub!( /@PLEDGE_PROJECT_TITLE@/, @pledge.project.title )
+    @body.gsub!( /@USER_FULL_NAME@/, @project_user.full_name )
   end
   
   def invoice_custom
@@ -125,18 +138,5 @@ class Admin::PledgesController < ApplicationController
     
     redirect_to admin_project_pledges_path( pledge.project ), :notice => 'Invoice was sent'    
   end
-  
-  def confirm_invoice
-    @project = Project.find( params[:project_id] )
-    @pledge = @project.pledges.find( params[:id] )
-
-    @project_user = @project.user
-    @body = @project_user.pledge_invoice_body
     
-    @body.gsub!( /@PLEDGE_FIRST_NAME@/, @pledge.first_name )
-    @body.gsub!( /@PLEDGE_AMOUNT@/, '$' + @pledge.amount_pledged.to_f.to_s )
-    @body.gsub!( /@PLEDGE_PROJECT_TITLE@/, @pledge.project.title )
-    @body.gsub!( /@USER_FULL_NAME@/, @project_user.full_name )
-  end
-  
 end

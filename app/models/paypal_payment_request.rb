@@ -5,7 +5,7 @@ class PaypalPaymentRequest
     @vars = {}
     @vars[:business]        = pledge.project.user.paypal_email
     @vars[:item_name]       = pledge.project.title
-    @vars[:amount]          = pledge.amount_pledged.to_f
+#    @vars[:amount]          = pledge.amount_pledged.to_f
     @vars[:item_number]     = pledge.id
     
     @vars[:cmd]             = '_xclick'

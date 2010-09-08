@@ -6,7 +6,7 @@
   <%= link_to "tab delimited", 
               admin_project_pledges_path( @project.id ) + ".csv?delimiter=tab",
               :class => "" %></li>
-  <li><%= link_to "Invoice all pledgers below", invoice_admin_project_path( @project ), :confirm => "You are about to invoice ALL pledgers below that have not yet received an invoice. Continue?", :method => :post %></li>
+  <li><%= link_to "Invoice all pledgers below", confirm_invoice_admin_project_path( @project ) %></li>
 </ul>
 
 <table class="pledges">

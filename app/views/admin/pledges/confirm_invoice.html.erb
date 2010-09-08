@@ -3,7 +3,7 @@
 <%= form_for @project_user, :url => invoice_custom_admin_project_pledge_path( :project_id => @project, :id => @pledge ), :method => :post do |f| %>
   
   <b>Subject:</b> 
-  <input type="text" name="subject" value="<%= @project_user.pledge_invoice_subject %>"><br><br>
+  <input type="text" name="subject" value="<%= @project_user.pledge_invoice_subject %>" style="width: 300px;"><br><br>
     
   <textarea name="body" style="width: 400px; height: 400px;"><%= @body %></textarea>
   

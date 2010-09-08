@@ -65,11 +65,33 @@ class Admin::ProjectsController < ApplicationController
                 :allowtransparency => 'true' }    
   end
 
-  def invoice
+  # def invoice
+  #   project = Project.find( params[:id] )
+  # 
+  #   project.pledges.not_queued.each do |pledge|
+  #     Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice, pledge )
+  #   end
+  #   
+  #   redirect_to admin_project_pledges_path( project ), :notice => 'Invoices were sent.'
+  # end
+
+  def confirm_invoice
+    @project = Project.find( params[:id] )
+
+    @project_user = @project.user
+    @body = @project_user.pledge_invoice_body    
+  end
+  
+  def invoice_custom
     project = Project.find( params[:id] )
 
+    body    = params[:body]
+    subject = params[:subject]
+
     project.pledges.not_queued.each do |pledge|
-      Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice, pledge )
+      Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice_custom,
+        { :pledge => pledge, :body => body, :subject => subject } )
+      pledge.invoice_queued!
     end
     
     redirect_to admin_project_pledges_path( project ), :notice => 'Invoices were sent.'
