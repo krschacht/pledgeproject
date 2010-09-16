@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.beta3'
+gem 'rails', '3.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -9,7 +9,8 @@ gem 'mysql'
 gem 'hoptoad_notifier'
 gem 'authlogic'
 gem 'delayed_job', '2.1.0.pre'
-
+gem 'heroku'
+gem 'taps'
 
 # gem 'moxie_forum', :path => "../plugins/moxie_forum"
 # gem 'logworm_client'

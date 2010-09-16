@@ -9,6 +9,9 @@ task :deploy_production => ['deploy:set_production_app', 'deploy:push',
                             'deploy:off', 'deploy:migrate', 'deploy:restart', 
                             'deploy:on', 'deploy:tag']
 
+desc "mirror production to staging"
+task :deploy_production_to_staging => [ 'deploy:production_to_staging', 'deploy:mirror_production_db' ]
+
 namespace :deploy do
   PRODUCTION_APP = 'pledgeproject'
   STAGING_APP = 'pledgedev'
@@ -27,13 +30,34 @@ namespace :deploy do
   	APP = PRODUCTION_APP
   end
 
+  task :production_to_staging do
+    prefix = "#{PRODUCTION_APP}_release-"
+    releases = `git tag`.split("\n").select { |t| t[0..prefix.length-1] == prefix }.sort
+    current_prod_release = releases.last
+
+    puts "######### Rolling staging back to production '#{current_prod_release}' ..."
+  
+    puts "######### Checking out '#{current_prod_release}' in a new branch on local git repo ..."
+    puts `git checkout #{current_prod_release}`
+    puts `git checkout -b prod`
+      
+    puts "######### Pushing '#{current_prod_release}' to Staging master ..."
+    puts `git push git@heroku.com:#{STAGING_APP}.git +prod:master --force`
+      
+    puts "######### Deleting local branch..."
+    puts `git checkout master`
+    puts `git branch -d prod`
+
+    puts "######### Staging is now running production code..."
+  end
+
   task :mirror_production_db do
-    puts 'Pulling DB from production... Are you sure you want to overwrite the local database (y/n)?'
+    puts '######### Pulling DB from production... Are you sure you want to overwrite the local database (y/n)?'
     puts `heroku db:pull --app #{PRODUCTION_APP}`
 
-    puts 'Pushing DB to staging... Are you sure you want to overwrite the staging database (y/n)?'
+    puts '######### Pushing DB to staging... Are you sure you want to overwrite the staging database (y/n)?'
     puts `heroku db:push --app #{STAGING_APP}`
-    puts 'Production DB is now mirrored on local dev & staging.'
+    puts '######### Production DB is now mirrored on local dev & staging.'
   end
 
   task :push do
@@ -67,7 +91,7 @@ namespace :deploy do
     puts 'Taking the app out of maintenance mode ...'
     puts `heroku maintenance:off --app #{APP}`
   end
-
+  
   task :push_previous do
     prefix = "#{APP}_release-"
     releases = `git tag`.split("\n").select { |t| t[0..prefix.length-1] == prefix }.sort
