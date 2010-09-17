@@ -1,7 +1,5 @@
 class CreatePremiumTransactions < ActiveRecord::Migration
   def self.up
-    drop_table :premium_transactions
-
     create_table :premium_transactions do |t|
       t.integer :pledge_id
       t.integer :user_id
