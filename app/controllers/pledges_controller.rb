@@ -36,8 +36,8 @@ class PledgesController < ApplicationController
         format.html do
 
           if @project.pledge_done_url.to_s.empty?
-            logger.info("using redirect_to #{done_pledge_path( :project_id => @project, :id => @pledge )}")
-            redirect_to( done_pledge_path( :project_id => @project, :id => @pledge ) )
+            logger.info("using redirect_to #{done_project_pledge_path( :project_id => @project, :id => @pledge )}")
+            redirect_to( done_project_pledge_path( :project_id => @project, :id => @pledge ) )
           else
             logger.info("using javascript #{@project.pledge_done_url}")
             render :text => "<html><body><script type='text/javascript'>" +

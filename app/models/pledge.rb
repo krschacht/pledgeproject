@@ -24,6 +24,7 @@ class Pledge < ActiveRecord::Base
   scope :for_project, lambda {|id| where(:project_id => id) }
   scope :not_invoiced, where( :payment_requested_at => nil)
   scope :not_queued, where( :invoice_queued_at => nil)
+  scope :not_paid, where( :paid_in_full_at => nil)
   
   def first_name
     fn = self[:first_name] || ""

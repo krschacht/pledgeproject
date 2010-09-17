@@ -48,8 +48,8 @@ class VotesController < ApplicationController
         format.html do
 
           if @group.vote_done_url.to_s.empty?
-            logger.info("using redirect_to #{done_vote_path( :group_id => @group, :id => @vote )}")
-            redirect_to( done_vote_path( :group_id => @group, :id => @vote ) )
+            logger.info("using redirect_to #{done_group_vote_path( :group_id => @group, :id => @vote )}")
+            redirect_to( done_group_vote_path( :group_id => @group, :id => @vote ) )
           else
             logger.info("using javascript #{@group.vote_done_url}")
             render :text => "<html><body><script type='text/javascript'>" +

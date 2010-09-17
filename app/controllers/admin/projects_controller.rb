@@ -88,7 +88,7 @@ class Admin::ProjectsController < ApplicationController
     body    = params[:body]
     subject = params[:subject]
 
-    project.pledges.not_queued.each do |pledge|
+    project.pledges.not_paid.each do |pledge|
       Delayed::Job.enqueue EmailJob.new(:pledger_notifier, :invoice_custom,
         { :pledge => pledge, :body => body, :subject => subject } )
       pledge.invoice_queued!

@@ -1,5 +1,6 @@
 class Admin::PledgesController < ApplicationController
-
+  include ActionView::Helpers::NumberHelper
+  
   before_filter :require_user, :show_admin_nav
 
   # GET /pledges
@@ -118,7 +119,7 @@ class Admin::PledgesController < ApplicationController
     @body = @project_user.pledge_invoice_body
     
     @body.gsub!( /@PLEDGE_FIRST_NAME@/, @pledge.first_name )
-    @body.gsub!( /@PLEDGE_AMOUNT@/, '$' + @pledge.amount_pledged.to_f.to_s )
+    @body.gsub!( /@PLEDGE_AMOUNT@/, number_to_currency(@pledge.amount_pledged) )
     @body.gsub!( /@PLEDGE_PROJECT_TITLE@/, @pledge.project.title )
     @body.gsub!( /@USER_FULL_NAME@/, @project_user.full_name )
   end

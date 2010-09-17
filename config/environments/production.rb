@@ -52,4 +52,6 @@ Pledgeproject::Application.configure do
     :enable_starttls_auto => true
   }
 
+  config.active_support.deprecation = :notify
+  
 end

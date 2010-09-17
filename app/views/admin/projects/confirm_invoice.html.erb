@@ -1,4 +1,4 @@
-<h2>You're about to send this email to <%= @project.pledges.not_queued.length %> people.</h2>
+<h2>You're about to send this email to <%= @project.pledges.not_paid.length %> people.</h2>
 
 <%= form_for @project_user, :url => invoice_custom_admin_project_path( @project ), :method => :post do |f| %>
   
