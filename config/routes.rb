@@ -72,7 +72,7 @@ Pledgeproject::Application.routes.draw do |map|
 
   
   # match "/login" => 'user_sessions#new'
-  # match "/logout" => 'user_sessions#destroy'  
+  match "/logout" => 'user_sessions#destroy'  
   
 #  resources :pledges
   
